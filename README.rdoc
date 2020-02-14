@@ -1,10 +1,9 @@
-== ULTRON -> one more of Marvel.
-Ultron is a SW to management fleets.
+== FONOWARE -> Application for fonologish management.
 
 ==API APP
-This project will have API to see activities from the android device
+This project will have API to see activities from the android and ios device, the development for react native expo project app.
 
-==This is a new project with a marvel comics name.
-Ultron is a fictional supervillain appearing in American comic books published by Marvel Comics. He is most recognized as a nemesis of the superhero groups Avengers.
+==About this Project.
+This project rise with the needed to management clinics and dates to fonologish especializations. Fathers and tutors can be see the avance of their children, and the professional can administrate clinics with dates registration, financial administration and others.
 
 == IF YOU NEED DATABASE COMPLETE PLEASE CONTACT ME
