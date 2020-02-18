@@ -12,7 +12,7 @@ default: &default
 development:
   <<: *default
 
-  database: ultron
+  database: fonoware
   username: postgres
   password: postgres
   host:  localhost
@@ -23,7 +23,7 @@ development:
 
 DB_AUDITORIAS:
   <<: *default
-  database: ultron_auditoria
+  database: fonoware_auditoria
   username: postgres
   password: postgres
   host: localhost
@@ -35,17 +35,17 @@ DB_AUDITORIAS:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: DBRUE
+  database: fonoware
   username: postgres
-  password: curso
+  password: fonoware
   port: 5433
   host: localhost
 
 production:
   <<: *default
-  database: DBRUE
+  database: fonoware
   username: postgres
-  password: curso
+  password: fonoware
   port: 5433
   host: localhost
 

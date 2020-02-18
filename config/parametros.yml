@@ -1,9 +1,6 @@
 development:
-  server_reports: http://192.168.16.174:8080/birt/run?__report=report/rue/
-  server_reports_gestion_academica: http://192.168.16.174:8080/birt/run?__report=report/ga/
-  server_reports_v2: http://192.168.24.172:8080/birt-460/run?__report=report/rue/
-  #ROLES
-  
+
+  #ROLES 
   rol_administrador: 1
   rol_operador: 3
   rol_super: 6
@@ -14,80 +11,9 @@ development:
   estado_produccion_finalizado: 3
   estado_produccion_anulado: 4
 
-  #INFRAESTRUCTURAS PARTES
-  techo: 1
-  paredes: 2
-  pilares: 3
-  piso: 4
-  instalacion_electrica: 5
-  #INFRAESTRUCTURAS CARACTERISTICAS
-  deformaciones: 1
-  pintura: 2
-  tipo_material: 3
-  humedad: 4
-  goteras: 5
-  fisuras_rectas: 6
-  fisuras_inclinadas: 7
-  revoque: 8
-  rotura: 9
-  tipo: 10
-  apariencia: 11
-  apariencia_hundimiento: 12
-  apariencia_roto: 13
-  llave: 14
-  toma: 15
-  ventilador: 16
-  cantidades: 17
-  #INFRAESTRUCTURAS CARACTERISTICAS OPCIONES
-  opcion_si: 1
-  opcion_no: 2
-  bueno: 3
-  malo: 4
-  teja: 5
-  tejuelon: 6
-  tejuela: 7
-  otro: 8
-  calcareo: 9
-  granito: 10
-  ladrillo: 11
-  ceramico: 12
-  madera: 13
-  tierra: 14
-  desgastado: 15
-  normal: 16
-  cantidad_fluorescente: 17
-  cantidad_foco_comun: 18
-  
-
-  #ESTADOS DIRECTORIOS
-  estado_directorio_solicitado: 1
-  estado_directorio_en_verificacion: 2
-  estado_directorio_aprobado: 3
-  estado_directorio_rechazado: 4
-  estado_directorio_activo: 5
-  estado_directorio_cerrado: 6
-  estado_directorio_clausurado: 7
-
-  #ESTADOS POSTULACIONES MEDIAS
-  identificado: 1
-  verificado: 2
-  titular: 3
-  suplente: 4
-  descalificado: 5
-  
-  
-  #VECTOR DE TIPOS DE FORMACIONES
-  v_tipos_grados_postgrados: [4, 5, 7, 8, 15]
-  salud_visual: 6
-  
+   
   #sistemas
   sistema_RUE: 1
-  
-
-  
-  #CUESTIONARIOS
-  cuestionario1: 1
-  cuestionario2: 2
   
   #TIPOS ELEMENTOS INTERFAZ
   radio_button: 1
@@ -98,21 +24,6 @@ development:
   #TIPOS DATO
   tipo_dato_numerico: 1
   tipo_dato_texto: 2
-  
- 
-  
-  #TIPOS DEPENDENCIAS
-  coordinacion_departamental: 7
-  supervision_administrativa: 8
-  supervision_administrativa_y_pedagogica: 12
-  supervision_pedagogica: 9
-  
-  
-
- 
-  #DISCIPLINAS LENGUAS
-  disciplina_lengua_materna_id: 6164
-  disciplina_segunda_lengua_id: 6165
  
   #TIPOS DOCUMENTOS
   certificado_nacimiento: 6
@@ -121,92 +32,22 @@ development:
   
 
 production:
-  server_reports: http://192.168.16.174:8080/birt/run?__report=report/rue/
-  server_reports_gestion_academica: http://192.168.16.174:8080/birt/run?__report=report/ga/
-  server_reports_v2: http://192.168.24.172:8080/birt-460/run?__report=report/rue/
-  #ROLES
- 
+  
+
+  #ROLES 
   rol_administrador: 1
- 
   rol_operador: 3
- 
   rol_super: 6
-  
 
-  #INFRAESTRUCTURAS PARTES
-  techo: 1
-  paredes: 2
-  pilares: 3
-  piso: 4
-  instalacion_electrica: 5
-  #INFRAESTRUCTURAS CARACTERISTICAS
-  deformaciones: 1
-  pintura: 2
-  tipo_material: 3
-  humedad: 4
-  goteras: 5
-  fisuras_rectas: 6
-  fisuras_inclinadas: 7
-  revoque: 8
-  rotura: 9
-  tipo: 10
-  apariencia: 11
-  apariencia_hundimiento: 12
-  apariencia_roto: 13
-  llave: 14
-  toma: 15
-  ventilador: 16
-  cantidades: 17
-  #INFRAESTRUCTURAS CARACTERISTICAS OPCIONES
-  opcion_si: 1
-  opcion_no: 2
-  bueno: 3
-  malo: 4
-  teja: 5
-  tejuelon: 6
-  tejuela: 7
-  otro: 8
-  calcareo: 9
-  granito: 10
-  ladrillo: 11
-  ceramico: 12
-  madera: 13
-  tierra: 14
-  desgastado: 15
-  normal: 16
-  cantidad_fluorescente: 17
-  cantidad_foco_comun: 18
+  #ESTADOS PRODUCCIONES
+  estado_produccion_solicitado: 1
+  estado_produccion_en_progreso: 2
+  estado_produccion_finalizado: 3
+  estado_produccion_anulado: 4
 
-
-  #ESTADOS DIRECTORIOS
-  estado_directorio_solicitado: 1
-  estado_directorio_en_verificacion: 2
-  estado_directorio_aprobado: 3
-  estado_directorio_rechazado: 4
-  estado_directorio_activo: 5
-  estado_directorio_cerrado: 6
-  estado_directorio_clausurado: 7
-
-  
-  
-  #VECTOR DE TIPOS DE FORMACIONES
-  v_tipos_grados_postgrados: [4, 5, 7, 8, 15]
-  salud_visual: 6
-  
+   
   #sistemas
   sistema_RUE: 1
-  #TURNOS
-  mañana: 1
-  tarde: 2
-  noche: 3
-  mañana_tarde: 4
-  tarde_noche: 5    
-  mañana_noche: 6
-  mañana_tarde_noche: 7
-
-  #CUESTIONARIOS
-  cuestionario1: 1
-  cuestionario2: 2
   
   #TIPOS ELEMENTOS INTERFAZ
   radio_button: 1
@@ -217,22 +58,10 @@ production:
   #TIPOS DATO
   tipo_dato_numerico: 1
   tipo_dato_texto: 2
-  
-  
-  
-  #TIPOS DEPENDENCIAS
-  coordinacion_departamental: 7
-  supervision_administrativa: 8
-  supervision_administrativa_y_pedagogica: 12
-  supervision_pedagogica: 9
-  
-
-  #DISCIPLINAS LENGUAS
-  disciplina_lengua_materna_id: 6164
-  disciplina_segunda_lengua_id: 6165
-  
+ 
   #TIPOS DOCUMENTOS
   certificado_nacimiento: 6
   sin_documento: 5
   cedula_identidad: 1
+  
   

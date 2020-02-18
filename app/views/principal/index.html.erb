@@ -13,8 +13,8 @@
     <div class="card" >
       <div class="card-body" >
         <h4 class="card-title">Producciones Cobradas (mes actual)</h4>
-        <p class="card-text">Cantidad: <%= @producciones_cobrados.count %> </p>
-        <p class="card-text">Monto: <%=@producciones_cobrados.sum(:costo).to_i.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse%> </p>
+        <p class="card-text">Cantidad: <%#= @producciones_cobrados.count %> </p>
+        <p class="card-text">Monto: <%#=@producciones_cobrados.sum(:costo).to_i.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse%> </p>
         
       </div>
     </div>
@@ -24,8 +24,8 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Producciones Sin Cobrar (mes actual)</h4>
-        <p class="card-text">Cantidad: <%= @producciones_sin_cobrar.count %></p>
-        <p class="card-text">Monto: <%= @producciones_sin_cobrar.sum(:costo).to_i.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></p>
+        <p class="card-text">Cantidad: <%#= @producciones_sin_cobrar.count %></p>
+        <p class="card-text">Monto: <%#= @producciones_sin_cobrar.sum(:costo).to_i.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></p>
        
       </div>
     </div>
@@ -39,9 +39,9 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Producciones Pertenece (mes actual)</h4>
-        <p class="card-text">Cantidad: <%= @producciones_pertenece.count %> </p>
+        <p class="card-text">Cantidad: <%#= @producciones_pertenece.count %> </p>
 
-        <p class="card-text">Monto: <%= @producciones_pertenece.sum(:costo).to_i.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></p>
+        <p class="card-text">Monto: <%#= @producciones_pertenece.sum(:costo).to_i.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></p>
         
       </div>
     </div>
@@ -51,8 +51,8 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Producciones que no Pertenece (mes actual)</h4>
-        <p class="card-text">Cantidad: <%= @producciones_no_pertenece.count %></p>
-        <p class="card-text">Monto: <%= @producciones_no_pertenece.sum(:costo).to_i.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %> </p>
+        <p class="card-text">Cantidad: <%#= @producciones_no_pertenece.count %></p>
+        <p class="card-text">Monto: <%#= @producciones_no_pertenece.sum(:costo).to_i.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %> </p>
         
       </div>
 
@@ -68,8 +68,8 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title"> Total Gastos(mes actual)</h4>
-        <p class="card-text">Cantidad: <%= @producciones_pertenece.count %> </p>
-        <p class="card-text">Monto: <%= @gastos_producciones.sum(:monto).to_i.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></p>
+        <p class="card-text">Cantidad: <%#= @producciones_pertenece.count %> </p>
+        <p class="card-text">Monto: <%#= @gastos_producciones.sum(:monto).to_i.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></p>
         
       </div>
     </div>
@@ -79,8 +79,8 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Cantidad Producciones (mes actual)</h4>
-        <p class="card-text">Cantidad: <%= @cantidad_producciones.count %></p>
-        <p class="card-text">Monto: <%= @producciones_pertenece.sum(:costo).to_i.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></p>
+        <p class="card-text">Cantidad: <%#= @cantidad_producciones.count %></p>
+        <p class="card-text">Monto: <%#= @producciones_pertenece.sum(:costo).to_i.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></p>
         
       </div>
 

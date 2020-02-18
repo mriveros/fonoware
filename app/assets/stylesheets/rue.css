@@ -5907,7 +5907,7 @@ header .principal {
 header nav.navbar-principal {
     margin: 10px -10px 0;
     /*background-color: #8c0505;*/
-	background-color: #298A08;
+	background-color:  #20a5b0  ;
     color: #FFF;
     border-radius: 0 0 16px 16px;
     font-family: Arial, ​sans-serif;
@@ -6004,7 +6004,7 @@ header nav.navbar-principal .dropdown-menu a, header nav.navbar-principal .dropd
     background-image: url(logo_right_2015.png);
 }
 .logo.bandera {
-    background-image: url(bandera.svg);
+    background-image: url(oido.svg);
 }
 .logo.rue {
 }
