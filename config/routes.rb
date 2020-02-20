@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
 
-  get 'validaciones/titulos/:serie_numero' => "validaciones_titulos#index"
-    
+  
+  namespace 'api' do
+    namespace 'v1' do
+  
+      resources :personas
+      resources :usuarios
+  
+    end
+  end  
     
     #CRONTAB
   get "crontab_ultron/index"

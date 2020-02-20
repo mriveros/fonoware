@@ -1,5 +1,6 @@
 class Usuario < ActiveRecord::Base
 
+  
   attr_accessible :persona_id, :login, :email, :password, :password_confirmation, :active, :token, :perfil_actual_id, :id
 
   scope :ordenado_id, -> {order("id")}
@@ -15,6 +16,7 @@ class Usuario < ActiveRecord::Base
   belongs_to :persona
   belongs_to :perfil_actual, class_name: "Perfil", foreign_key: 'perfil_actual_id'  
   has_many :infraestructuras_fiscalizaciones, :dependent => :restrict_with_error
+  before_create -> {self.token = generate_token}
 
   def self.generar_password
   
@@ -30,6 +32,14 @@ class Usuario < ActiveRecord::Base
     usuario = Usuario.where("persona_id = ?", self.id).first 
     usuario.present? ? usuario.email : nil
 
+  end
+
+  private
+  def generate_token
+      loop do
+        token = SecureRandom.hex
+        return token unless Usuario.exists?({token: token})
+      end
   end
 
 end
