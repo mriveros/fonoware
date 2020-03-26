@@ -71,15 +71,15 @@ Rails.application.routes.draw do
   get "produccion/planilla_resumen_produccion_cliente_pdf"
 
     #CLIENTES
-  post "clientes/lista"
-  get "clientes/lista"
-  get "clientes/agregar"
-  post "clientes/guardar"
-  get "clientes/eliminar"
-  get "clientes/editar"
-  post "clientes/actualizar"
-  get "clientes/index"
-  get "clientes/buscar_cliente"
+  post "pacientes/lista"
+  get "pacientes/lista"
+  get "pacientes/agregar"
+  post "pacientes/guardar"
+  get "pacientes/eliminar"
+  get "pacientes/editar"
+  post "pacientes/actualizar"
+  get "pacientes/index"
+  get "pacientes/buscar_cliente"
 
     #FLOTAS
   post "flotas/lista"

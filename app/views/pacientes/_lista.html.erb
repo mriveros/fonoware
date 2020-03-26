@@ -1,0 +1,53 @@
+<% if paciente.present? %>
+
+  <% paciente.each do |pac| %>
+
+    <tr>
+
+      <td style="width:50px;"><%= pac.paciente_id %></td>
+      <td><%= pac.documento_persona%></td>
+      <td><%= pac.nombre_persona%></td>
+      <td><%= pac.apellido_persona %></td>
+      <td><%= pac.direccion %></td>
+      <td><%= pac.telefono%></td>
+      
+      <td style="width:120px;">
+        
+        <%= link_to_editar_paciente(pac) %>
+        
+        <%= link_to icon_eliminar, pacientes_eliminar_path(id: pac.paciente_id), remote: true, class: "btn btn-danger btn-xs", title: 'Haga click para eliminar el paciente', data: { confirm: "Está seguro de eliminar el paciente ?"} %>
+      
+       </td>
+
+     
+     
+
+      </td>
+
+    </tr>
+
+  <% end %>
+
+<tr id="tab-paginacion">
+
+    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate paciente, :params => params %></div></td>
+</tr>
+
+<tr>
+    <td colspan="12">
+      Cantidad de registros encontrados: <%= @total_encontrados %> 
+    </td>
+</tr>
+
+ 
+
+<% else %>
+
+  <tr>
+
+    <td colspan="12"><p class='none-result'>No se han encontrado resultados.</p></td>
+
+  </tr>
+
+
+<% end %>

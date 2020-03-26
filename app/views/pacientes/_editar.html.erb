@@ -10,7 +10,7 @@
       
     </div>
 
-    <%= form_for @cliente, remote: true, url: clientes_actualizar_url, html: { id: "form-editar-cliente" }, method: 'POST' do |f| %>
+    <%= form_for @paciente, remote: true, url: pacientes_actualizar_url, html: { id: "form-editar-cliente" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
       <%= hidden_field_tag :cliente_id, params[:id]%>
