@@ -1,4 +1,4 @@
-class ClientesController < ApplicationController
+class PacientesController < ApplicationController
 
 before_filter :require_usuario
 skip_before_action :verify_authenticity_token
@@ -13,52 +13,31 @@ skip_before_action :verify_authenticity_token
     cond = []
     args = []
 
-    if params[:form_buscar_clientes_id].present?
+    if params[:form_buscar_paciente_id].present?
 
-      cond << "clientes.id = ?"
-      args << params[:form_buscar_clientes_id]
-
-    end
-
-    if params[:form_buscar_clientes_ruc].present?
-
-      cond << "clientes.ruc = ?"
-      args << params[:form_buscar_clientes_ruc]
+      cond << "pacientes.paciente_id = ?"
+      args << params[:form_buscar_paciente_id]
 
     end
 
-     if params[:form_buscar_clientes_razon_social].present?
+    if params[:form_buscar_paciente_documento].present?
 
-      cond << "clientes.razon_social = ?"
-      args << params[:form_buscar_clientes_razon_social]
-
-    end
-
-    if params[:form_buscar_clientes_nombre].present?
-
-      cond << "clientes.cliente_nombre ilike ?"
-      args << "%#{params[:form_buscar_clientes_nombre]}%"
+      cond << "pacientes.ruc = ?"
+      args << params[:form_buscar_paciente_documento]
 
     end
 
-    if params[:form_buscar_clientes_apellido].present?
+    if params[:form_buscar_paciente_nombre].present?
 
-      cond << "clientes.cliente_apellido ilike ?"
-      args << "%#{params[:form_buscar_clientes_apellido]}%"
-
-    end
-
-    if params[:form_buscar_clientes_direccion].present?
-
-      cond << "clientes.direccion = ?"
-      args << params[:form_buscar_clientes_direccion]
+      cond << "pacientes.cliente_nombre ilike ?"
+      args << "%#{params[:form_buscar_paciente_nombre]}%"
 
     end
 
-    if params[:form_buscar_clientes_telefono].present?
+    if params[:form_buscar_paciente_apellido].present?
 
-      cond << "clientes.telefono ilike ?"
-      args << "%#{params[:form_buscar_clientes_telefono]}%"
+      cond << "pacientes.cliente_apellido ilike ?"
+      args << "%#{params[:form_buscar_paciente_apellido]}%"
 
     end
 
@@ -66,17 +45,17 @@ skip_before_action :verify_authenticity_token
 
     if cond.size > 0
 
-      @clientes =  Cliente.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
-      @total_encontrados = Cliente.where(cond).count
+      @pacientes =  VPaciente.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+      @total_encontrados = VPaciente.where(cond).count
 
     else
 
-      @clientes = Cliente.orden_01.paginate(per_page: 10, page: params[:page])
-      @total_encontrados = Cliente.count
+      @pacientes = VPaciente.orden_01.paginate(per_page: 10, page: params[:page])
+      @total_encontrados = VPaciente.count
 
     end
 
-    @total_registros = Cliente.count
+    @total_registros = VPaciente.count
 
   	respond_to do |f|
 	    
@@ -88,7 +67,7 @@ skip_before_action :verify_authenticity_token
 
   def agregar
 
-    @cliente = Cliente.new
+    @paciente = paciente.new
 
     respond_to do |f|
 	    
@@ -104,47 +83,21 @@ skip_before_action :verify_authenticity_token
     @msg = ""
     @guardado_ok = false
 
-    unless params[:cliente][:cliente_nombre].present?
+    unless params[:paciente][:paciente_documento].present?
 
       @valido = false
       @msg += " Debe Completar el campo Nombre. \n"
 
     end
 
-    unless params[:cliente][:cliente_apellido].present?
-
-      @valido = false
-      @msg += "Debe Completar el campo Apellido. \n"
-
-    end
-
-    unless params[:cliente][:direccion].present?
-
-      @valido = false
-      @msg += "Debe Completar el campo Dirección. \n"
-
-    end
-
-    unless params[:cliente][:telefono].present?
-
-      @valido = false
-      @msg += "Debe Completar el campo Teléfono. \n"
-
-    end
-
     if @valido
       
-      @cliente = Cliente.new()
-      @cliente.razon_social = params[:cliente][:razon_social].upcase
-      @cliente.ruc = params[:cliente][:ruc]
-      @cliente.cliente_nombre = params[:cliente][:cliente_nombre].upcase
-      @cliente.cliente_apellido = params[:cliente][:cliente_apellido].upcase
-      @cliente.direccion = params[:cliente][:direccion].upcase
-      @cliente.telefono = params[:cliente][:telefono]
+      @paciente = Paciente.new()
+      @paciente.persona_id = params[:paciente][:id]
 
         if @cliente.save
 
-          auditoria_nueva("registrar cliente", "clientes", @cliente)
+          auditoria_nueva("registrar paciente", "pacientes", @paciente)
          
           @guardado_ok = true
          
@@ -171,7 +124,7 @@ skip_before_action :verify_authenticity_token
 
   def editar
     
-    @cliente = Cliente.find(params[:id])
+    @paciente = Paciente.find(params[:id])
 
   	respond_to do |f|
 	    
@@ -187,7 +140,7 @@ skip_before_action :verify_authenticity_token
     @msg = ""
     @cliente = Cliente.find(params[:cliente_id])
 
-    auditoria_id = auditoria_antes("actualizar cliente", "clientes", @cliente)
+    auditoria_id = auditoria_antes("actualizar cliente", "pacientes", @cliente)
 
     if valido
 
@@ -248,7 +201,7 @@ skip_before_action :verify_authenticity_token
 
       if @cliente.destroy
 
-        auditoria_nueva("eliminar cliente", "clientes", @cliente_elim)
+        auditoria_nueva("eliminar cliente", "pacientes", @cliente_elim)
 
         @eliminado = true
 
