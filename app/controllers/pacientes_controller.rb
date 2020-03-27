@@ -7,7 +7,7 @@ skip_before_action :verify_authenticity_token
   
 
   end
-
+ 
   def lista
 
     cond = []
@@ -67,7 +67,7 @@ skip_before_action :verify_authenticity_token
 
   def agregar
 
-    @paciente = paciente.new
+    @paciente = VPaciente.new
 
     respond_to do |f|
 	    
@@ -83,22 +83,21 @@ skip_before_action :verify_authenticity_token
     @msg = ""
     @guardado_ok = false
 
-    unless params[:paciente][:paciente_documento].present?
+    unless params[:persona_documento].present?
 
       @valido = false
-      @msg += " Debe Completar el campo Nombre. \n"
+      @msg += " Debe Completar el campo Documento. \n"
 
     end
 
     if @valido
       
       @paciente = Paciente.new()
-      @paciente.persona_id = params[:paciente][:id]
+      @paciente.persona_id = params[:persona_id]
 
-        if @cliente.save
+        if @paciente.save
 
           auditoria_nueva("registrar paciente", "pacientes", @paciente)
-         
           @guardado_ok = true
          
         end 
@@ -175,9 +174,9 @@ skip_before_action :verify_authenticity_token
 
   end
 
-  def buscar_cliente
+  def buscar_paciente
     
-    @personas = Cliente.where("cliente_nombre ilike ?", "%#{params[:cliente_produccion]}%")
+    @personas = VPaciente.where("nombre_persona ilike ?", "%#{params[:cliente_produccion]}%")
 
     respond_to do |f|
       
@@ -224,6 +223,23 @@ skip_before_action :verify_authenticity_token
     respond_to do |f|
 
       f.js
+
+    end
+
+  end
+
+
+  def buscar_persona
+    
+    if params[:tipo_documento_id].present? && params[:nacionalidad_id] && params[:documento].present?
+
+      @persona = Persona.where("tipo_documento_id = ? and nacionalidad_id = ? and documento_persona = ?", params[:tipo_documento_id], params[:nacionalidad_id], params[:documento])  
+ 
+    end
+
+    respond_to do |f|
+
+      f.json { render :json => @persona.first}
 
     end
 

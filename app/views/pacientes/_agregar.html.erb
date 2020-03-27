@@ -1,4 +1,4 @@
-
+<%= javascript_include_tag "modulos/pacientes.js" %>
 <div class="modal-dialog">
       
   <div class="modal-content">
@@ -6,56 +6,60 @@
     <div class="modal-header" style="background:#e6e6e6;">
           
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title" id="myModalLabel">Agregar Cliente</h4>
+      <h4 class="modal-title" id="myModalLabel">Agregar Paciente</h4>
       
     </div>
 
-    <%= form_for @cliente, remote: true, url: clientes_guardar_url, html: { id: "form-agregar-cliente" }, method: 'POST' do |f| %>
+    <%= form_for @paciente, remote: true, url: pacientes_guardar_url, html: { id: "form-agregar-paciente" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
+      <%= hidden_field_tag :persona_id%>
 
       <div class="modal-body">
 
         <div class="panel-body">
 
-          <div class="col-sm-4"><%= f.label :razon_social, "Razón Social".html_safe %></div>
-           <div class="col-sm-7"><%= f.text_field :razon_social, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
+          <div class="col-sm-4"><%= label_tag nil, "Tipo de Documento #{attr_requerido}".html_safe, id: "lbl-tipo-documento-persona" %></div>
+
+          <div class="col-sm-7"><%= collection_select :persona, :tipo_documento_id,  TipoDocumento.habilitados.ordenado_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= label_tag nil, "Nacionalidad #{attr_requerido}".html_safe, id: "lbl-nacionalidad" %></div>
+          <div class="col-sm-7"><%= collection_select :persona, :nacionalidad_id, Nacionalidad.ordenado_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= label_tag nil, "N° Documento #{attr_requerido}".html_safe, id: "lbl-documento" %></div>
+          <div class="col-sm-7"><%= text_field_tag :persona_documento, nil, class: 'form-control input-sm' %></div>
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= label_tag nil, "Nombre #{attr_requerido}".html_safe, id: "lbl-nombre" %></div>
+          <div class="col-sm-7"><%= text_field_tag :persona_nombre, nil, class: 'form-control input-sm', readonly: true %></div>
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= label_tag nil, "Apellido #{attr_requerido}".html_safe, id: "lbl-apellido" %></div>
+          <div class="col-sm-7"><%= text_field_tag :persona_apellido, nil, class: 'form-control input-sm', readonly: true %></div>
           <div class="col-sm-1"></div><br />
           <div class="col-sm-1"></div><br />
 
-          <div class="col-sm-4"><%= f.label :ruc, "RUC".html_safe %></div>
-           <div class="col-sm-7"><%= f.text_field :ruc, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
-          <div class="col-sm-1"></div><br />
-          <div class="col-sm-1"></div><br />
 
-          <div class="col-sm-4"><%= f.label :nombre, "Nombres #{attr_requerido}".html_safe %></div>
-           <div class="col-sm-7"><%= f.text_field :cliente_nombre, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
-          <div class="col-sm-1"></div><br />
-           <div class="col-sm-1"></div><br />
+
           
-          <div class="col-sm-4"><%= f.label :apellido, "Apellidos #{attr_requerido}".html_safe %></div>
-           <div class="col-sm-7"><%= f.text_field :cliente_apellido, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
           <div class="col-sm-1"></div><br />
-           <div class="col-sm-1"></div><br />
-
-          <div class="col-sm-4"><%= f.label :direccion, "Dirección #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= f.text_field :direccion, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
-          <div class="col-sm-1"></div><br />
-           <div class="col-sm-1"></div><br />
-
-          <div class="col-sm-4"><%= f.label :telefono, "Teléfono #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= f.text_field :telefono, class: 'form-control input-sm'%></div>
-          <div class="col-sm-1"></div><br />   
-           <div class="col-sm-1"></div><br /> 
+          <div id="buscar_perso">                                       
+          </div>
+        </div>        
        
       </div>
 
       <div class="modal-footer" style="background:#e6e6e6;">
-        <%= link_to "<span class='glyphicon glyphicon-remove'></span> Cerrar".html_safe, "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %> 
-        <%= f.submit "Guardar".html_safe, class: "btn btn-primary", id: "btn-guardar-cliente" %>          
-      </div>
 
-    <% end %>
+        <%= link_to "Cerrar", "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %> 
+        <%= f.submit "Guardar", class: "btn btn-primary", id: "btn-guardar-paciente" %>
+          
+      </div>
+ 
+    <%end %>
 
   </div>
   
@@ -63,20 +67,31 @@
 
 <style type="text/css">
 
-  #form-agregar-cliente label, #form-agregar-cliente input[type='text'], #form-agregar-cliente select { float:left; margin-top:5px;}
-  #form-agregar-cliente br {clear:both; }
-  #form-agregar-cliente label { width:200px;font-size:12px;margin-top:10px;}
-  #form-agregar-cliente #razon_social { width:60%;}
-  #form-agregar-cliente #cliente_nombre { width:60%;}
-  #form-agregar-cliente #cliente_apellido { width:60%;}
-  #form-agregar-cliente #direccion { width:50%;}
-  #form-agregar-cliente #telefono { width:50%;}
-  
+  #form-agregar-paciente label, #form-agregar-paciente input[type='text'], #form-agregar-paciente input[type='password'], #form-agregar-paciente select , #form-agregar-paciente input[type='checkbox']{ float:left; margin-top:5px;}
+  #form-agregar-paciente br {clear:both; }
+  #form-agregar-paciente label { width:200px;font-size:12px;margin-top:10px;}
+  #form-agregar-paciente #persona_tipo_documento_persona_id { width:60%;}
+  #form-agregar-paciente #persona_nacionalidad_id { width:60%;}
+  #form-agregar-paciente #persona_documento { width:50%;}
+ 
+
 
 </style>
 
 <script type="text/javascript">
 
-  aplicar_datepicker2();
+  setTimeout(function(){ 
+    $("#persona_documento").focus();
+    $("#persona_tipo_documento_id").val(1);
+    $("#persona_nacionalidad_id").val(1);
+  }, 1000);
 
+  $("#persona_documento").bind("keydown", function(e){
+      
+    if(e.keyCode == 13 || e.keyCode == 9){
+    buscar_persona_v2($("#persona_tipo_documento_id").val(), $("#persona_nacionalidad_id").val(), $("#persona_documento").val(), "<%= url_for(pacientes_buscar_persona_path ) %>", "<%= url_for(personas_index_path( agregar: true))%>");
+      return false;
+    }
+ 
+  })
 </script>
