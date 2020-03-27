@@ -41,6 +41,20 @@ skip_before_action :verify_authenticity_token
 
     end
 
+    if params[:form_buscar_pacientes_direccion].present?
+
+      cond << "direccion ilike ?"
+      args << "%#{params[:form_buscar_pacientes_direccion]}%"
+
+    end
+
+    if params[:form_buscar_pacientes_telefono].present?
+
+      cond << "telefono ilike ?"
+      args << "%#{params[:form_buscar_pacientes_telefono]}%"
+
+    end
+
     cond = cond.join(" and ").lines.to_a + args if cond.size > 0
 
     if cond.size > 0

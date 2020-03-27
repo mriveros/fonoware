@@ -70,6 +70,23 @@
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
             </div>
           </div>
+
+           <div class="col-sm-4"><%= f.label :direccion, "Dirección #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= f.text_field :direccion, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= f.label :telefono, "Teléfono ".html_safe %></div>
+          <div class="col-sm-7"><%= f.text_field :telefono, class: 'form-control input-sm' %></div>
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= f.label :celular, "Celular ".html_safe %></div>
+          <div class="col-sm-7"><%= f.text_field :celular, class: 'form-control input-sm' %></div>
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= f.label :correo_electronico, "Correo Electrónico ".html_safe %></div>
+          <div class="col-sm-7"><%= f.text_field :correo_electronico, class: 'form-control input-sm' %></div>
+          <div class="col-sm-1"></div><br />
+          
           <div class="col-sm-1"></div><br />          
           <div class="col-sm-4"><%= f.label :genero_id, "Sexo #{attr_requerido}".html_safe %></div>
           <div class="col-sm-7"><%= f.collection_select :genero_id, Genero.order('id'), :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm', style: "width:150px;"} %></div>

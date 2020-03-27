@@ -8,13 +8,11 @@
       <td><%= p.nacionalidad.descripcion if p.nacionalidad %></td>
       <td><%= p.tipo_documento.descripcion if p.tipo_documento %></td>
       <td style="width:120px;"><%= p.documento_persona %></td>
-      <td><%= p.nombre_persona %></td>
-      <td><%= p.apellido_persona %></td>
-      <td style="text-align:center;"><%= p.fecha_nacimiento.strftime("%d/%m/%Y") if p.fecha_nacimiento.present? %></td>
-      <td><%= p.genero.descripcion if p.genero %></td>
-      <td><%= p.libro if p.libro %></td>
-      <td><%= p.folio if p.folio %></td>
-      <td><%= p.acta if p.acta %></td>
+      <td style="text-transform:uppercase;"><%= p.nombre_persona %></td>
+      <td style="text-transform:uppercase;"><%= p.apellido_persona %></td>
+      <td style="text-transform:uppercase;"><%= p.direccion %></td>
+      <td><%= p.celular%></td>
+      <td><%= p.correo_electronico%></td>
       <td style="text-align:center;width:150px;">
       <%= link_to_editar_persona(p) %>
       <%= link_to_unificar_persona(p) %>

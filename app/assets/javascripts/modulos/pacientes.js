@@ -72,7 +72,7 @@ function buscar_persona_v2(tipo_documento_id, nacionalidad_id, documento, ruta, 
           
       }else{
         $('#buscar_perso').html('<div class="alert alert-danger"><span class="glyphicon glyphicon-info-sign"></span>\n\
-        Esta persona no existe, debe registrar previamente la persona para la creación de usuarios, corroborando previamente con copia del documento.\n\
+        Esta persona no existe, debe registrar previamente la persona para la creación de pacientes, corroborando previamente con copia del documento.\n\
         <a href="' + ruta_agregar_persona + '" class="btn btn-primary btn-xs" target="_blank" style="margin-left:10px;">Agregar Persona</a></div>');
         /*$("<span id='msg-documento-persona' style='color:red;font-size:10px;margin: 10px 0 0 10px;'>Esta persona no existe, debe registrar previamente la persona para la creación de usuarios, corroborando previamente con copia del documento.<a href='" + ruta_agregar_persona + "' class='btn btn-primary btn-xs' target='_blank' style='margin-left:10px;'>Agregar Persona</a></span>").insertAfter("#persona_documento");*/
 
