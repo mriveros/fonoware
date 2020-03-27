@@ -13,31 +13,31 @@ skip_before_action :verify_authenticity_token
     cond = []
     args = []
 
-    if params[:form_buscar_paciente_id].present?
+    if params[:form_buscar_pacientes_id].present?
 
-      cond << "pacientes.paciente_id = ?"
-      args << params[:form_buscar_paciente_id]
+      cond << "paciente_id = ?"
+      args << params[:form_buscar_pacientes_id]
 
     end
 
     if params[:form_buscar_paciente_documento].present?
 
-      cond << "pacientes.ruc = ?"
+      cond << "documento_persona = ?"
       args << params[:form_buscar_paciente_documento]
 
     end
 
-    if params[:form_buscar_paciente_nombre].present?
+    if params[:form_buscar_pacientes_nombre].present?
 
-      cond << "pacientes.cliente_nombre ilike ?"
-      args << "%#{params[:form_buscar_paciente_nombre]}%"
+      cond << "nombre_persona ilike ?"
+      args << "%#{params[:form_buscar_pacientes_nombre]}%"
 
     end
 
-    if params[:form_buscar_paciente_apellido].present?
+    if params[:form_buscar_pacientes_apellido].present?
 
-      cond << "pacientes.cliente_apellido ilike ?"
-      args << "%#{params[:form_buscar_paciente_apellido]}%"
+      cond << "apellido_persona ilike ?"
+      args << "%#{params[:form_buscar_pacientes_apellido]}%"
 
     end
 
@@ -123,7 +123,7 @@ skip_before_action :verify_authenticity_token
 
   def editar
     
-    @paciente = Paciente.find(params[:id])
+    @paciente = Persona.find(params[:id])
 
   	respond_to do |f|
 	    
@@ -137,40 +137,39 @@ skip_before_action :verify_authenticity_token
 
     valido = true
     @msg = ""
-    @cliente = Cliente.find(params[:cliente_id])
 
-    auditoria_id = auditoria_antes("actualizar cliente", "pacientes", @cliente)
+    @persona = Persona.find(params[:persona][:id])
+    @paciente = Paciente.where("persona_id = ?", params[:persona][:id]).first
+    auditoria_id = auditoria_antes("actualizar persona", "personas", @persona)
 
     if valido
 
-      @cliente.razon_social = params[:cliente][:razon_social].upcase
-      @cliente.ruc = params[:cliente][:ruc]
-      @cliente.cliente_nombre = params[:cliente][:cliente_nombre].upcase
-      @cliente.cliente_apellido =  params[:cliente][:cliente_apellido].upcase
-      @cliente.direccion = params[:cliente][:direccion].upcase
-      @cliente.telefono = params[:cliente][:telefono]
+      @persona.update_attributes(params[:persona] )
+      auditoria_despues(@persona, auditoria_id)
 
-      if @cliente.save
+      if @persona.save
 
-        auditoria_despues(@cliente, auditoria_id)
-        @cliente_ok = true
+        @persona_ok = true
 
       end
-
+    
     end
-        rescue Exception => exc  
-        # dispone el mensaje de error 
-        #puts "Aqui si muestra el error ".concat(exc.message)
-        if exc.present?        
+    
+    rescue Exception => exc  
+      # dispone el mensaje de error 
+      #puts "Aqui si muestra el error ".concat(exc.message)
+      if exc.present?        
+        
         @excep = exc.message.split(':')    
         @msg = @excep[3].concat(" "+@excep[4])
-        end                
+      
+      end                
+        
+    respond_to do |f|
 
-  	respond_to do |f|
-	    
-	      f.js
-	    
-	  end
+      f.js
+
+    end
 
   end
 
@@ -189,24 +188,24 @@ skip_before_action :verify_authenticity_token
 
   def eliminar
 
-    valido = true
+    @valido = true
     @msg = ""
 
-    @cliente = Cliente.find(params[:id])
+    @paciente = Paciente.find(params[:id])
 
-    @cliente_elim = @cliente  
+    @paciente_elim = @paciente  
 
-    if valido
+    if @valido
 
-      if @cliente.destroy
+      if @paciente.destroy
 
-        auditoria_nueva("eliminar cliente", "pacientes", @cliente_elim)
+        auditoria_nueva("eliminar cliente", "pacientes", @paciente)
 
         @eliminado = true
 
       else
 
-        @msg = "ERROR: No se ha podido eliminar el Cliente."
+        @msg = "ERROR: No se ha podido eliminar el Paciente."
 
       end
 
@@ -215,9 +214,11 @@ skip_before_action :verify_authenticity_token
         # dispone el mensaje de error 
         #puts "Aqui si muestra el error ".concat(exc.message)
         if exc.present?        
-        @excep = exc.message.split(':')    
-        @msg = @excep[3].concat(" "+@excep[4])
-        @eliminado = false
+          
+          @excep = exc.message.split(':')    
+          @msg = @excep[3].concat(" "+@excep[4])
+          @eliminado = false
+        
         end
         
     respond_to do |f|

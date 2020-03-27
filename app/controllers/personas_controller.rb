@@ -231,21 +231,25 @@ class PersonasController < ApplicationController
     if valido
 
       @persona.update_attributes(params[:persona] )
-        auditoria_despues(@persona, auditoria_id)
+      auditoria_despues(@persona, auditoria_id)
 
       if @persona.save
 
         @persona_ok = true
 
       end
+    
     end
-        rescue Exception => exc  
-        # dispone el mensaje de error 
-        #puts "Aqui si muestra el error ".concat(exc.message)
-        if exc.present?        
+    
+    rescue Exception => exc  
+      # dispone el mensaje de error 
+      #puts "Aqui si muestra el error ".concat(exc.message)
+      if exc.present?        
+        
         @excep = exc.message.split(':')    
         @msg = @excep[3].concat(" "+@excep[4])
-        end                
+      
+      end                
         
     respond_to do |f|
 

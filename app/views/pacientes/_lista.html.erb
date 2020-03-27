@@ -6,14 +6,14 @@
 
       <td style="width:50px;"><%= pac.paciente_id %></td>
       <td><%= pac.documento_persona%></td>
-      <td><%= pac.nombre_persona%></td>
-      <td><%= pac.apellido_persona %></td>
-      <td><%= pac.direccion %></td>
+      <td style="text-transform:uppercase;"><%= pac.nombre_persona%></td>
+      <td style="text-transform:uppercase;"><%= pac.apellido_persona %></td>
+      <td style="text-transform:uppercase;"><%= pac.direccion %></td>
       <td><%= pac.telefono%></td>
       
       <td style="width:120px;">
         
-        <%= link_to_editar_paciente(pac) %>
+        <%= link_to_editar_paciente(pac.persona_id) %>
         
         <%= link_to icon_eliminar, pacientes_eliminar_path(id: pac.paciente_id), remote: true, class: "btn btn-danger btn-xs", title: 'Haga click para eliminar el paciente', data: { confirm: "Está seguro de eliminar el paciente ?"} %>
       
@@ -51,3 +51,18 @@
 
 
 <% end %>
+
+
+
+<script type="text/javascript">
+
+
+  function eliminar_paciente(){
+    alert("function")
+
+  }
+
+</script>
+
+
+
