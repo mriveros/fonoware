@@ -1652,6 +1652,13 @@ textarea.input-lg, .input-group-lg>textarea.form-control, .input-group-lg>textar
     background-color: #f0ad4e;
     border-color: #eea236;
 }
+
+.btn-detalle-fono {
+    color: #fff;
+    background-color: #FF8C24;
+    border-color: #FF8C24;
+}
+
 .btn-warning:hover, .btn-warning:focus, .btn-warning:active, .btn-warning.active {
     color: #fff;
     background-color: #ed9c28;

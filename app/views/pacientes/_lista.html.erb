@@ -13,6 +13,8 @@
       
       <td style="width:120px;">
         
+        <%= link_to_paciente_detalle_fono(pac.paciente_id) %>
+
         <%= link_to_editar_paciente(pac.persona_id) %>
         
         <%= link_to icon_eliminar, pacientes_eliminar_path(id: pac.paciente_id), remote: true, class: "btn btn-danger btn-xs", title: 'Haga click para eliminar el paciente', data: { confirm: "Está seguro de eliminar el paciente ?"} %>

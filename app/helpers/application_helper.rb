@@ -62,7 +62,7 @@ module ApplicationHelper
   #FIN CONTROL DE ACCESOS
 
   def icon_borrar
-    "<i class='glyphicon glyphicon-remove' style='color:#F50A19;size:12px'></i>".html_safe
+    "<i class='glyphicon glyphicon-remove' 'style='color:#F50A19;size:12px></i>".html_safe
   end
   def image_del
     image_tag("delete-icon.png", :style => "width:16px;")
@@ -90,6 +90,11 @@ module ApplicationHelper
 
   def icon_detalles_adelanto
     "<span class='glyphicon glyphicon-th-list'>Adelantos</span>".html_safe
+  end
+
+  def icon_detalles_fono
+
+    "<span class='glyphicon glyphicon-th-list'>Fono</span>".html_safe
   end
 
   def icon_detalles_gasto

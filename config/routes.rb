@@ -81,6 +81,7 @@ Rails.application.routes.draw do
   get "pacientes/index"
   get "pacientes/buscar_paciente"
   get "pacientes/buscar_persona"
+  get "pacientes/paciente_detalle_fono"
 
     #FLOTAS
   post "flotas/lista"
