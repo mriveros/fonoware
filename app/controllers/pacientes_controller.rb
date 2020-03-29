@@ -264,6 +264,7 @@ skip_before_action :verify_authenticity_token
 
   def paciente_detalle_fono
 
+    @paciente = Paciente.where("id = ?", params[:paciente_id]).first
 
     respond_to do |f|
 

@@ -70,7 +70,7 @@ Rails.application.routes.draw do
   get "produccion/planilla_resumen_produccion_cliente"
   get "produccion/planilla_resumen_produccion_cliente_pdf"
 
-    #CLIENTES
+    #PACIENTES
   post "pacientes/lista"
   get "pacientes/lista"
   get "pacientes/agregar"
@@ -82,6 +82,7 @@ Rails.application.routes.draw do
   get "pacientes/buscar_paciente"
   get "pacientes/buscar_persona"
   get "pacientes/paciente_detalle_fono"
+  post "pacientes/guardar_detalle_fono"
 
     #FLOTAS
   post "flotas/lista"

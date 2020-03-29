@@ -1,4 +1,4 @@
- 
+<%= javascript_include_tag "modulos/pacientes.js" %>
 <%= javascript_include_tag "sweetalert.min" %>
 <%= stylesheet_link_tag "sweetalert" %>
 <div>
@@ -9,6 +9,7 @@
     <%= modal_window( window_id: "modal-window-agregar-paciente", link_to_id: "#link-to-agregar-paciente", url: pacientes_agregar_path( window_id: "modal-window-agregar-paciente") )%>
     
   </div>
+  
 </div>
 
 <div style="clear:both;"></div>
@@ -23,7 +24,7 @@
 
         <tr>
 
-          <th style="width:50px;">
+          <th >
             <span>ID</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_pacientes_id, nil, :class => 'form-control', :placeholder => "" %>
@@ -31,7 +32,7 @@
             </div>
           </th>
           
-           <th style="width:130px;">
+           <th >
             <span>Documento</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_paciente_documento, nil, :class => 'form-control', :placeholder => "" %>
@@ -39,7 +40,7 @@
             </div>
           </th>
 
-          <th style="width:10%;">
+          <th >
             <span>Nombre</span>
             <div class="input-group input-group-sm">
                 <%= text_field_tag :form_buscar_pacientes_nombre, nil, :class => 'form-control', :placeholder => "" %>
@@ -47,9 +48,8 @@
             </div>
             <em class="nmb"></em>
           </th>
-
-
-          <th style="width:130px;">
+          
+          <th >
             <span>Apellido</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_pacientes_apellido, nil, :class => 'form-control', :placeholder => "" %>
@@ -58,7 +58,7 @@
             <em class="nmb"></em>
           </th>
 
-          <th style="width:130px;">
+          <th >
             <span>Dirección</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_pacientes_direccion, nil, :class => 'form-control', :placeholder => "" %>
@@ -66,8 +66,8 @@
             </div>
           </th>
 
-          <th style="width:18%;">
-            <span>Teléfono - Celular<br/>
+          <th >
+            <span>Teléfono - Celular</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_pacientes_telefono, nil, :class => 'form-control', :placeholder => "" %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pacientes', '#form_buscar_pacientes_telefono');"><i class="fa fa-times"></i></span>
@@ -76,7 +76,7 @@
           </th>
 
 
-          <th style="width:150px;"></th>
+          <th ></th>
 
         </tr>
 
@@ -111,6 +111,7 @@
     }
       
     if(valido){
+      
     $(".nmb").html('');       
     $("#pacientes-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")      
     }

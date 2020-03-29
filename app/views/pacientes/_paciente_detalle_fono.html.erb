@@ -1,53 +1,63 @@
-<td colspan="12">
+<td colspan="12" align="center" style="background: #e6e6e6; ">
+  
+  <div class="panel panel-default" >
 
-  <div style="background: #e6e6e6; margin:15px;padding:15px;border-radius:10px;">
+    <div class="panel-heading" align="center">
 
-    <div>
+      <div  align="center" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
 
-      <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
-        <h3 style="float:left;margin-top:5px;">Detalles Fonoaudiológicos del Paciente</h3>
-        <%#= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar adelanto".html_safe, "#", id: "link-to-agregar-detalle-credito", class: "btn btn-primary btn-xs", style: "float:right;" %>
+        <h3 style="float:center;">Detalles Fonoaudiológicos del Paciente</h3>
+
       </div>
 
     </div>
-
-    <div style="clear:both;"></div>
    
     <div class="panel-body">
       
       <div class="table-responsive" id="table-paciente-detalle-fono">
-          
+
+         <%= form_for @paciente, remote: true, url: pacientes_guardar_detalle_fono_url, html: { id: "form-datos-paciente" }, method: 'POST' do |f| %>
+
+          <%= hidden_field_tag :persona_id%>
+
         <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
-            
+         
+
           <thead>
               
             <tr role="row">
               
-              <th>id</th>
-              <th>Detalle Crédito</th>
-              <th>Monto</th>
-              <th>Fecha creación</th>
-              <th>Fecha modificación</th>
-              <th style='text-align:right;'></th>
+              <th>Antecedentes</th>
+              <th>Datos Clínicos</th>
+              <th>Datos de Escolaridad</th>
+              <th>Datos de Derivación</th>
+              
               
             </tr>
             
           </thead>
        
-          <tbody id="paciente-detalle-fono-lista">
+          <tbody id="paciente-detalle-fono">
 
             
                 
           </tbody>
-              
+          
+        
+
+        <div style="background:#e6e6e6;">
+
+       
+          
+        </div>
+
         </table>
         
+        <%= f.submit "Actualizar Datos", class: "btn btn-primary", id: "btn-actualizar-datos-paciente" %>
+
+       <%end %>  
+
       </div>
       
     </div>
-    
-  </div>
-
-  <%#= modal_window( window_id: "modal-window-agregar-detalle-credito", link_to_id: "#link-to-agregar-detalle-credito", url: produccion_agregar_detalle_credito_path( window_id: "modal-window-agregar-detalle-credito", produccion_id: params[:produccion_id]) )%>
-
-</td>
+  </div>  
