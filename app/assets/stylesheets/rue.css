@@ -4032,6 +4032,14 @@ button.close {
     text-align: right;
     border-top: 1px solid #e5e5e5;
 }
+
+.modal-footer-center {
+    margin-top: 15px;
+    padding: 19px 20px 20px;
+    text-align: right;
+    border-top: 1px solid #e5e5e5;
+    align-items: center;
+}
 .modal-footer:before, .modal-footer:after {
     content: " ";
     display: table;

@@ -114,10 +114,20 @@
 
               <td>
 
-                <div class="col-sm-4"><%= label_tag nil, "Curso Escolaridad".html_safe %></div>
-                <div class="col-sm-5"><%= collection_select :curso, :id, Curso.basica, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:100px;"} %></div>
-                <div class="col-sm-1"></div><br/>
-                </div>
+                <div class="col-sm-12"><%= label_tag nil, "Curso Escolaridad".html_safe %></div>
+                <div class="col-sm-5"><%= collection_select :escolaridad_grado, :id, Curso.basica, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:100px;"} %></div>
+                <div class="col-sm-1"></div><br/><br/>
+                
+
+                <div class="col-sm-12"><%= label_tag nil, "Tiempo Escolaridad".html_safe %></div>
+                <div class="col-sm-12"><%= text_field_tag :escolaridad_tiempo, nil, class: 'form-control input-sm'%></div>
+                <div class="col-sm-1"></div><br/><br/>
+               
+
+                <div class="col-sm-12"><%= label_tag nil, "Institución Actual".html_safe %></div>
+                <div class="col-sm-12"><%= text_field_tag :escolaridad_institucion, nil, class: 'form-control input-sm'%></div>
+                <div class="col-sm-1"></div><br/><br/>
+                
                 
 
 
@@ -127,6 +137,10 @@
 
 
               <td>
+
+                <div class="col-sm-12"><%= label_tag nil, "Derivado Por".html_safe %></div>
+                <div class="col-sm-12"><%= text_field_tag :datos_derivacion, nil, class: 'form-control input-sm'%></div>
+                <div class="col-sm-1"></div><br/><br/>
                 
 
 
@@ -150,7 +164,13 @@
 
         </table>
         
-        <%= f.submit "Actualizar Datos", class: "btn btn-primary", id: "btn-actualizar-datos-paciente" %>
+        <div class="modal-footer-center" style="background:#e6e6e6;">
+
+          <%= f.submit "Actualizar Datos", class: "btn btn-primary", id: "btn-actualizar-datos-paciente"  %>
+          
+        </div>
+
+       
 
        <%end %>  
 
@@ -208,4 +228,7 @@
   })
 
 
-  </script>>
+
+
+
+  </script>
