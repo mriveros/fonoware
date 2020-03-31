@@ -27,10 +27,10 @@
               
             <tr role="row">
               
-              <th>Antecedentes</th>
-              <th>Datos Clínicos</th>
-              <th>Datos de Escolaridad</th>
-              <th>Datos de Derivación</th>
+              <th style="width:25%;">Antecedentes</th>
+              <th style="width:25%;">Datos Clínicos</th>
+              <th style="width:25%;">Datos de Escolaridad</th>
+              <th style="width:25%;">Datos de Derivación</th>
               
               
             </tr>
@@ -38,7 +38,109 @@
           </thead>
        
           <tbody id="paciente-detalle-fono">
+            <tr>
+              <td>
+                
+                <div class="col-sm-4"><%= label_tag nil, "Antecedentes Personales".html_safe, id: "lbl-antecedentes-personales" %></div><br />
+                <div class="col-sm-12">
+                  <%= text_area_tag :antecedentes_personales, nil,  class: 'form-control input-sm' %>
+                </div>
+               
+                <div class="col-sm-4"><%= label_tag nil, "Antecedentes Quirúrgicos".html_safe, id: "lbl-antecedentes-quirurgicos" %></div><br />
+                <div class="col-sm-12">
+                  <%= text_area_tag :antecedentes_quirurgicos, nil,  class: 'form-control input-sm' %>
+                </div>
+                
+                <div class="col-sm-4"><%= label_tag nil, "Antecedentes Familiares".html_safe, id: "lbl-antecedentes-familiares" %></div><br />
+                <div class="col-sm-12">
+                  <%= text_area_tag :antecedentes_familiares, nil,  class: 'form-control input-sm' %>
+                 </div>
 
+                 <div class="col-sm-4"><%= label_tag nil, "Antecedentes Hábitos".html_safe, id: "lbl-antecedentes-habitos" %></div><br />
+                <div class="col-sm-12">
+                  <%= text_area_tag :antecedentes_habitos, nil,  class: 'form-control input-sm' %>
+                 </div>
+                
+                <div class="col-sm-4"><%= label_tag nil, "Otros Antecedentes".html_safe, id: "lbl-antecedentes-familiares" %></div><br />
+                <div class="col-sm-12">
+                  <%= text_area_tag :antecedentes_otros, nil,  class: 'form-control input-sm' %>
+                </div>
+                
+              </td>
+
+
+              <td>
+                
+                 <div class="col-sm-4"><%= label_tag nil, "Sindrome".html_safe, id: "lbl-sindrome" %></div><br />
+                <div class="col-sm-12">
+
+                  <div class="col-sm-12"><%= check_box_tag "sindrome" %></div>
+                  <div id= "div_sindrome" hidden="true">
+
+                    <div class="col-sm-12"><%= label_tag nil, "Especificar".html_safe, id: "lbl-especificar-sindrome" %></div>
+                    <div class="col-sm-12"><%= text_field_tag :sindrome_especificar, nil, class: 'form-control input-sm'%></div>
+                  </div>
+
+                </div>
+
+
+               
+                <div class="col-sm-4"><%= label_tag nil, "Transtornos".html_safe, id: "lbl-transtornos" %></div><br />
+                <div class="col-sm-12">
+
+                  <div class="col-sm-12"><%= check_box_tag "transtornos" %></div><br/>
+                  <div id= "div_transtornos" hidden="true">
+                  
+                    <div class="col-sm-12"><%= label_tag nil, "Especificar".html_safe, id: "lbl-especificar-transtorno" %></div>
+                    <div class="col-sm-12"><%= text_field_tag :transtorno_especificar, nil, class: 'form-control input-sm' %></div>
+
+                  </div>
+
+                </div>
+
+
+                
+                <div class="col-sm-4"><%= label_tag nil, "Enfermedad".html_safe, id: "lbl-enfermedad" %></div><br />
+                <div class="col-sm-12">
+
+                  <div class="col-sm-12" ><%= check_box_tag "enfermedad" %></div>  
+
+                  <div id= "div_enfermedad" hidden="true">                
+                  
+                    <div class="col-sm-12"><%= label_tag nil, "Especificar".html_safe, id: "lbl-especificar-enfermedad"%></div>
+                    <div class="col-sm-12"><%= text_field_tag :enfermedad_especificar, nil, class: 'form-control input-sm' %></div>
+                  </div>
+
+                </div>
+
+
+              </td>
+
+
+              <td>
+
+                <div class="col-sm-4"><%= label_tag nil, "Especialidad".html_safe %></div>
+                <div class="col-sm-5"><%= collection_select :especialidad, :id, Cursos.orden_id, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+                <div class="col-sm-1"></div><br/>
+                </div>
+                
+
+
+              </td>
+
+
+
+
+              <td>
+                
+
+
+              </td>
+
+
+
+
+            </tr>
             
                 
           </tbody>
@@ -61,3 +163,54 @@
       
     </div>
   </div>  
+
+
+  <script type="text/javascript">
+
+    $("#sindrome").bind('change', function () {
+
+    if( $('#sindrome').prop('checked')) {
+
+      $('#sindrome').val(true);
+      $('#div_sindrome').show();
+      
+
+    }else{
+      $('#sindrome').val(false);
+      $('#div_sindrome').hide();
+    }
+    
+  })
+
+  $("#transtornos").bind('change', function () {
+
+    if( $('#transtornos').prop('checked')) {
+
+      $('#transtornos').val(true);
+      $('#div_transtornos').show();
+
+    }else{
+
+      $('#transtornos').val(false);
+      $('#div_transtornos').hide();
+    }
+    
+  })
+
+  $("#enfermedad").bind('change', function () {
+
+    if( $('#enfermedad').prop('checked')) {
+
+      $('#enfermedad').val(true);
+      $('#div_enfermedad').show();
+      
+
+    }else{
+      $('#enfermedad').val(false);
+      $('#div_enfermedad').hide();
+    }
+    
+  })
+
+
+  </script>>
