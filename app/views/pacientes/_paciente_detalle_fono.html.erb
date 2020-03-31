@@ -45,11 +45,6 @@
                 <div class="col-sm-12">
                   <%= text_area_tag :antecedentes_personales, nil,  class: 'form-control input-sm' %>
                 </div>
-               
-                <div class="col-sm-4"><%= label_tag nil, "Antecedentes Quirúrgicos".html_safe, id: "lbl-antecedentes-quirurgicos" %></div><br />
-                <div class="col-sm-12">
-                  <%= text_area_tag :antecedentes_quirurgicos, nil,  class: 'form-control input-sm' %>
-                </div>
                 
                 <div class="col-sm-4"><%= label_tag nil, "Antecedentes Familiares".html_safe, id: "lbl-antecedentes-familiares" %></div><br />
                 <div class="col-sm-12">
@@ -119,8 +114,8 @@
 
               <td>
 
-                <div class="col-sm-4"><%= label_tag nil, "Especialidad".html_safe %></div>
-                <div class="col-sm-5"><%= collection_select :especialidad, :id, Cursos.orden_id, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:200px;"} %></div>
+                <div class="col-sm-4"><%= label_tag nil, "Curso Escolaridad".html_safe %></div>
+                <div class="col-sm-5"><%= collection_select :curso, :id, Curso.basica, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:100px;"} %></div>
                 <div class="col-sm-1"></div><br/>
                 </div>
                 
