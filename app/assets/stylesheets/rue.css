@@ -4036,7 +4036,7 @@ button.close {
 .modal-footer-center {
     margin-top: 15px;
     padding: 19px 20px 20px;
-    text-align: right;
+    text-align: center;
     border-top: 1px solid #e5e5e5;
     align-items: center;
 }
