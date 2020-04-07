@@ -4,8 +4,10 @@
    
   $("#form_buscar_pacientes_id").val('<%= @paciente.id %>');
   $("#form-buscar-pacientes").submit();
-  swal("Guardado Exitosamente.")
-  setTimeout(function(){ $("#<%= params[:window_id]%>").modal('hide'); }, 3000);
+  setTimeout(function(){ 
+    $("#<%= params[:window_id]%>").modal('hide');
+    swal("Guardado Exitosamente.")
+}, 1000);
 
 
 <% else %>

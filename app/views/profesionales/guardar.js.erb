@@ -4,8 +4,11 @@
    
   $("#form_buscar_profesional_id").val('<%= @profesional.id %>');
   $("#form-buscar-profesional").submit();
-  swal("Guardado Exitosamente.")
-  setTimeout(function(){ $("#<%= params[:window_id]%>").modal('hide'); }, 3000);
+  
+  setTimeout(function(){ 
+    $("#<%= params[:window_id]%>").modal('hide');
+    swal("Guardado Exitosamente.")
+}, 1000);
 
 
 <% else %>

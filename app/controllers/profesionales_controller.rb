@@ -63,7 +63,7 @@ skip_before_action :verify_authenticity_token
       @total_encontrados = VProfesional.where(cond).count
 
     else
-      puts "//////////////////////////////////////////DEBUG!  "
+     
       @profesionales = VProfesional.orden_01.paginate(per_page: 10, page: params[:page])
       @total_encontrados = VProfesional.count
 
