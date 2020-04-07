@@ -59,12 +59,12 @@ skip_before_action :verify_authenticity_token
 
     if cond.size > 0
 
-      @profesional =  VProfesional.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+      @profesionales =  VProfesional.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
       @total_encontrados = VProfesional.where(cond).count
 
     else
-
-      @profesional = VProfesional.orden_01.paginate(per_page: 10, page: params[:page])
+      puts "//////////////////////////////////////////DEBUG!  "
+      @profesionales = VProfesional.orden_01.paginate(per_page: 10, page: params[:page])
       @total_encontrados = VProfesional.count
 
     end
@@ -258,13 +258,6 @@ skip_before_action :verify_authenticity_token
 
     end
 
-  end
-
-
-
-
- 
-    
   end
 
 end

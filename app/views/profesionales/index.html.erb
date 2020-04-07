@@ -1,4 +1,4 @@
-<%= javascript_include_tag "modulos/profesionales.js" %>
+<%= javascript_include_tag "modulos/pacientes.js" %>
 <%= javascript_include_tag "sweetalert.min" %>
 <%= stylesheet_link_tag "sweetalert" %>
 <div>
@@ -20,7 +20,7 @@
    
     <thead>
 
-      <%= form_tag profesionales_lista_path, remote: true, id: "form-buscar-profesionales"  do  %>
+      <%= form_tag profesionales_lista_path, remote: true, id: "form-buscar-profesional"  do  %>
 
         <tr>
 
@@ -84,7 +84,7 @@
 
       </thead> 
 
-    <tbody id="profesional-lista"></tbody>
+    <tbody id="profesionales-lista"></tbody>
   
   </table>
 
@@ -94,10 +94,12 @@
 
 
 <script type="text/javascript">
-  
+
   $("#form-buscar-profesional").submit();
+
   //---------------------------- RECUPERANDO DATOS ----------------------------//
   $("#form-buscar-profesional").bind("submit", function () {
+
     var valido = true;
     if($("#form_buscar_profesional_nombre").val().length !== 0 ){
       valido = false;

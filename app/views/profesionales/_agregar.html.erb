@@ -6,11 +6,11 @@
     <div class="modal-header" style="background:#e6e6e6;">
           
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title" id="myModalLabel">Agregar Paciente</h4>
+      <h4 class="modal-title" id="myModalLabel">Agregar Profesional</h4>
       
     </div>
 
-    <%= form_for @paciente, remote: true, url: pacientes_guardar_url, html: { id: "form-agregar-paciente" }, method: 'POST' do |f| %>
+    <%= form_for @profesional, remote: true, url: profesionales_guardar_url, html: { id: "form-agregar-profesional" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
       <%= hidden_field_tag :persona_id%>
@@ -55,7 +55,7 @@
       <div class="modal-footer" style="background:#e6e6e6;">
 
         <%= link_to "Cerrar", "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %> 
-        <%= f.submit "Guardar", class: "btn btn-primary", id: "btn-guardar-paciente" %>
+        <%= f.submit "Guardar", class: "btn btn-primary", id: "btn-guardar-profesional" %>
           
       </div>
  
@@ -67,12 +67,12 @@
 
 <style type="text/css">
 
-  #form-agregar-paciente label, #form-agregar-paciente input[type='text'], #form-agregar-paciente input[type='password'], #form-agregar-paciente select , #form-agregar-paciente input[type='checkbox']{ float:left; margin-top:5px;}
-  #form-agregar-paciente br {clear:both; }
-  #form-agregar-paciente label { width:200px;font-size:12px;margin-top:10px;}
-  #form-agregar-paciente #persona_tipo_documento_persona_id { width:60%;}
-  #form-agregar-paciente #persona_nacionalidad_id { width:60%;}
-  #form-agregar-paciente #persona_documento { width:50%;}
+  #form-agregar-profesional label, #form-agregar-profesional input[type='text'], #form-agregar-profesional input[type='password'], #form-agregar-profesional select , #form-agregar-profesional input[type='checkbox']{ float:left; margin-top:5px;}
+  #form-agregar-profesional br {clear:both; }
+  #form-agregar-profesional label { width:200px;font-size:12px;margin-top:10px;}
+  #form-agregar-profesional #persona_tipo_documento_persona_id { width:60%;}
+  #form-agregar-profesional #persona_nacionalidad_id { width:60%;}
+  #form-agregar-profesional #persona_documento { width:50%;}
  
 
 
@@ -89,7 +89,7 @@
   $("#persona_documento").bind("keydown", function(e){
       
     if(e.keyCode == 13 || e.keyCode == 9){
-    buscar_persona_v2($("#persona_tipo_documento_id").val(), $("#persona_nacionalidad_id").val(), $("#persona_documento").val(), "<%= url_for(pacientes_buscar_persona_path ) %>", "<%= url_for(personas_index_path( agregar: true))%>");
+    buscar_persona_v2($("#persona_tipo_documento_id").val(), $("#persona_nacionalidad_id").val(), $("#persona_documento").val(), "<%= url_for(profesionales_buscar_persona_path ) %>", "<%= url_for(personas_index_path( agregar: true))%>");
       return false;
     }
  

@@ -1,22 +1,22 @@
-<% if paciente.present? %>
+<% if profesionales.present? %>
 
-  <% paciente.each do |pac| %>
+  <% profesionales.each do |pro| %>
 
     <tr>
 
-      <td><%= pac.paciente_id %></td>
-      <td><%= pac.documento_persona%></td>
-      <td style="text-transform:uppercase;"><%= pac.nombre_persona%></td>
-      <td style="text-transform:uppercase;"><%= pac.apellido_persona %></td>
-      <td style="text-transform:uppercase;"><%= pac.direccion %></td>
-      <td><%= pac.telefono%> - <%= pac.celular%></td>
+      <td><%= pro.profesional_id %></td>
+      <td><%= pro.documento_persona%></td>
+      <td style="text-transform:uppercase;"><%= pro.nombre_persona%></td>
+      <td style="text-transform:uppercase;"><%= pro.apellido_persona %></td>
+      <td style="text-transform:uppercase;"><%= pro.direccion %></td>
+      <td><%= pro.telefono%> - <%= pro.celular%></td>
       
       <td >
         
         
-        <%= link_to_paciente_detalle_fono(pac.paciente_id) %>
-        <%= link_to_editar_paciente(pac.persona_id) %>
-        <%= link_to icon_eliminar, pacientes_eliminar_path(id: pac.paciente_id), remote: true, class: "btn btn-danger btn-xs", title: 'Haga click para eliminar el paciente', data: { confirm: "Está seguro de eliminar el paciente ?"} %>
+        <%#= link_to_profesional_detalle_fono(pro.profesional_id) %>
+        <%= link_to_editar_profesional(pro.persona_id) %>
+        <%= link_to icon_eliminar, profesionales_eliminar_path(id: pro.profesional_id), remote: true, class: "btn btn-danger btn-xs", title: 'Haga click para eliminar el profesional', data: { confirm: "Está seguro de eliminar el profesional ?"} %>
 
       
        </td>
@@ -30,7 +30,7 @@
 
 <tr id="tab-paginacion">
 
-    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate paciente, :params => params %></div></td>
+    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate profesionales, :params => params %></div></td>
 </tr>
 
 <tr>
