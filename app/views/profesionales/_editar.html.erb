@@ -6,11 +6,11 @@
     <div class="modal-header" style="background:#e6e6e6;">
           
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title" id="myModalLabel">Editar Paciente</h4>
+      <h4 class="modal-title" id="myModalLabel">Editar Profesional</h4>
       
     </div>
 
-    <%= form_for @paciente, remote: true, url: pacientes_actualizar_url, html: { id: "form-editar-persona" }, method: 'POST' do |f| %>
+    <%= form_for @profesional, remote: true, url: profesionales_actualizar_url, html: { id: "form-editar-persona" }, method: 'POST' do |f| %>
 
       <%= f.hidden_field :id %>
       <%= hidden_field_tag :window_id, params[:window_id]%>

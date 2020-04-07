@@ -1,4 +1,4 @@
-<%= javascript_include_tag "modulos/pacientes.js" %>
+<%= javascript_include_tag "modulos/personas.js" %>
 <%= javascript_include_tag "sweetalert.min" %>
 <%= stylesheet_link_tag "sweetalert" %>
 <div>
@@ -14,7 +14,7 @@
 
 <div style="clear:both;"></div>
  
-<div class="table-responsive" id="table-profesionales">
+<div class="table-responsive" id="table-profesional">
 
   <table class="table table-small-font table-bordered table-striped" style="font-size:11px;">
    
@@ -116,7 +116,7 @@
     if(valido){
       
     $(".nmb").html('');       
-    $("#profesional-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")      
+    $("#profesionales-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")      
     }
 
     

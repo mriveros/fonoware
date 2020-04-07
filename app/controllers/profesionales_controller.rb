@@ -153,7 +153,7 @@ skip_before_action :verify_authenticity_token
     @msg = ""
 
     @persona = Persona.find(params[:persona][:id])
-    @profesional = Profesonal.where("persona_id = ?", params[:persona][:id]).first
+    @profesional = Profesional.where("persona_id = ?", params[:persona][:id]).first
     auditoria_id = auditoria_antes("actualizar persona", "personas", @persona)
 
     if valido
