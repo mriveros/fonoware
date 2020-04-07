@@ -44,6 +44,7 @@
 								<a class="dropdown-toggle " href="#" data-toggle="dropdown">Administración<b class="caret"></b></a>
 								<ul class="dropdown-menu">
 								  <li><%= link_to "Personas", personas_index_path if acceso_permitido("personas.index") %></li>
+                   <li><%= link_to "Profesionales", profesionales_index_path if acceso_permitido("profesionales.index") %></li>
 								  <li><%= link_to "Pacientes",pacientes_index_path if acceso_permitido("pacientes.index") %></li> 
 								  <li><%= link_to "Tutores", clientes_index_path if acceso_permitido("clientes.index") %></li> 
 								  <li><%= link_to "Profesionales", clientes_index_path if acceso_permitido("clientes.index") %></li> 
