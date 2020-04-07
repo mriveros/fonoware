@@ -212,14 +212,18 @@ skip_before_action :verify_authenticity_token
 
     if @valido
 
-      if @paciente_detalle.destroy
-        
-        auditoria_nueva("eliminar cliente detalle", "pacientes_detalles_fono", @paciente_detalle)
-        @eliminado = true
+      if @paciente_detalle.present?
 
-      else
+        if @paciente_detalle.destroy
+          
+          auditoria_nueva("eliminar cliente detalle", "pacientes_detalles_fono", @paciente_detalle)
+          @eliminado = true
 
-        @msg = "ERROR: No se ha podido eliminar el Detalle del Paciente."
+        else
+
+          @msg = "ERROR: No se ha podido eliminar el Detalle del Paciente."
+
+        end
 
       end
 

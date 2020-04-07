@@ -16,7 +16,8 @@
         
         <%#= link_to_profesional_detalle_fono(pro.profesional_id) %>
         <%= link_to_editar_profesional(pro.persona_id) %>
-        <%= link_to icon_eliminar, profesionales_eliminar_path(id: pro.profesional_id), remote: true, class: "btn btn-danger btn-xs", title: 'Haga click para eliminar el profesional', data: { confirm: "Está seguro de eliminar el profesional ?"} %>
+        <%#= link_to icon_eliminar, profesionales_eliminar_path(id: pro.profesional_id), remote: true, class: "btn btn-danger btn-xs", title: 'Haga click para eliminar el profesional', data: { confirm: "Está seguro de eliminar el profesional ?"} %>
+        <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{pro.profesional_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-profesional", title: 'Haga click para eliminar el profesional'  %>
 
       
        </td>
@@ -52,6 +53,39 @@
 
 <% end %>
 
+<script type="text/javascript">
+//profesionales_eliminar_path(id: pro.profesional_id)
+  function eliminar_registro(profesional_id) {
 
+        swal({
+          title: "Confirmar",
+          text: "Al confirmar se eliminará permanentemente de la lista de profesionales",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonClass: "btn-confirm",
+          confirmButtonText: "Confirmar",
+          cancelButtonText: "Cancelar",
+          closeOnConfirm: true,
+          closeOnCancel: true
+        },
+        function(isConfirm) {
+          if (isConfirm) {
 
+              $.ajax({
+                url: "<%= url_for(profesionales_eliminar_path) %>", 
+                data: {id: profesional_id},
+                dataType: 'script'
+              });
+            
+          } else{
 
+            return false;
+
+          }
+
+        });
+
+    
+    }
+
+</script>
