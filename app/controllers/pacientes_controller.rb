@@ -207,7 +207,6 @@ skip_before_action :verify_authenticity_token
 
     @paciente = Paciente.find(params[:id])
     @paciente_detalle  = PacienteDetalleFono.where("paciente_id = ?", params[:id]).first
-
     @paciente_elim = @paciente  
 
     if @valido
