@@ -96,19 +96,17 @@ Rails.application.routes.draw do
   get "profesionales/buscar_profesional"
   get "profesionales/buscar_persona"
   
-
-  #FLOTAS
-  post "flotas/lista"
-  get "flotas/lista"
-  get "flotas/agregar"
-  post "flotas/guardar"
-  get "flotas/eliminar"
-  get "flotas/editar"
-  post "flotas/actualizar"
-  get "flotas/index"
-  get "flotas/obtener_datos"
-  get "flotas/buscar_flota"
-  
+ #PRECIOS
+  post "precios/lista"
+  get "precios/lista"
+  get "precios/agregar"
+  post "precios/guardar"
+  get "precios/eliminar"
+  get "precios/editar"
+  post "precios/actualizar"
+  get "precios/index"
+  get "precios/obtener_datos"
+  get "precios/buscar_precio"
 
     #PERSONAS
   post "personas/lista"

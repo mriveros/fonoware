@@ -48,7 +48,7 @@
 								  <li><%= link_to "Pacientes",pacientes_index_path if acceso_permitido("pacientes.index") %></li> 
 								  <li><%= link_to "Tutores", clientes_index_path if acceso_permitido("clientes.index") %></li> 
 								  <li><%= link_to "Profesionales", clientes_index_path if acceso_permitido("clientes.index") %></li> 
-								  <li><%= link_to "Precios", flotas_index_path if acceso_permitido("flotas.index") %></li> 
+								  <li><%= link_to "Precios", precios_index_path if acceso_permitido("precios.index") %></li> 
 								  <li><%= link_to "Detalles Gastos", detalles_debitos_index_path if acceso_permitido("detalles_debitos.index") %></li> 
 								  <li><%= link_to "Detalles Adelantos", detalles_creditos_index_path if acceso_permitido("detalles_creditos.index") %></li> 
 								</ul>

@@ -1,4 +1,4 @@
-class FlotasController < ApplicationController
+class PreciosController < ApplicationController
 
 before_filter :require_usuario
 
@@ -10,45 +10,33 @@ before_filter :require_usuario
     cond = []
     args = []
 
-    if params[:form_buscar_flotas_id].present?
+    if params[:form_buscar_precios_id].present?
 
-      cond << "flotas.id = ?"
-      args << params[:form_buscar_flotas_id]
-
-    end
-
-     if params[:form_buscar_flotas_codigo].present?
-
-      cond << "flotas.codigo = ?"
-      args << params[:form_buscar_flotas_codigo]
+      cond << "id = ?"
+      args << params[:form_buscar_precios_id]
 
     end
 
-    if params[:form_buscar_flotas_marca_id].present?
+     if params[:form_buscar_precios_codigo].present?
 
-      cond << "flotas.marca_id = ?"
-      args << params[:form_buscar_flotas_marca_id]
+      cond << "codigo = ?"
+      args << params[:form_buscar_precios_codigo]
 
-    end
+    end    
 
-    if params[:form_buscar_flotas_modelo].present?
 
-      cond << "flotas.modelo = ?"
-      args << params[:form_buscar_flotas_modelo]
+    if params[:form_buscar_precios_descripcion].present?
 
-    end
-
-    if params[:form_buscar_flotas_chapa].present?
-
-      cond << "flotas.chapa = ?"
-      args << params[:form_buscar_flotas_chapa]
+      cond << "descripcion ilike ?"
+      args << "%#{params[:form_buscar_precios_descripcion]}%"
 
     end
 
-    if params[:form_buscar_flotas_descripcion].present?
 
-      cond << "flotas.descripcion ilike ?"
-      args << "%#{params[:form_buscar_flotas_descripcion]}%"
+    if params[:form_buscar_precios_monto].present?
+
+      cond << "monto = ?"
+      args << params[:form_buscar_precios_monto]
 
     end
 
@@ -56,17 +44,17 @@ before_filter :require_usuario
 
     if cond.size > 0
 
-      @flotas =  Flota.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
-      @total_encontrados = Flota.where(cond).count
+      @precios =  Precio.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+      @total_encontrados = Precio.where(cond).count
 
     else
 
-      @flotas = Flota.orden_01.paginate(per_page: 10, page: params[:page])
-      @total_encontrados = Flota.count
+      @precios = Precio.orden_01.paginate(per_page: 10, page: params[:page])
+      @total_encontrados = Precio.count
 
     end
 
-    @total_registros = Flota.count
+    @total_registros = Precio.count
 
     respond_to do |f|
 
@@ -78,10 +66,12 @@ before_filter :require_usuario
 
   def agregar
 
-    @flota = Flota.new
+    @precio = Precio.new
 
     respond_to do |f|
+
       f.js
+      
     end
 
   end
@@ -90,20 +80,19 @@ before_filter :require_usuario
 
     valido = true
     @msg = ""
-    @flota_ok = false
+    @precio_ok = false
 
-    @flota = Flota.new()
-    @flota.codigo_flota = params[:flota][:codigo_flota].upcase
-    @flota.marca_id = params[:flota][:marca_id]
-    @flota.modelo = params[:flota][:modelo].upcase
-    @flota.chapa = params[:flota][:chapa].upcase
-    @flota.descripcion = params[:flota][:descripcion].upcase
+    @precio = Precio.new()
+    @precio.codigo = params[:precio][:codigo].upcase
+    @precio.descripcion = params[:precio][:descripcion].upcase
+    @precio.monto = params[:precio][:monto]
+    
 
-      if @flota.save
+      if @precio.save
 
-        auditoria_nueva("registrar flota", "flotas", @flota)
+        auditoria_nueva("registrar precio", "precios", @precio)
        
-        @flota_ok = true
+        @precio_ok = true
        
 
       end 
@@ -130,7 +119,7 @@ before_filter :require_usuario
     valido = true
     @msg = ""
 
-    @flota = Flota.find(params[:id])
+    @precio = Flota.find(params[:id])
 
     if valido
 
@@ -224,22 +213,16 @@ before_filter :require_usuario
     end
   end
 
-  def agregar_persona_senatics
+  
 
-    respond_to do |f|
-      f.js
-    end
+  def buscar_precio
 
-  end
-
-  def buscar_flota
-
-     @flotas = VFlota.where("marca ilike ?", "%#{params[:flota_produccion]}%")
+     @precios = Precio.where("descripcion ilike ?", "%#{params[:descripcion]}%")
 
     respond_to do |f|
       
       f.html
-      f.json { render :json => @flotas }
+      f.json { render :json => @precios }
     
     end
 
