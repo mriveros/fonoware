@@ -8,7 +8,13 @@
   $("#form_buscar_profesional_apellido").val('');
   $("#form_buscar_profesional_direccion").val('');
   $("#form_buscar_profesional_telefono").val('');
-  setTimeout(function(){ $("#<%= params[:window_id]%>").modal('hide'); $("#form-buscar-profesional").submit(); }, 3000);
+  setTimeout(function(){ 
+    
+    $("#<%= params[:window_id]%>").modal('hide'); 
+    $("#form-buscar-profesional").submit(); 
+    swal("Guardado Exitosamente.");
+    
+  }, 2000);
 
 <% else %>
 

@@ -8,7 +8,13 @@
   $("#form_buscar_pacientes_apellido").val('');
   $("#form_buscar_pacientes_direccion").val('');
   $("#form_buscar_pacientes_telefono").val('');
-  setTimeout(function(){ $("#<%= params[:window_id]%>").modal('hide'); $("#form-buscar-pacientes").submit(); }, 3000);
+  setTimeout(function(){ 
+    
+    $("#<%= params[:window_id]%>").modal('hide'); 
+    $("#form-buscar-pacientes").submit(); 
+    swal("Guardado Exitosamente.");
+
+  }, 3000);
 
 <% else %>
 

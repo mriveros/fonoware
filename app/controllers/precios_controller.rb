@@ -85,7 +85,7 @@ before_filter :require_usuario
     @precio = Precio.new()
     @precio.codigo = params[:precio][:codigo].upcase
     @precio.descripcion = params[:precio][:descripcion].upcase
-    @precio.monto = params[:precio][:monto]
+    @precio.monto = params[:precio][:monto].to_s.gsub(/[$.]/,'').to_i
     
 
       if @precio.save
@@ -119,19 +119,21 @@ before_filter :require_usuario
     valido = true
     @msg = ""
 
-    @precio = Flota.find(params[:id])
+    @precio = Precio.find(params[:id])
+
+    @precio_elim = @precio
 
     if valido
 
-      if @flota.destroy
+      if @precio.destroy
 
-        auditoria_nueva("eliminar flota", "flotas", @flota)
+        auditoria_nueva("eliminar precio", "precios", @precio)
 
         @eliminado = true
 
       else
 
-        @msg = "ERROR: No se ha podido eliminar la flota."
+        @msg = "ERROR: No se ha podido eliminar el precio."
 
       end
 
@@ -155,7 +157,7 @@ before_filter :require_usuario
 
   def editar
 
-    @flota = Flota.find(params[:id])
+    @precio = Precio.find(params[:id])
 
     respond_to do |f|
 
@@ -170,23 +172,23 @@ before_filter :require_usuario
     valido = true
     @msg = ""
 
-    @flota = Flota.find(params[:flota][:id])
-    auditoria_id = auditoria_antes("actualizar flota", "flotas", @flota)
+    @precio = Precio.find(params[:precio][:id])
+    auditoria_id = auditoria_antes("actualizar precio", "precios", @precio)
 
     if valido
 
-      @flota.codigo_flota = params[:flota][:codigo_flota].upcase
-      @flota.descripcion = params[:flota][:descripcion].upcase
-      @flota.marca_id =  params[:flota][:marca_id]
-      @flota.modelo = params[:flota][:modelo].upcase
-      @flota.chapa = params[:flota][:chapa].upcase
+      @precio.codigo = params[:precio][:codigo].upcase
+      @precio.descripcion = params[:precio][:descripcion].upcase
+      @precio.monto =  params[:precio][:monto].to_s.gsub(/[$.]/,'').to_i
+     
 
-      if @flota.save
+      if @precio.save
 
-        auditoria_despues(@flota, auditoria_id)
-        @flota_ok = true
+        auditoria_despues(@precio, auditoria_id)
+        @precio_ok = true
 
       end
+
     end
         rescue Exception => exc  
         # dispone el mensaje de error 
@@ -203,16 +205,6 @@ before_filter :require_usuario
     end
 
   end
-    
-  def obtener_datos
-    @persona= Persona.find_by_id(params[:persona_id])
-    
-    respond_to do |f|  
-      f.html
-      f.json { render :json => @persona }
-    end
-  end
-
   
 
   def buscar_precio
