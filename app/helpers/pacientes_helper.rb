@@ -44,7 +44,5 @@ def verificar_enfermedad(paciente_id)
   end
 
 end
-
-
   
 end

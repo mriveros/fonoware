@@ -1,0 +1,13 @@
+<% if @guardado_ok %>
+
+  swal("Los detalles fonoaudiológicos se guardaron exitosamente!");
+  $("#link-to-paciente-detalle-fono-<%= params[:paciente_id]%>").trigger('click');
+  $("#link-to-paciente-detalle-fono-<%=params[:paciente_id]%>").trigger('click');
+
+    
+ 
+<% else %>
+
+  swal('Error al guardar los detalles fonoaudiológicos. Intente más tarde');
+
+<% end %>
