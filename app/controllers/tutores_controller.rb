@@ -1,4 +1,4 @@
-class ProfesionalesController < ApplicationController
+class TutoresController < ApplicationController
 
 before_filter :require_usuario
 skip_before_action :verify_authenticity_token
@@ -13,45 +13,45 @@ skip_before_action :verify_authenticity_token
     cond = []
     args = []
 
-    if params[:form_buscar_profesional_id].present?
+    if params[:form_buscar_tutor_id].present?
 
-      cond << "profesional_id = ?"
-      args << params[:form_buscar_profesional_id]
+      cond << "tutor_id = ?"
+      args << params[:form_buscar_tutor_id]
 
     end
 
-    if params[:form_buscar_profesional_documento].present?
+    if params[:form_buscar_tutor_documento].present?
 
       cond << "documento_persona = ?"
-      args << params[:form_buscar_profesional_documento]
+      args << params[:form_buscar_tutor_documento]
 
     end
 
-    if params[:form_buscar_profesional_nombre].present?
+    if params[:form_buscar_tutor_nombre].present?
 
       cond << "nombre_persona ilike ?"
-      args << "%#{params[:form_buscar_profesional_nombre]}%"
+      args << "%#{params[:form_buscar_tutor_nombre]}%"
 
     end
 
-    if params[:form_buscar_profesional_apellido].present?
+    if params[:form_buscar_tutor_apellido].present?
 
       cond << "apellido_persona ilike ?"
-      args << "%#{params[:form_buscar_profesional_apellido]}%"
+      args << "%#{params[:form_buscar_tutor_apellido]}%"
 
     end
 
-    if params[:form_buscar_profesional_direccion].present?
+    if params[:form_buscar_tutor_direccion].present?
 
       cond << "direccion ilike ?"
-      args << "%#{params[:form_buscar_profesional_direccion]}%"
+      args << "%#{params[:form_buscar_tutor_direccion]}%"
 
     end
 
-    if params[:form_buscar_profesional_telefono].present?
+    if params[:form_buscar_tutor_telefono].present?
 
       cond << "telefono ilike ?"
-      args << "%#{params[:form_buscar_profesional_telefono]}%"
+      args << "%#{params[:form_buscar_tutor_telefono]}%"
 
     end
 
@@ -59,17 +59,17 @@ skip_before_action :verify_authenticity_token
 
     if cond.size > 0
 
-      @profesionales =  VProfesional.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
-      @total_encontrados = VProfesional.where(cond).count
+      @tutores =  VTutor.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+      @total_encontrados = Vtutor.where(cond).count
 
     else
      
-      @profesionales = VProfesional.orden_01.paginate(per_page: 10, page: params[:page])
-      @total_encontrados = VProfesional.count
+      @tutores = VTutor.orden_01.paginate(per_page: 10, page: params[:page])
+      @total_encontrados = VTutor.count
 
     end
 
-    @total_registros = VProfesional.count
+    @total_registros = VTutor.count
 
     respond_to do |f|
       
@@ -81,7 +81,7 @@ skip_before_action :verify_authenticity_token
 
   def agregar
 
-    @profesional = VProfesional.new
+    @tutor = VTutor.new
 
     respond_to do |f|
       
@@ -106,12 +106,12 @@ skip_before_action :verify_authenticity_token
 
     if @valido
       
-      @profesional = Profesional.new()
-      @profesional.persona_id = params[:persona_id]
+      @tutor = tutor.new()
+      @tutor.persona_id = params[:persona_id]
 
-        if @profesional.save
+        if @tutor.save
 
-          auditoria_nueva("registrar profesional", "profesionales", @profesional)
+          auditoria_nueva("registrar tutor", "tutor", @tutor)
           @guardado_ok = true
          
         end 
@@ -137,7 +137,7 @@ skip_before_action :verify_authenticity_token
 
   def editar
     
-    @profesional = Persona.find(params[:id])
+    @tutor = Persona.find(params[:id])
 
     respond_to do |f|
       
@@ -153,7 +153,7 @@ skip_before_action :verify_authenticity_token
     @msg = ""
 
     @persona = Persona.find(params[:persona][:id])
-    @profesional = Profesional.where("persona_id = ?", params[:persona][:id]).first
+    @tutor = tutor.where("persona_id = ?", params[:persona][:id]).first
     auditoria_id = auditoria_antes("actualizar persona", "personas", @persona)
 
     if valido
@@ -187,9 +187,9 @@ skip_before_action :verify_authenticity_token
 
   end
 
-  def buscar_profesional
+  def buscar_tutor
     
-    @personas = VProfesional.where("nombre_persona ilike ?", "%#{params[:cliente_produccion]}%")
+    @personas = VTutor.where("nombre_persona ilike ?", "%#{params[:cliente_produccion]}%")
 
     respond_to do |f|
       
@@ -205,21 +205,21 @@ skip_before_action :verify_authenticity_token
     @valido = true
     @msg = ""
 
-    @profesional = Profesional.find(params[:id])
+    @tutor = tutor.find(params[:id])
 
-    @profesional_elim = @profesional  
+    @tutor_elim = @tutor  
 
     if @valido
 
-      if @profesional.destroy
+      if @tutor.destroy
 
-        auditoria_nueva("eliminar profesional", "profesionales", @profesional)
+        auditoria_nueva("eliminar tutor", "tutores", @tutor)
 
         @eliminado = true
 
       else
 
-        @msg = "ERROR: No se ha podido eliminar el profesional."
+        @msg = "ERROR: No se ha podido eliminar el tutor."
 
       end
 
