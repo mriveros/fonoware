@@ -95,6 +95,18 @@ Rails.application.routes.draw do
   get "profesionales/index"
   get "profesionales/buscar_profesional"
   get "profesionales/buscar_persona"
+
+  #TUTORES
+  post "tutores/lista"
+  get "tutores/lista"
+  get "tutores/agregar"
+  post "tutores/guardar"
+  get "tutores/eliminar"
+  get "tutores/editar"
+  post "tutores/actualizar"
+  get "tutores/index"
+  get "tutores/buscar_tutor"
+  get "tutores/buscar_persona"
   
  #PRECIOS
   post "precios/lista"
