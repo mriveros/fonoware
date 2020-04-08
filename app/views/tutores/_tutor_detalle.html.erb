@@ -1,0 +1,62 @@
+<td colspan="12" align="center" style="background: #e6e6e6; ">
+  
+  <div class="panel panel-default" >
+
+    <div class="panel-heading" align="center">
+
+      <div  align="center" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
+
+        <h3 style="float:center;">Detalles de Tutores</h3>
+
+      </div>
+
+    </div>
+   
+    <div class="panel-body">
+      
+      <div class="table-responsive" id="table-tutor-detalle">
+
+         <%= form_for @tutor, remote: true, url: tutores_guardar_detalle_url, html: { id: "form-datos-tutor" }, method: 'POST' do |f| %>
+
+          <%= hidden_field_tag :tutor_id, @tutor.id %>
+          
+
+        <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
+         
+
+          <thead>
+              
+            <tr role="row">
+              
+              <th style="width:25%;">ID</th>
+              <th style="width:25%;">Paciente Nombre</th>
+              <th style="width:25%;">Paciente Apellido</th>
+              <th style="width:25%;">Parentezco</th>
+              <th style="width:25%;">Dato 1 </th>
+              <th style="width:25%;">Dato 2</th>
+              
+              
+            </tr>
+            
+          </thead>
+
+        <div style="background:#e6e6e6;">
+
+       
+          
+        </div>
+
+        </table>
+
+       <%end %>  
+
+      </div>
+      
+    </div>
+  </div>  
+
+
+  <script type="text/javascript">
+
+
+  </script>

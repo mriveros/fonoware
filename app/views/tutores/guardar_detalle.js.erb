@@ -1,0 +1,13 @@
+<% if @guardado_ok %>
+
+  swal("Los detalles de Tutores se guardaron exitosamente!");
+  $("#link-to-tutor-detalle-<%= params[:tutor_id]%>").trigger('click');
+  $("#link-to-tutor-detalle-<%= params[:tutor_id]%>").trigger('click');
+
+    
+ 
+<% else %>
+
+  swal('Error al guardar los detalles de Tutores. Intente más tarde');
+
+<% end %>

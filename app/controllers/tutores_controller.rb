@@ -60,7 +60,7 @@ skip_before_action :verify_authenticity_token
     if cond.size > 0
 
       @tutores =  VTutor.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
-      @total_encontrados = Vtutor.where(cond).count
+      @total_encontrados = VTutor.where(cond).count
 
     else
      
@@ -106,12 +106,12 @@ skip_before_action :verify_authenticity_token
 
     if @valido
       
-      @tutor = tutor.new()
+      @tutor = Tutor.new()
       @tutor.persona_id = params[:persona_id]
 
         if @tutor.save
 
-          auditoria_nueva("registrar tutor", "tutor", @tutor)
+          auditoria_nueva("registrar tutor", "tutores", @tutor)
           @guardado_ok = true
          
         end 
@@ -153,7 +153,7 @@ skip_before_action :verify_authenticity_token
     @msg = ""
 
     @persona = Persona.find(params[:persona][:id])
-    @tutor = tutor.where("persona_id = ?", params[:persona][:id]).first
+    @tutor = Tutor.where("persona_id = ?", params[:persona][:id]).first
     auditoria_id = auditoria_antes("actualizar persona", "personas", @persona)
 
     if valido
@@ -205,7 +205,7 @@ skip_before_action :verify_authenticity_token
     @valido = true
     @msg = ""
 
-    @tutor = tutor.find(params[:id])
+    @tutor = Tutor.find(params[:id])
 
     @tutor_elim = @tutor  
 
