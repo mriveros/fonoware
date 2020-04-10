@@ -261,4 +261,86 @@ skip_before_action :verify_authenticity_token
 
   end
 
+
+  def tutor_detalle
+    
+    @tutor_detalle = VTutorDetalle.where("tutor_id = ?", params[:tutor_id])
+
+
+     respond_to do |f|
+
+      f.js
+
+    end
+  
+  end
+
+
+  def lista_detalle
+
+
+   respond_to do |f|
+
+      f.js
+
+    end
+  
+  end
+
+  def agregar_tutor_detalle
+    
+    @tutor_detalle = TutorDetalle.new
+
+   respond_to do |f|
+
+      f.js
+
+    end
+  
+  end
+
+  def eliminar_tutor_detalle
+
+    @valido = true
+    @msg = ""
+
+    @tutor_detalle = TutorDetalle.find(params[:tutor_detalle_id])
+
+    if @valido
+
+      if @tutor_detalle.destroy
+
+        auditoria_nueva("eliminar tutor detalle", "tutores_detalles", @tutor_detalle)
+
+        @eliminado = true
+
+      else
+
+        @msg = "ERROR: No se ha podido eliminar el detalle del Tutor. Intente más tarde."
+
+      end
+
+    end
+
+        rescue Exception => exc  
+        # dispone el mensaje de error 
+        #puts "Aqui si muestra el error ".concat(exc.message)
+        if exc.present?        
+          
+          @excep = exc.message.split(':')    
+          @msg = @excep[3].concat(" "+@excep[4])
+          @eliminado = false
+        
+        end
+        
+    respond_to do |f|
+
+      f.js
+
+    end
+  
+  end
+
+
+
 end

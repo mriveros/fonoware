@@ -14,7 +14,7 @@
       <td >
         
         
-        <%#= link_to_tutor_detalle(tut.tutor_id) %>
+        <%= link_to_tutor_detalle(tut.tutor_id) %>
         <%= link_to_editar_tutor(tut.persona_id) %>
         <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{tut.tutor_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-tutor", title: 'Haga click para eliminar el tutor'  %>
 
