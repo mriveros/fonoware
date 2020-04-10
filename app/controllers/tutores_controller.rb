@@ -143,7 +143,7 @@ skip_before_action :verify_authenticity_token
       
         f.js
       
-  end
+    end
 
   end
 
@@ -224,6 +224,7 @@ skip_before_action :verify_authenticity_token
       end
 
     end
+
         rescue Exception => exc  
         # dispone el mensaje de error 
         #puts "Aqui si muestra el error ".concat(exc.message)
