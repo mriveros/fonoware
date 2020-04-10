@@ -4,16 +4,19 @@
 
     <tr>
 
-      <td style="width:50px;"><%= pre.id %></td>
+      <td><%= pre.id %></td>
       <td><%= pre.codigo%></td>
       <td><%= pre.descripcion%></td>
       <td><%= pre.monto.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
+      <td> <%= check_box_tag "predeterminado", nil, verificar_predeterminado(pre.id) %></td>
+
       <td style="width:120px;"> 
 
         <%= link_to_editar_precio(pre) %>
         
         <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{pre.id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-precio", title: 'Haga click para eliminar el precio'  %>
        
+       <%= link_to icon_confirmar,"#", onclick: "marcar_predeterminado(#{pre.id});return false;", class: "btn btn-success btn-xs", id: "btn-marcar-predeterminado", title: 'Haga click para marcar este precio como predeterminado.'  %>
          
        </td>
 
@@ -71,6 +74,39 @@
 
               $.ajax({
                 url: "<%= url_for(precios_eliminar_path) %>", 
+                data: {id: precio_id},
+                dataType: 'script'
+              });
+            
+          } else{
+
+            return false;
+
+          }
+
+        });
+
+    
+    }
+
+    function marcar_predeterminado(precio_id) {
+
+        swal({
+          title: "Confirmar",
+          text: "Al confirmar este precio como predeterminado éste quedara como principal al crear una cita.",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonClass: "btn-confirm",
+          confirmButtonText: "Confirmar",
+          cancelButtonText: "Cancelar",
+          closeOnConfirm: true,
+          closeOnCancel: true
+        },
+        function(isConfirm) {
+          if (isConfirm) {
+
+              $.ajax({
+                url: "<%= url_for(precios_marcar_predeterminado_path) %>", 
                 data: {id: precio_id},
                 dataType: 'script'
               });

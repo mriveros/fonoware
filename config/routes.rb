@@ -119,6 +119,7 @@ Rails.application.routes.draw do
   get "precios/index"
   get "precios/obtener_datos"
   get "precios/buscar_precio"
+  get "precios/marcar_predeterminado"
 
     #PERSONAS
   post "personas/lista"

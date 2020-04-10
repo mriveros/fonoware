@@ -220,6 +220,42 @@ before_filter :require_usuario
 
   end
 
+  def marcar_predeterminado
+
+    @guardado_ok = false    
+    @msg = ""
+
+    Precio.update_all(predeterminado: false)
+
+    @precio = Precio.where("id = ?", params[:id]).first
+    auditoria_id = auditoria_antes("Marcar precio predeterminado", "precios", @precio)
+    @precio.predeterminado = true
+
+    if @precio.save
+
+        auditoria_despues(@precio, auditoria_id)
+        @guardado_ok = true
+        @msg = "Precio marcado como predeterminado exitosamente."
+
+    end
+    
+    rescue Exception => exc  
+      # dispone el mensaje de error 
+      #puts "Aqui si muestra el error ".concat(exc.message)
+      if exc.present?        
+        @excep = exc.message.split(':')    
+        @msg = @excep[3].concat(" "+@excep[4])
+        @eliminado = false
+      end
+        
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
 
 
 end
