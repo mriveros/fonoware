@@ -29,6 +29,17 @@ development:
   certificado_nacimiento: 6
   sin_documento: 5
   cedula_identidad: 1
+
+  #ESPECIALIDADES
+  especialidad_fonoaudiologia: 1
+  clinica_general: 2
+
+  #TIPOS CONSULTAS FONO
+  entrevista: 1
+  evaluacion: 2
+  tratamiento: 3
+  informe_fono_alta: 4
+  informe_fono: 5
   
 
 production:
@@ -63,5 +74,16 @@ production:
   certificado_nacimiento: 6
   sin_documento: 5
   cedula_identidad: 1
+
+  #ESPECIALIDADES
+  especialidad_fonoaudiologia: 1
+  clinica_general: 2
+
+  #TIPOS CONSULTAS FONO
+  entrevista: 1
+  evaluacion: 2
+  tratamiento: 3
+  informe_fono_alta: 4
+  informe_fono: 5
   
   
