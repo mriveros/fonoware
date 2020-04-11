@@ -108,7 +108,6 @@ Rails.application.routes.draw do
   get "tutores/buscar_tutor"
   get "tutores/buscar_persona"
   get "tutores/tutor_detalle"
-  get "tutores/lista_detalle"
   get "tutores/agregar_tutor_detalle"
   post "tutores/guardar_tutor_detalle"
   get "tutores/eliminar_tutor_detalle"

@@ -86,6 +86,39 @@ function buscar_persona_v2(tipo_documento_id, nacionalidad_id, documento, ruta, 
     typeData: 'json'     
   })
 }
+
+// --------------------- BUSCAR PACIENTE ------------------------//
+function buscar_paciente(tipo_documento_id, nacionalidad_id, documento, ruta, ruta_agregar_persona){
+
+  $("#msg-documento-persona").remove();
+  $('#buscar_perso').html('');
+  $.ajax({
+    type: 'GET',
+    url: ruta,
+    data: {tipo_documento_id: tipo_documento_id, nacionalidad_id: nacionalidad_id, documento:documento},
+    success: function(data){
+      
+      if(data != null){
+          
+        $("#persona_documento").next();
+        $("#persona_nombre").val(data.nombre_persona); 
+        $("#persona_apellido").val(data.apellido_persona);
+        $("#paciente_id").val(data.paciente_id);
+        
+          
+      }else{
+        $('#buscar_perso').html('<div class="alert alert-danger"><span class="glyphicon glyphicon-info-sign"></span>\n\
+        El paciente no existe, debe registrar previamente la persona para la creación de pacientes, corroborando previamente con copia del documento.\n\
+        <a href="' + ruta_agregar_persona + '" class="btn btn-primary btn-xs" target="_blank" style="margin-left:10px;">Agregar Paciente</a></div>');
+  
+        $("#persona_nombre").val('');
+        $("#persona_apellido").val('');
+          
+      }
+    },
+    typeData: 'json'     
+  })
+}
 //--------------------------------------------------------//
 // --------------------- BUSCAR USUARIO ------------------------//
 function buscar_usuario(tipo_documento_id, nacionalidad_id, documento, fecha_nacimiento, ruta){

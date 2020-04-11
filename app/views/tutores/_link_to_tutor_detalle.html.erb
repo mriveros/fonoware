@@ -1,8 +1,8 @@
-<%= link_to icon_detalles, "#", id: "link-to-tutor-detalle#{tutor_id}", class: 'btn btn-success btn-xs', title: 'Haga click para ver los detalles del Tutor y asignar a sus tutelados correspondientes', onclick: "$('.modal').html('');return false;" %>
+<%= link_to icon_detalles, "#", id: "link-to-tutor-detalle-#{tutor_id}", class: 'btn btn-success btn-xs', title: 'Haga click para ver los detalles del Tutor y asignar a sus tutelados correspondientes', onclick: "$('.modal').html('');return false;" %>
 
 <script type="text/javascript">
 
-  $("#link-to-tutor-detalle<%= tutor_id %>").bind('click', function(){
+  $("#link-to-tutor-detalle-<%= tutor_id %>").bind('click', function(){
 
     var contenido = $.trim($("#tutor-detalle-<%= tutor_id %>").html());
 

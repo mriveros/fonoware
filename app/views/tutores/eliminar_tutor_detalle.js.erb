@@ -6,8 +6,8 @@
 
       function(){ $("#msg-eliminar-tutor-detalle").remove(); 
      
-      $("#link-to-tutor-detalle<%= @tutor_detalle.tutor_id%>").trigger('click');
-      $("#link-to-tutor-detalle<%= @tutor_detalle.tutor_id%>").trigger('click');
+      $("#link-to-tutor-detalle-<%= @tutor_detalle.tutor_id%>").trigger('click');
+      $("#link-to-tutor-detalle-<%= @tutor_detalle.tutor_id%>").trigger('click');
       
        swal("Detalle eliminado exitosamente.");
 

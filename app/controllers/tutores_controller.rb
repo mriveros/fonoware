@@ -131,7 +131,7 @@ skip_before_action :verify_authenticity_token
       
         f.js
       
-  end
+    end
 
   end
 
@@ -276,8 +276,9 @@ skip_before_action :verify_authenticity_token
   end
 
 
-  def lista_detalle
-
+  def agregar_tutor_detalle
+    
+    @tutor_detalle = TutorDetalle.new
 
    respond_to do |f|
 
@@ -287,11 +288,60 @@ skip_before_action :verify_authenticity_token
   
   end
 
-  def agregar_tutor_detalle
-    
-    @tutor_detalle = TutorDetalle.new
 
-   respond_to do |f|
+   def guardar_tutor_detalle
+    
+    @valido = true
+    @msg = ""
+    @guardado_ok = false
+
+    unless params[:persona_documento].present?
+
+      @valido = false
+      @msg += " Debe Completar el campo Documento. \n"
+
+    end
+
+    unless params[:persona_nombre].present?
+
+      @valido = false
+      @msg += " El nombre del Paciente no puede estar vacío. \n"
+
+    end
+
+    unless params[:parentezco][:id].present?
+
+      @valido = false
+      @msg += " El apellido del Paciente no puede estar vacío. \n"
+
+    end
+
+    if @valido
+      
+      @tutor_Detalle = TutorDetalle.new()
+      @tutor_Detalle.tutor_id = params[:tutor_id]
+      @tutor_Detalle.paciente_id = params[:paciente_id]
+      @tutor_Detalle.parentezco_id = params[:parentezco][:id]
+
+        if @tutor_Detalle.save
+
+          auditoria_nueva("registrar paciente asignado a tutor", "tutores_detalles", @tutor_Detalle)
+          @guardado_ok = true
+         
+        end 
+
+    end
+  
+    rescue Exception => exc  
+    # dispone el mensaje de error 
+    #puts "Aqui si muestra el error ".concat(exc.message)
+      if exc.present?        
+        @excep = exc.message.split(':')    
+        @msg = @excep[3].concat(" "+@excep[4].to_s)
+      
+      end                
+
+    respond_to do |f|
 
       f.js
 

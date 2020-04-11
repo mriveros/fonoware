@@ -189,13 +189,16 @@ skip_before_action :verify_authenticity_token
 
   def buscar_paciente
     
-    @personas = VPaciente.where("nombre_persona ilike ?", "%#{params[:cliente_produccion]}%")
+    if params[:tipo_documento_id].present? && params[:nacionalidad_id] && params[:documento].present?
+
+      @paciente = VPaciente.where("tipo_documento_id = ? and nacionalidad_id = ? and documento_persona = ?", params[:tipo_documento_id], params[:nacionalidad_id], params[:documento])  
+ 
+    end
 
     respond_to do |f|
-      
-      f.html
-      f.json { render :json => @personas }
-    
+
+      f.json { render :json => @paciente.first}
+
     end
     
   end
