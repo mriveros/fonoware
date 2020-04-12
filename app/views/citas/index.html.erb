@@ -1,0 +1,172 @@
+
+<%= javascript_include_tag "sweetalert.min" %>
+<%= stylesheet_link_tag "sweetalert" %>
+<div>
+
+  <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
+    <h3 style="float:left;margin-top:5px;">Precios</h3>
+    <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar cita".html_safe, "#", id: "link-to-agregar-cita", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
+    <%= modal_window( window_id: "modal-window-agregar-cita", link_to_id: "#link-to-agregar-cita", url: citas_agregar_path( window_id: "modal-window-agregar-cita") )%>
+    
+  </div>
+</div>
+
+<div style="clear:both;"></div>
+ 
+<div class="table-responsive" id="table-citas">
+
+  <table class="table table-small-font table-bordered table-striped" style="font-size:11px;">
+   
+    <thead>
+
+      <%= form_tag citas_lista_path, remote: true, id: "form-buscar-citas"  do  %>
+
+        <tr>
+
+          <th style="width:15%;">
+            <span>ID</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_citas_id, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-citas', '#form_buscar_citas_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+          
+           <th style="width:15%;">
+            <span>Fecha Cita</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_citas_fecha, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-citas', '#form_buscar_citas_fecha');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th style="width:25%;">
+            <span>Documento</span>
+            <div class="input-group input-group-sm">
+                <%= text_field_tag :form_buscar_citas_paciente_documento, nil, :class => 'form-control', :placeholder => "" %>
+                <span class="input-group-addon limpiar" onclick="$('#form_buscar_citas_id').val('');quitar_filtro('#form-buscar-citas', '#form_buscar_citas_paciente_documento');"><i class="fa fa-times"></i></span>
+            </div>
+
+            <%= hidden_field_tag :form_buscar_citas_paciente_documento %>
+            <%= autocomplete_help( ruta:  autocompletar_path(atributo_id: :id,
+                  atributo_descripcion: :paciente_documento,
+                  atributo_tipo: :text, 
+                  model: :VCita, 
+                  limit: 10,
+                  cadena_consulta: "upper(quitar_acentos(paciente_documento))",
+                  orden: "paciente_documento"), 
+              parametro_id: "form_buscar_citas_paciente_documento", 
+              resultado_id: "form_buscar_citas_id",
+              min_length: 2
+              ) %>
+          </th>
+
+          <th >
+            <span>Nombre Paciente</span>
+            <div class="input-group input-group-sm">
+                <%= text_field_tag :form_buscar_citas_pacientes_nombre, nil, :class => 'form-control', :placeholder => "" %>
+                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-citas', '#form_buscar_citas_pacientes_nombre');"><i class="fa fa-times"></i></span>
+            </div>
+            <em class="nmb"></em>
+          </th>
+          
+          <th >
+            <span>Apellido Paciente</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_citas_pacientes_apellido, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-citas', '#form_buscar_citas_pacientes_apellido');"><i class="fa fa-times"></i></span>
+            </div>
+            <em class="nmb"></em>
+          </th>
+
+          <th style="width:130px;">
+              <span>Tipo Consulta</span>
+            <div class="input-group input-group-sm">
+              <%= collection_select :form_buscar_citas, :tipo_consulta_id, TipoConsulta.order('id'), :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-citas', '#form_buscar_citas_tipo_consulta_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th> 
+
+          <th style="width:20%;">
+            <span>Monto Consulta</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_precios_monto_consulta, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-citas', '#form_buscar_precios_monto_consulta');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th style="width:15%;"></th>
+
+        </tr>
+
+        <% end %>
+
+      </thead> 
+
+    <tbody id="citas-lista"></tbody>
+  
+  </table>
+
+</div>
+
+
+
+
+<script type="text/javascript">
+
+  //---------------------------- RECUPERANDO DATOS ----------------------------//
+  $("#form-buscar-precios").bind("submit", function () {
+    var valido = true;
+    if($("#form_buscar_precios_descripcion").val().length !== 0 ){
+      valido = false;
+      if(($("#form_buscar_precios_descripcion").val().replace(/\s/g,'')).length > 2 && ($("#form_buscar_precios_descripcion").val().replace(/\s/g,'')).length > 2){        
+        valido = true;
+      }else{
+        valido = false;
+        //swal("Para la búsqueda por Nombre y Apellido Ingrese minimo 3(tres) carácteres en cada caja de texto", "", "error");         
+        $(".nmb").html('*Ingrese minimo 3(tres) carácteres para cada caja de texto');
+        $(".nmb").attr({'style':'color: red;font-size: 8px;'});      
+      }      
+    }
+      
+    if(valido){
+    $(".nmb").html('');       
+    $("#precios-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")      
+    }
+
+    
+
+  })
+ 
+  //---------------------------------------------------------------------------//
+  //---------------------------- BUSCAR PERSONAS-------- -------------------------//
+  $("#table-precios input, #table-precios select").bind('change', function () {
+      $.ajaxQ.abortAll();
+      $("#form-buscar-precios").submit();
+
+  })
+  //----------------------------------------------------------------------------//
+  //----------------------------INICIO -----------------------------------------//
+  aplicar_datepicker();
+  $("#form-buscar-precios").submit();
+  <% if params[:agregar] %>
+    $("#link-to-agregar-precio").trigger('click');
+  <% end %>
+  //----------------------------------------------------------------------------//
+</script>
+
+<style>
+    /*INTRO.JS*/
+    .introjs-helperNumberLayer{
+        width: 23px;
+        height: 23px;
+        padding: 0px;
+    }
+
+    #start-tour{
+        cursor: pointer;
+    }
+
+    #form-buscar-precios table th { background:#e6e6e6;}
+    #form-buscar-precios table th span.limpiar { background:#fff;}
+
+</style>

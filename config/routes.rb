@@ -10,16 +10,16 @@ Rails.application.routes.draw do
     end
   end  
     
-    #CRONTAB
+  #CRONTAB
   get "crontab_ultron/index"
 
-    #JURISDICCIONES
+  #JURISDICCIONES
   get "jurisdicciones/index"
   get "jurisdicciones/buscar_juridisccion_oferta" 
 
   #JURISDICCIONES
   get "informes/index"
-   get "informes/indexa"
+  get "informes/indexa"
   get "informes/generar_pdf"
 
   #DETALLES DEBITOS
@@ -123,7 +123,7 @@ Rails.application.routes.draw do
   get "precios/buscar_precio"
   get "precios/marcar_predeterminado"
 
-  #PRECIOS
+  #CITAS
   get "citas/index"
   post "citas/lista"
   get "citas/lista"
