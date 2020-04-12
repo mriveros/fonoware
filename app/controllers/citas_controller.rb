@@ -63,7 +63,7 @@ before_filter :require_usuario
 
     else
 
-      @precios = VCita.orden_fecha_cita.paginate(per_page: 10, page: params[:page])
+      @citas = VCita.orden_fecha_cita.paginate(per_page: 10, page: params[:page])
       @total_encontrados = VCita.count
 
     end
