@@ -13,7 +13,7 @@ before_filter :require_usuario
 
     if params[:form_buscar_citas_id].present?
 
-      cond << "paciente_id = ?"
+      cond << "cita_id = ?"
       args << params[:form_buscar_citas_id]
 
     end
@@ -27,29 +27,43 @@ before_filter :require_usuario
 
     if params[:form_buscar_citas_paciente_documento].present?
 
-      cond << "documento_persona = ?"
+      cond << "paciente_documento = ?"
       args << params[:form_buscar_citas_paciente_documento]
 
     end
 
     if params[:form_buscar_citas_pacientes_nombre].present?
 
-      cond << "nombre_persona ilike ?"
+      cond << "paciente_nombre ilike ?"
       args << "%#{params[:form_buscar_citas_pacientes_nombre]}%"
 
     end
 
     if params[:form_buscar_citas_pacientes_apellido].present?
 
-      cond << "apellido_persona ilike ?"
+      cond << "paciente_apellido ilike ?"
       args << "%#{params[:form_buscar_citas_pacientes_apellido]}%"
 
     end
 
-    if params[:form_buscar_citas_tipo_consulta].present?
+    if params[:form_buscar_citas][:tipo_consulta_id].present?
 
-      cond << "tipo_consulta = ?"
-      args << params[:form_buscar_citas_tipo_consulta]
+      cond << "tipo_consulta_id = ?"
+      args << params[:form_buscar_citas][:tipo_consulta_id]
+
+    end
+
+    if params[:form_buscar_citas_monto_consulta].present?
+
+      cond << "precio = ?"
+      args << params[:form_buscar_citas_monto_consulta]
+
+    end
+
+    if params[:form_buscar_citas][:estado_cita_id].present?
+
+      cond << "estado_cita_id = ?"
+      args << params[:form_buscar_citas][:estado_cita_id]
 
     end
 
@@ -192,27 +206,9 @@ before_filter :require_usuario
     @msg = ""
 
     @cita = Cita.find(params[:id])
-    #@cita_detalle  = CitaDetalleFono.where("cita_id = ?", params[:id]).first
     @cita_elim = @cita  
 
     if @valido
-
-      if @cita_detalle.present?
-
-        #OBS: en este codigo incluiremos validaciones de que tipo de usuario quiere eliminar una
-        # cita, si es administrador puede hacerlo si tiene detalles de citas.
-        #if @cita_detalle.destroy
-          
-        #  auditoria_nueva("eliminar cita detalle", "citas_detalles_fono", @cita_detalle)
-        #  @eliminado = true
-
-        #else
-
-        #  @msg = "ERROR: No se ha podido eliminar la cita del Paciente."
-
-        #end
-
-      end
 
       if @cita.destroy
 
@@ -239,6 +235,54 @@ before_filter :require_usuario
         end
         
     respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+
+  def cambiar_estado_cita_en_espera_a_en_consultorio
+
+    @msg = ""
+    @actualizado = false
+    
+    @cita = Cita.where("id = ?", params[:id]).first
+    auditoria_id = auditoria_antes("cambiar estado cita de en espera a en consultorio ", "citas", @cita)
+
+    if @cita.present?
+
+      @cita.estado_cita_id = PARAMETRO[:estado_cita_en_consultorio]
+
+      if @cita.save
+      
+        @msg = "El estado de la Cita modificado exitosamente!"
+        @actualizado = true
+        auditoria_despues(@cita, auditoria_id)
+
+      end
+
+    else
+
+      @msg = "No se pudo realizar la modificación del estado de la Cita. Intente más tarde."
+
+    end
+    
+    rescue Exception => exc  
+        
+        # dispone el mensaje de error 
+        #puts "Aqui si muestra el error ".concat(exc.message)
+        if exc.present?        
+        @excep = exc.message.split(':')    
+        @msg = @excep[3].concat( " " + @excep[4].to_s)
+        @eliminado = false
+        
+    end
+
+
+
+     respond_to do |f|
 
       f.js
 

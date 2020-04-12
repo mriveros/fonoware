@@ -132,6 +132,7 @@ Rails.application.routes.draw do
   get "citas/editar"
   post "citas/actualizar"
   get "citas/eliminar"
+  get "citas/cambiar_estado_cita_en_espera_a_en_consultorio"
   
   #PERSONAS
   post "personas/lista"

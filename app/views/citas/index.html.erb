@@ -40,28 +40,15 @@
               </div>
          </th>
 
-          <th style="width:10%;">
+          <th style="width:7%;">
             <span>Documento</span>
             <div class="input-group input-group-sm">
                 <%= text_field_tag :form_buscar_citas_paciente_documento, nil, :class => 'form-control', :placeholder => "" %>
                 <span class="input-group-addon limpiar" onclick="$('#form_buscar_citas_id').val('');quitar_filtro('#form-buscar-citas', '#form_buscar_citas_paciente_documento');"><i class="fa fa-times"></i></span>
             </div>
-
-            <%= hidden_field_tag :form_buscar_citas_paciente_documento %>
-            <%= autocomplete_help( ruta:  autocompletar_path(atributo_id: :id,
-                  atributo_descripcion: :paciente_documento,
-                  atributo_tipo: :text, 
-                  model: :VCita, 
-                  limit: 10,
-                  cadena_consulta: "upper(quitar_acentos(paciente_documento))",
-                  orden: "paciente_documento"), 
-              parametro_id: "form_buscar_citas_paciente_documento", 
-              resultado_id: "form_buscar_citas_id",
-              min_length: 2
-              ) %>
           </th>
 
-          <th style="width:20%;">
+          <th style="width:15%;">
             <span>Nombre Paciente</span>
             <div class="input-group input-group-sm">
                 <%= text_field_tag :form_buscar_citas_pacientes_nombre, nil, :class => 'form-control', :placeholder => "" %>
@@ -70,7 +57,7 @@
             <em class="nmb"></em>
           </th>
           
-          <th style="width:20%;" >
+          <th style="width:15%;" >
             <span>Apellido Paciente</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_citas_pacientes_apellido, nil, :class => 'form-control', :placeholder => "" %>
@@ -87,7 +74,7 @@
             </div>
           </th> 
 
-          <th style="width:10%;">
+          <th style="width:7%;">
             <span>Monto Consulta</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_citas_monto_consulta, nil, :class => 'form-control', :placeholder => "" %>
@@ -121,6 +108,8 @@
 
 
 <script type="text/javascript">
+
+  $("#form_buscar_citas_fecha").val("<%=DateTime.now.to_date %>")
 
   //---------------------------- RECUPERANDO DATOS ----------------------------//
   $("#form-buscar-citas").bind("submit", function () {
