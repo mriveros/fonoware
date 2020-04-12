@@ -23,7 +23,7 @@
 
         <tr>
 
-          <th style="width:10%;">
+          <th style="width:5%;">
             <span>ID</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_citas_id, nil, :class => 'form-control', :placeholder => "" %>
@@ -32,12 +32,13 @@
           </th>
           
            <th style="width:10%;">
-            <span>Fecha Cita</span>
-            <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_citas_fecha, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-citas', '#form_buscar_citas_fecha');"><i class="fa fa-times"></i></span>
-            </div>
-          </th>
+            <div><%= label_tag nil, "Fecha Cita".html_safe %></div>
+              <div class='input-group date'>
+                <%= text_field_tag :form_buscar_citas_fecha, nil, class: 'form-control input-sm' %>
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-citas', '#form_buscar_citas_fecha');"><i class="fa fa-times"></i></span>
+              </div>
+         </th>
 
           <th style="width:10%;">
             <span>Documento</span>
@@ -93,6 +94,14 @@
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-citas', '#form_buscar_citas_monto_consulta');"><i class="fa fa-times"></i></span>
             </div>
           </th>
+
+          <th style="width:10%;">
+              <span>Estado Cita</span>
+            <div class="input-group input-group-sm">
+              <%= collection_select :form_buscar_citas, :estado_cita_id, EstadoCita.orden_01.fonoaudiologia, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-citas', '#form_buscar_citas_estado_cita_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th> 
 
           <th style="width:10%;"></th>
 

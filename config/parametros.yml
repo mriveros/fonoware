@@ -5,13 +5,14 @@ development:
   rol_operador: 3
   rol_super: 6
 
-  #ESTADOS PRODUCCIONES
-  estado_produccion_solicitado: 1
-  estado_produccion_en_progreso: 2
-  estado_produccion_finalizado: 3
-  estado_produccion_anulado: 4
+  #ESTADOS CITAS
+  estado_cita_en_espera: 1
+  estado_cita_en_consultorio: 2
+  estado_cita_en_terminado: 3
+  estado_cita_en_anulado: 4
+  estado_cita_en_postergado: 5
+  estado_cita_en_ausente: 6
 
-   
   #sistemas
   sistema_RUE: 1
   
@@ -50,11 +51,13 @@ production:
   rol_operador: 3
   rol_super: 6
 
-  #ESTADOS PRODUCCIONES
-  estado_produccion_solicitado: 1
-  estado_produccion_en_progreso: 2
-  estado_produccion_finalizado: 3
-  estado_produccion_anulado: 4
+  #ESTADOS CITAS
+  estado_cita_en_espera: 1
+  estado_cita_en_consultorio: 2
+  estado_cita_en_terminado: 3
+  estado_cita_en_anulado: 4
+  estado_cita_en_postergado: 5
+  estado_cita_en_ausente: 6
 
    
   #sistemas
