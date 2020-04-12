@@ -21,10 +21,8 @@ Rails.application.routes.draw do
   get "informes/index"
    get "informes/indexa"
   get "informes/generar_pdf"
-  
-  
 
-    #DETALLES DEBITOS
+  #DETALLES DEBITOS
   post "detalles_debitos/lista"
   get "detalles_debitos/lista"
   get "detalles_debitos/agregar"
@@ -34,7 +32,7 @@ Rails.application.routes.draw do
   post "detalles_debitos/actualizar"
   get "detalles_debitos/index"
  
-    #DETALLES CREDITOS
+  #DETALLES CREDITOS
   post "detalles_creditos/lista"
   get "detalles_creditos/lista"
   get "detalles_creditos/agregar"
@@ -44,7 +42,7 @@ Rails.application.routes.draw do
   post "detalles_creditos/actualizar"
   get "detalles_creditos/index"
 
-    #PRODUCCION
+  #PRODUCCION
   get "produccion/index"
   get "produccion/lista"
   post "produccion/lista"
@@ -69,7 +67,7 @@ Rails.application.routes.draw do
   get "produccion/planilla_resumen_produccion_pdf"
   get "produccion/planilla_resumen_produccion_cliente"
   get "produccion/planilla_resumen_produccion_cliente_pdf"
-
+  
   #PACIENTES
   post "pacientes/lista"
   get "pacientes/lista"
@@ -95,7 +93,7 @@ Rails.application.routes.draw do
   get "profesionales/index"
   get "profesionales/buscar_profesional"
   get "profesionales/buscar_persona"
-
+  
   #TUTORES
   post "tutores/lista"
   get "tutores/lista"
@@ -111,8 +109,8 @@ Rails.application.routes.draw do
   get "tutores/agregar_tutor_detalle"
   post "tutores/guardar_tutor_detalle"
   get "tutores/eliminar_tutor_detalle"
-  
- #PRECIOS
+
+  #PRECIOS
   post "precios/lista"
   get "precios/lista"
   get "precios/agregar"
@@ -125,7 +123,17 @@ Rails.application.routes.draw do
   get "precios/buscar_precio"
   get "precios/marcar_predeterminado"
 
-    #PERSONAS
+  #PRECIOS
+  get "citas/index"
+  post "citas/lista"
+  get "citas/lista"
+  get "citas/agregar"
+  post "citas/guardar"
+  get "citas/editar"
+  post "citas/actualizar"
+  get "citas/eliminar"
+  
+  #PERSONAS
   post "personas/lista"
   get "personas/lista"
   get "personas/agregar"
@@ -141,6 +149,8 @@ Rails.application.routes.draw do
   get "personas/obtener_datos"
   get "personas/buscar_persona_senatics"
   get "personas/buscar_chofer"
+  
+
   #ROLES
   post "roles/lista"
   get "roles/lista"
@@ -155,6 +165,7 @@ Rails.application.routes.draw do
   get "roles/eliminar_acceso"
   get "roles/index"
 
+  
   #CONTROLADORES
   post "controladores/lista"
   get "controladores/lista"
@@ -169,7 +180,8 @@ Rails.application.routes.draw do
   get "controladores/eliminar_accion"
   get "controladores/index"
 
-  #Usuarios
+  
+  #USUARIOS
   get "usuarios/cambiar_perfil_actual"
   get "usuarios/mi_cuenta"
   post "usuarios/actualizar_mi_cuenta"
@@ -192,7 +204,7 @@ Rails.application.routes.draw do
   get 'usuarios/buscar_persona'
   post 'usuarios/cambiar_estado_usuario'
 
-  #Login
+  #LOGIN
   get 'login' => "usuarios_sessions#new",      :as => :login
   get 'logout' => "usuarios_sessions#destroy", :as => :logout
   post "usuarios_sessions/create"
@@ -220,8 +232,7 @@ Rails.application.routes.draw do
   
   get "application/autocompletar" => 'application#autocompletar', :as => :autocompletar
 
-    #INFORMACIONES
- 
+  #INFORMACIONES
   get "informaciones/index"
   get "informaciones/lista"
   post "informaciones/lista"
