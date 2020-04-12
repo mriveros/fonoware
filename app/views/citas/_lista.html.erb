@@ -25,6 +25,8 @@
 
         <%if cit.estado_cita_id == PARAMETRO[:estado_cita_en_consultorio]%>
 
+          <%= link_to_cita_detalle_fono(cit.cita_id) %>
+
         <%end%>
 
       

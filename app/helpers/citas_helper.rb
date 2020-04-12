@@ -6,5 +6,11 @@ module CitasHelper
       
   end
 
+   def link_to_cita_detalle_fono(cita_id)
+
+    render partial: 'link_to_cita_detalle_fono', locals: { cita_id: cita_id}
+
+  end
+
   
 end

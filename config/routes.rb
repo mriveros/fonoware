@@ -133,6 +133,8 @@ Rails.application.routes.draw do
   post "citas/actualizar"
   get "citas/eliminar"
   get "citas/cambiar_estado_cita_en_espera_a_en_consultorio"
+  get "citas/cita_detalle_fono"
+  post "citas/guardar_cita_detalle_fono"
   
   #PERSONAS
   post "personas/lista"

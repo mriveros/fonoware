@@ -1,0 +1,232 @@
+<td colspan="12" align="center" style="background: #e6e6e6; ">
+  
+  <div class="panel panel-default" >
+
+    <div class="panel-heading" align="center">
+
+      <div  align="center" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
+
+        <h3 style="float:center;">Detalles de la Cita Fonoaudiológica</h3>
+
+      </div>
+
+    </div>
+   
+    <div class="panel-body">
+      
+      <div class="table-responsive" id="table-paciente-detalle-fono">
+
+         <%= form_for @cita, remote: true, url: citas_guardar_cita_detalle_fono_url, html: { id: "form-datos-cita-detalle" }, method: 'POST' do |f| %>
+
+          <%= hidden_field_tag :cita_id, @cita.id %>
+
+          
+
+        <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
+         
+
+          <thead>
+              
+            <tr role="row">
+              
+              <th style="width:50%;">Datos de la Consulta</th>
+
+              <th style="width:50%;">Adjuntos</th>
+              
+            </tr>
+
+            
+          </thead>
+       
+          <tbody id="cita-detalle-fono">
+            <tr>
+
+              <td>
+                
+                <div class="col-sm-7"><%= label_tag nil, "Objetivos".html_safe, id: "lbl-antecedentes-personales" %></div><br />
+                <div class="col-sm-12">
+                  <%= text_area_tag :objetivo, nil,:size =>"25x5", class: 'form-control input-sm' %>
+                </div>
+                
+                <div class="col-sm-7"><%= label_tag nil, "Estrategias".html_safe, id: "lbl-antecedentes-familiares" %></div><br />
+                <div class="col-sm-12">
+                  <%= text_area_tag :estrategia,nil, :size =>"25x5",  class: 'form-control input-sm' %>
+                 </div>
+
+                 <div class="col-sm-7"><%= label_tag nil, "Resultados Obtenidos".html_safe, id: "lbl-antecedentes-habitos" %></div><br />
+                <div class="col-sm-12">
+                  <%= text_area_tag :resultado, nil, :size =>"25x5",  class: 'form-control input-sm' %>
+                 </div>
+                
+                <div class="col-sm-7"><%= label_tag nil, "Observaciones de la conducta".html_safe, id: "lbl-antecedentes-familiares" %></div><br />
+                <div class="col-sm-12">
+                  <%= text_area_tag :observacion, nil, :size =>"25x5",  class: 'form-control input-sm' %>
+                </div>
+                
+              </td>
+
+              <td>
+
+              </td>
+
+
+            </tr>
+            
+                
+          </tbody>
+          
+        
+
+        <div style="background:#e6e6e6;">
+
+       
+          
+        </div>
+
+        </table>
+        
+        <div class="modal-footer-center" style="background:#e6e6e6;">
+
+          <%= f.submit "Actualizar Datos", class: "btn btn-primary", id: "btn-actualizar-datos-paciente"  %>
+          
+        </div>
+
+       
+
+       <%end %>  
+
+      </div>
+      
+    </div>
+  </div>  
+
+
+  <script type="text/javascript">
+
+    //--------------------------RECUPERAR DATOS ----------------------------
+     <%if @cita_detalle_fono.present?%>
+      
+      <%if @paciente_detalle_fono.antecedentes_personales != nil%>
+
+        $("#antecedentes_personales").val('<%=@paciente_detalle_fono.antecedentes_personales%>');  
+      
+      <%end%>
+
+      <%if @paciente_detalle_fono.antecedentes_familiares != nil%>
+
+        $("#antecedentes_familiares").val('<%=@paciente_detalle_fono.antecedentes_familiares%>');  
+      
+      <%end%>
+
+      <%if @paciente_detalle_fono.antecedentes_habitos != nil%>
+
+        $("#antecedentes_habitos").val('<%=@paciente_detalle_fono.antecedentes_habitos%>');  
+      
+      <%end%>
+
+      <%if @paciente_detalle_fono.antecedentes_otros != nil%>
+
+        $("#antecedentes_otros").val('<%=@paciente_detalle_fono.antecedentes_otros%>');
+      
+      <%end%>
+     
+      <%if @paciente_detalle_fono.sindrome_especificar != nil%>
+        
+        $("#div_sindrome").show();
+        $("#sindrome_especificar").val('<%=@paciente_detalle_fono.sindrome_especificar%>');
+
+      <%end%>
+
+      <%if @paciente_detalle_fono.transtorno_especificar != nil%>
+        
+        $("#div_transtornos").show();
+        $("#transtorno_especificar").val('<%=@paciente_detalle_fono.transtorno_especificar%>');
+
+      <%end%>
+
+      <%if @paciente_detalle_fono.enfermedad_especificar != nil%>
+        
+        $("#div_enfermedad").show();
+        $("#enfermedad_especificar").val('<%=@paciente_detalle_fono.enfermedad_especificar%>');
+
+      <%end%>
+
+      <%if @paciente_detalle_fono.escolaridad_grado_id != nil%>
+
+        $("#escolaridad_grado_id").val('<%=@paciente_detalle_fono.escolaridad_grado_id%>');
+      
+      <%end%>
+
+      <%if @paciente_detalle_fono.escolaridad_tiempo != nil%>
+
+        $("#escolaridad_tiempo").val('<%=@paciente_detalle_fono.escolaridad_tiempo%>');
+      
+      <%end%>
+
+      <%if @paciente_detalle_fono.escolaridad_institucion != nil%>
+
+        $("#escolaridad_institucion").val('<%=@paciente_detalle_fono.escolaridad_institucion%>');
+      
+      <%end%>
+
+      <%if @paciente_detalle_fono.datos_derivacion != nil%>
+
+        $("#datos_derivacion").val('<%=@paciente_detalle_fono.datos_derivacion%>');
+      
+      <%end%>
+
+    <%end%>
+    
+    
+    
+    //-----------------------------------------------------------------------
+    $("#sindrome").bind('change', function () {
+
+    if( $('#sindrome').prop('checked')) {
+
+      $('#sindrome').val(true);
+      $('#div_sindrome').show();
+      
+
+    }else{
+      $('#sindrome').val(false);
+      $('#div_sindrome').hide();
+    }
+    
+  })
+
+  $("#transtornos").bind('change', function () {
+
+    if( $('#transtornos').prop('checked')) {
+
+      $('#transtornos').val(true);
+      $('#div_transtornos').show();
+
+    }else{
+
+      $('#transtornos').val(false);
+      $('#div_transtornos').hide();
+    }
+    
+  })
+
+  $("#enfermedad").bind('change', function () {
+
+    if( $('#enfermedad').prop('checked')) {
+
+      $('#enfermedad').val(true);
+      $('#div_enfermedad').show();
+      
+
+    }else{
+      $('#enfermedad').val(false);
+      $('#div_enfermedad').hide();
+    }
+    
+  })
+
+
+
+
+
+  </script>
