@@ -1,0 +1,20 @@
+<% if @guardado_ok %>
+  
+   setTimeout(function(){ 
+    
+   
+  $("#link-to-cita-detalle-fono-<%= params[:cita_id]%>").trigger('click');
+  $("#link-to-cita-detalle-fono-<%= params[:cita_id]%>").trigger('click');
+  swal("Los detalles fonoaudiológicos se guardaron exitosamente!");
+
+  }, 1000);
+
+  
+
+    
+ 
+<% else %>
+
+  swal('Error al guardar los detalles fonoaudiológicos. Intente más tarde');
+
+<% end %>

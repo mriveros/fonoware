@@ -44,22 +44,22 @@
                 
                 <div class="col-sm-4"><%= label_tag nil, "Antecedentes Personales".html_safe, id: "lbl-antecedentes-personales" %></div><br />
                 <div class="col-sm-12">
-                  <%= text_area_tag :antecedentes_personales, nil,  class: 'form-control input-sm' %>
+                  <%= text_area_tag :antecedentes_personales, nil, class: 'form-control input-sm', :size =>"25x3", maxlength: "255" %>
                 </div>
                 
                 <div class="col-sm-4"><%= label_tag nil, "Antecedentes Familiares".html_safe, id: "lbl-antecedentes-familiares" %></div><br />
                 <div class="col-sm-12">
-                  <%= text_area_tag :antecedentes_familiares,nil,  class: 'form-control input-sm' %>
+                  <%= text_area_tag :antecedentes_familiares,nil,  class: 'form-control input-sm', :size =>"25x3", maxlength: "255"  %>
                  </div>
 
                  <div class="col-sm-4"><%= label_tag nil, "Antecedentes Hábitos".html_safe, id: "lbl-antecedentes-habitos" %></div><br />
                 <div class="col-sm-12">
-                  <%= text_area_tag :antecedentes_habitos, nil,  class: 'form-control input-sm' %>
+                  <%= text_area_tag :antecedentes_habitos, nil,  class: 'form-control input-sm' , :size =>"25x3", maxlength: "255" %>
                  </div>
                 
                 <div class="col-sm-4"><%= label_tag nil, "Otros Antecedentes".html_safe, id: "lbl-antecedentes-familiares" %></div><br />
                 <div class="col-sm-12">
-                  <%= text_area_tag :antecedentes_otros, nil,  class: 'form-control input-sm' %>
+                  <%= text_area_tag :antecedentes_otros, nil,  class: 'form-control input-sm' , :size =>"25x3", maxlength: "255" %>
                 </div>
                 
               </td>
