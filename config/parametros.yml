@@ -41,6 +41,10 @@ development:
   tratamiento: 3
   informe_fono_alta: 4
   informe_fono: 5
+
+  #TIPOS RESOLUCIONES
+  archivo_fonoaudiologico: 1
+  archivo_clinica_general: 2
   
 
 production:
@@ -88,5 +92,9 @@ production:
   tratamiento: 3
   informe_fono_alta: 4
   informe_fono: 5
+
+  #TIPOS RESOLUCIONES
+  archivo_fonoaudiologico: 1
+  archivo_clinica_general: 2
   
   

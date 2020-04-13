@@ -16,7 +16,7 @@
       
       <div class="table-responsive" id="table-paciente-detalle-fono">
 
-         <%= form_for @cita, remote: true, url: citas_guardar_cita_detalle_fono_url, html: { id: "form-datos-cita-detalle" }, method: 'POST' do |f| %>
+         <%= form_for @cita, remote: true, url: citas_detalles_fono_guardar_cita_detalle_fono_url, html: { id: "form-datos-cita-detalle" }, method: 'POST' do |f| %>
 
           <%= hidden_field_tag :cita_id, @cita.id %>
 
