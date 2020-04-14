@@ -13,14 +13,13 @@
     </div>
    
     <div class="panel-body">
-      
+   
       <div class="table-responsive" id="table-paciente-detalle-fono">
 
          <%= form_for @cita, remote: true, url: citas_detalles_fono_guardar_cita_detalle_fono_url, html: { id: "form-datos-cita-detalle-fono" }, method: 'POST' do |f| %>
 
           <%= hidden_field_tag :cita_id, params[:cita_id] %>
-
-          
+    
 
         <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
          
@@ -42,7 +41,7 @@
 
             <tr>
 
-              <td>
+              <td class="col-sm-6">
                 
                 <div class="col-sm-7"><%= label_tag nil, "Objetivos".html_safe, id: "lbl-cita-detalle-fono-objetivo" %></div><br />
                 <div class="col-sm-12">
@@ -66,9 +65,9 @@
                 
               </td>
 
-              <td>
+              <td class="col-sm-6">
 
-                <div class="panel panel-primary">
+                <div class="panel panel-primary ">
 
                     <div class="panel-heading">
 
@@ -82,7 +81,7 @@
 
                         <div class="col-md-12" style="text-align: left">
 
-                          <p> 
+                          <p class="col-md-12"> 
 
                             Este apartado permite crear un archivo, asignarle un código de archivo y una breve descripcion.
 
@@ -114,7 +113,7 @@
 
                       <div class="col-md-12" style="text-align: left">
 
-                        <p> 
+                        <p class="col-md-12"> 
 
                           Este apartado permite adjuntar un archivo de tipo PDF. Para adjuntar un archivo es necesario completar primeramente los datos de la cita como ser los objetivos, estrategias, resultados obtenidos, y las observaciones. Una vez completado estos detalles se debe crear un archivo para poder adjuntar en esta sección.
 
@@ -152,7 +151,7 @@
 
                       <div class="col-md-12" style="text-align: left">
 
-                        <p> 
+                        <p class="col-md-12"> 
 
                           Una vez adjunto el archivo, ésta sección permite descargar el archivo adjunto si se cuenta con los permisos correspondiente. Para visualizar el botón de descarga <strong> éste debe estar autorizado por el Administrador</strong>. En caso de no visualizarlo contacte con el mismo.
 
@@ -185,8 +184,7 @@
 
                   </div>
 
-              </div>
-                
+                </div>
 
               </td>
 

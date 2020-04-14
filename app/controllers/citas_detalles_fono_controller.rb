@@ -273,6 +273,33 @@ class CitasDetallesFonoController < ApplicationController
 
   end
 
+  def deshabilitar_descarga_archivo
+
+    @valido = false
+    @msg = ""
+
+    cita_detalle_fono = CitaDetalleFono.where("id = ?", params[:cita_detalle_id]).first
+
+    @resolucion = Resolucion.where("id = ?", cita_detalle_fono.resolucion_id).first
+    auditoria_id = auditoria_antes("deshabilitar descarga de archivos", "resoluciones", @resolucion)
+    @resolucion.habilitado = false
+
+    if @resolucion.save
+
+      @valido = true
+      auditoria_despues(@resolucion, auditoria_id)
+
+    end
+
+    respond_to do |f|
+
+        f.js
+
+      end  
+
+
+  end
+
 
 
 

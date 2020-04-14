@@ -145,7 +145,7 @@ Rails.application.routes.draw do
   get "citas_detalles_fono/adjuntar_resolucion"
   post "citas_detalles_fono/guardar_resolucion_adjunta"
   get "citas_detalles_fono/habilitar_descarga_archivo"
-
+   get "citas_detalles_fono/deshabilitar_descarga_archivo"
   
   #PERSONAS
   post "personas/lista"
