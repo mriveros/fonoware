@@ -1,21 +1,27 @@
 <% if @precio_ok.present? %>
 
-   $("<div class='col-sm-12' id='msg-editar-precio' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Actualizado Exitosamente.</div>").insertBefore("#form-editar-precio");
+   $("<div class='col-sm-12' id='msg-editar-cita' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Actualizado Exitosamente.</div>").insertBefore("#form-editar-cita");
    
-  $("#form_buscar_precios_id").val('<%= @precio.id %>');
-  $("#form_buscar_precios_codigo").val('');
-  $("#form_buscar_precios_monto").val('');
-  $("#form_buscar_precios_descripcion").val('');
+  $("#form_buscar_citas_id").val('<%= @cita.id %>');
+  $("#form_buscar_citas_fecha").val('');
+  $("#form_buscar_citas_paciente_documento").val('');
+  $("#form_buscar_citas_pacientes_nombre").val('');
+  $("#form_buscar_citas_pacientes_apellido").val('');
+  $("#form_buscar_citas_tipo_consulta_id").val('');
+  $("#form_buscar_citas_monto_consulta").val('');
+  $("#form_buscar_citas_estado_cita_id").val('');
+  
+
   setTimeout(function(){ 
 
     $("#<%= params[:window_id]%>").modal('hide'); 
-    $("#form-buscar-precios").submit();
+    $("#form-buscar-citas").submit();
     swal("Guardado Exitosamente.");
 
   }, 3000);
 
 <% else %>
 
-  $("<div class='col-sm-12' id='msg-editar-precio' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= j(@msg) %></div>").insertBefore("#form-editar-precio");
+  $("<div class='col-sm-12' id='msg-editar-cita' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= j(@msg) %></div>").insertBefore("#form-editar-cita");
 
 <% end %>
