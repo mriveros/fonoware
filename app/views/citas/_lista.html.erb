@@ -53,7 +53,7 @@
 
             <%end%>
 
-            <%= link_to icon_confirmar,"#", onclick: "cambiar_estado_cita_en_consultorio_a_terminado(#{@cita_detalle_fono.id}, #{cit.cita_id} );return false;", class: "btn btn-success btn-xs", id: "btn-cambiar-estado-en-consultorio", title: 'Haga click para cambiar el estado de esta cita a Terminado'%>
+            <%= link_to icon_confirmar,"#", onclick: "cambiar_estado_cita_en_consultorio_a_terminado(#{cit.cita_id} );return false;", class: "btn btn-success btn-xs", id: "btn-cambiar-estado-en-consultorio", title: 'Haga click para cambiar el estado de esta cita a Terminado'%>
 
           <%end%>
 
@@ -61,6 +61,8 @@
 
 
         <%if cit.estado_cita_id == PARAMETRO[:estado_cita_terminado]%>
+
+          <%= link_to "<i class='glyphicon glyphicon-repeat'></i>".html_safe,"#", onclick: "cambiar_estado_cita_terminado_a_en_consultorio(#{cit.cita_id} );return false;", class: "btn btn-info btn-xs", id: "btn-cambiar-estado-terminado-a-en-consultorio", title: 'Haga click aquí para volver al estado anterior de la Cita En Consultorio'%>
 
           <%= link_to_cita_detalle_fono_terminado(cit.cita_id) %>
 
@@ -325,6 +327,37 @@
 
               $.ajax({
                 url: "<%= url_for(citas_cambiar_estado_cobro_a_no_cobrado_path) %>", 
+                data: {id: cita_id},
+                dataType: 'script'
+              });
+            
+          } else{
+
+            return false;
+
+          }
+
+        });
+  }
+
+  function cambiar_estado_cita_terminado_a_en_consultorio(cita_id) {
+
+        swal({
+          title: "Confirmar",
+          text: "Al confirmar la cita pasará al estado de En Consultorio y se podrá realizar modificaciones a la Cita o incluir un archivo adjunto.",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonClass: "btn-confirm",
+          confirmButtonText: "Confirmar",
+          cancelButtonText: "Cancelar",
+          closeOnConfirm: true,
+          closeOnCancel: true
+        },
+        function(isConfirm) {
+          if (isConfirm) {
+
+              $.ajax({
+                url: "<%= url_for(citas_cambiar_estado_cita_terminado_a_en_consultorio_path) %>", 
                 data: {id: cita_id},
                 dataType: 'script'
               });

@@ -3,7 +3,7 @@
   $("#form_buscar_citas_id").val('<%= @cita.id %>');
   $("#form-buscar-citas").submit();
 
-  setTimeout(function(){ 
+   setTimeout(function(){ 
 
     swal({title: "Atención", text: "<%= j(@msg)%>", html: false})
     

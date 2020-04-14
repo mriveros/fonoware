@@ -139,6 +139,7 @@ Rails.application.routes.draw do
   get "citas/cambiar_estado_cita_en_consultorio_a_terminado"
   get "citas/cambiar_estado_cobro_a_cobrado"
   get "citas/cambiar_estado_cobro_a_no_cobrado"
+  get "citas/cambiar_estado_cita_terminado_a_en_consultorio"
   
 
   #CITAS DETALLES FONO

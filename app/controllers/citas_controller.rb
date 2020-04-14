@@ -420,7 +420,7 @@ before_filter :require_usuario
 
       if @cita.save
       
-        @msg = "La Cita ha sido marcado como No Cobrado."
+        @msg = "La Cita ha sido marcado como No Cobrado"
         @actualizado = true
         auditoria_despues(@cita, auditoria_id)
 
@@ -429,6 +429,53 @@ before_filter :require_usuario
     else
 
       @msg = "No se pudo realizar la modificación del estado de cobro de la Cita. Intente más tarde."
+
+    end
+    
+    rescue Exception => exc  
+        
+        # dispone el mensaje de error 
+        #puts "Aqui si muestra el error ".concat(exc.message)
+        if exc.present?        
+        @excep = exc.message.split(':')    
+        @msg = @excep[3].concat( " " + @excep[4].to_s)
+        @eliminado = false
+        
+    end
+
+
+
+     respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+  def cambiar_estado_cita_terminado_a_en_consultorio
+
+    @msg = ""
+    @actualizado = false
+    
+    @cita = Cita.where("id = ?", params[:id]).first
+    auditoria_id = auditoria_antes("cambiar estado cita de terminado a en consultorio", "citas", @cita)
+
+    if @cita.present?
+
+      @cita.estado_cita_id = PARAMETRO[:estado_cita_en_consultorio]
+
+      if @cita.save
+      
+        @msg = "El estado de la Cita modificado exitosamente!"
+        @actualizado = true
+        auditoria_despues(@cita, auditoria_id)
+
+      end
+
+    else
+
+      @msg = "No se pudo realizar la modificación del estado de la Cita. Intente más tarde."
 
     end
     
