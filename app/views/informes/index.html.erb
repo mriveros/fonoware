@@ -20,55 +20,47 @@
 
       <div class="panel-body" style="background:#e6e6e6; ">
         
-        <div class="col-sm-4"><%= label_tag nil, "Flota #{attr_requerido}".html_safe %></div>
+        <div class="col-sm-4"><%= label_tag nil, "Paciente #{attr_requerido}".html_safe %></div>
         <div class="col-sm-7"><%= hidden_field_tag :flota_id, nil ,class: 'form-control input-sm' %></div>
         <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= text_area_tag :flota_produccion, nil, rows: 3 ,class: 'form-control input-sm'%></div>
         <br style="clear: both;"/>
 
-        <div class="col-sm-4"><%= label_tag :nil, "Chofer #{attr_requerido}".html_safe %></div>
+        <div class="col-sm-4"><%= label_tag :nil, "Profesional #{attr_requerido}".html_safe %></div>
         <div class="col-sm-7"><%= hidden_field_tag :chofer_id, nil ,class: 'form-control input-sm' %></div>
         <div class="col-sm-7" style= "margin: 0px 0px 21px;" ><%= text_area_tag :chofer_produccion, nil ,rows: 3,class: 'form-control input-sm'%></div>
         <div class="col-sm-1"></div><br />
 
-        <div class="col-sm-4"><%= label_tag :nil, "Cliente #{attr_requerido}".html_safe %></div>
-        <div class="col-sm-7"><%= hidden_field_tag :cliente_id, nil ,class: 'form-control input-sm' %></div>
-        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= text_area_tag :cliente_produccion, nil ,rows: 3,class: 'form-control input-sm' %></div>
         <div class="col-sm-1"></div><br />
+        <div class="col-sm-4"><%= label_tag :nil, "Tipo Consulta".html_safe %></div>
+        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= collection_select :form_buscar_produccion, :estado_produccion_id, TipoConsulta.order('id'), :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %></div>
+         <div class="col-sm-1"></div><br />
 
         <div class="col-sm-1"></div><br />
-        <div class="col-sm-4"><%= label_tag :nil, "Desde Fecha #{attr_requerido}".html_safe %></div>
+        <div class="col-sm-4"><%= label_tag :nil, "Estado Cita".html_safe %></div>
+        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= collection_select :form_buscar_produccion, :estado_produccion_id, EstadoCita.order('id'), :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %></div>
+         <div class="col-sm-1"></div><br />
+
+        <div class="col-sm-1"></div><br />
+        <div class="col-sm-4"><%= label_tag :nil, "Estado Cobro".html_safe %></div>
+        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= collection_select :form_buscar_produccion, :estado_produccion_id, EstadoCobro.order('id'), :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %></div>
+         <div class="col-sm-1"></div><br />
+
+        <div class="col-sm-1"></div><br />
+        <div class="col-sm-4"><%= label_tag :nil, "Desde Fecha".html_safe %></div>
         <div class="col-sm-5" style= "margin: 0px 0px 21px;"><%= date_field_tag :fecha_desde, @fecha, class: 'form-control input-sm', style: "margin-top:0px;height:42px" %>
         </div>    
         <div class="col-sm-1"></div><br /> 
 
          <div class="col-sm-1"></div><br />
-        <div class="col-sm-4"><%= label_tag :nil, "Hasta Fecha #{attr_requerido}".html_safe %></div>
+        <div class="col-sm-4"><%= label_tag :nil, "Hasta Fecha".html_safe %></div>
         <div class="col-sm-5" style= "margin: 0px 0px 21px;"><%= date_field_tag :fecha_hasta, @fecha, class: 'form-control input-sm', style: "margin-top:0px;height:42px" %>
         </div>    
         <div class="col-sm-1"></div><br />  
 
         <div class="col-sm-1"></div><br />
-        <div class="col-sm-4"><%= label_tag :nil, "Cobrado?".html_safe %></div>
-        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= check_box_tag :cobrado, nil ,class: 'form-control input-sm' %></div>
-        <div class="col-sm-1"></div><br />
-       
-        <div class="col-sm-1"></div><br />
-        <div class="col-sm-4"><%= label_tag :nil, "Pertenece?".html_safe %></div>
-        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= check_box_tag :pertenece, nil ,class: 'form-control input-sm' %></div>
-        <div class="col-sm-1"></div><br />
-
-
-        <div class="col-sm-1"></div><br />
         <div class="col-sm-4"><%= label_tag :nil, "Informe General".html_safe %></div>
         <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= check_box_tag :general, nil ,class: 'form-control input-sm' %></div>
         <div class="col-sm-1"></div><br />
-
-       
-        <div class="col-sm-1"></div><br />
-        <div class="col-sm-4"><%= label_tag :nil, "Estado".html_safe %></div>
-        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= collection_select :form_buscar_produccion, :estado_produccion_id, EstadoProduccion.order('id'), :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %></div>
-         <div class="col-sm-1"></div><br />
-
 
       </div>
       <div class="modal-footer" style="background:#e6e6e6; text-align: center">
@@ -98,7 +90,7 @@
     $("#flota_id").val('');
     $("#flota_produccion").attr('readonly', false);
 
-    $.getJSON("<%= url_for(flotas_buscar_flota_path) %>", { flota_produccion: $("#flota_produccion").val()}, function(j){
+    $.getJSON("<%= url_for(pacientes_buscar_paciente_path) %>", { flota_produccion: $("#flota_produccion").val()}, function(j){
         
       var nombre_flota = "";
       var options = "<option value=''> -- Seleccione una Flota -- </option>"
@@ -148,7 +140,7 @@
     $("#chofer_id").val('');
     $("#chofer_produccion").attr('readonly', false);
 
-    $.getJSON("<%= url_for(personas_buscar_chofer_path) %>", { chofer_produccion: $("#chofer_produccion").val()}, function(j){
+    $.getJSON("<%= url_for(pacientes_buscar_paciente_path) %>", { chofer_produccion: $("#chofer_produccion").val()}, function(j){
         
       var nombre_persona = "";
       var options = "<option value=''> -- Seleccione un Chofer -- </option>"
@@ -198,7 +190,7 @@
     $("#cliente_id").val('');
     $("#cliente_produccion").attr('readonly', false);
 
-    $.getJSON("<%= url_for(clientes_buscar_cliente_path) %>", { cliente_produccion: $("#cliente_produccion").val()}, function(j){
+    $.getJSON("<%= url_for(pacientes_buscar_paciente_path) %>", { cliente_produccion: $("#cliente_produccion").val()}, function(j){
         
       var nombre_persona = "";
       var options = "<option value=''> -- Seleccione un Cliente -- </option>"

@@ -63,14 +63,11 @@
             <li><%= link_to "Historiales", produccion_index_path if acceso_permitido("produccion.index") %></li> 
 							
 						<li>
-								
-              <a class="dropdown-toggle " href="#" data-toggle="dropdown">Informes<b class="caret"></b></a>
-								
-						<ul class="dropdown-menu">
 
-							<li><%= link_to "Generar Reportes", informes_index_path if acceso_permitido("informes.index")%></li>
+						<li><%= link_to "Informes", informes_index_path if acceso_permitido("informes.index")%></li>
+
 								
-						</ul>
+						
 
 						</li>
 
