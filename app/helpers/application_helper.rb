@@ -118,11 +118,11 @@ module ApplicationHelper
   end
 
   def icon_confirmar_cobro
-      "<span class='glyphicon glyphicon-ok'>Cobrado</span>".html_safe
+      "<span class='glyphicon glyphicon-ok'> Cobrado</span>".html_safe
   end
 
   def icon_desconfirmar_cobro
-      "<span class='glyphicon glyphicon-off'>No Cobrado</span>".html_safe
+      "<span class='glyphicon glyphicon-off'> No Cobrado</span>".html_safe
   end
 
   def icon_confirmar_finalizar

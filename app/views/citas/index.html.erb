@@ -90,6 +90,14 @@
             </div>
           </th> 
 
+          <th style="width:10%;">
+              <span>Estado Cobro</span>
+            <div class="input-group input-group-sm">
+              <%= collection_select :form_buscar_citas, :estado_cobro_id, EstadoCobro.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-citas', '#form_buscar_citas_estado_cobro_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th> 
+
           <th style="width:10%;"></th>
 
         </tr>

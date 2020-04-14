@@ -1,0 +1,250 @@
+<td colspan="12" align="center" style="background: #e6e6e6; ">
+  
+  <div class="panel panel-default" >
+
+    <div class="panel-heading" align="center">
+
+      <div  align="center" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
+
+        <h3 style="float:center;">Detalles de la Cita Fonoaudiológica</h3>
+
+      </div>
+
+    </div>
+   
+    <div class="panel-body">
+   
+      <div class="table-responsive" id="table-paciente-detalle-fono">
+
+         <%= form_for @cita, remote: true, url: citas_detalles_fono_guardar_cita_detalle_fono_url, html: { id: "form-datos-cita-detalle-fono" }, method: 'POST' do |f| %>
+
+          <%= hidden_field_tag :cita_id, params[:cita_id] %>
+    
+
+        <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
+         
+
+          <thead>
+              
+            <tr role="row">
+              
+              <th style="width:50%;">Datos de la Consulta</th>
+
+              <th style="width:50%;">Adjuntos</th>
+              
+            </tr>
+
+            
+          </thead>
+       
+          <tbody id="cita-detalle-fono">
+
+            <tr>
+
+              <td class="col-sm-6">
+                
+                <div class="col-sm-7"><%= label_tag nil, "Objetivos".html_safe, id: "lbl-cita-detalle-fono-objetivo" %></div><br />
+                <div class="col-sm-12">
+                  <%= text_area_tag :objetivo, nil,:size =>"25x5", class: 'form-control input-sm',maxlength: "510", readonly: true%>
+                </div>
+                
+                <div class="col-sm-7"><%= label_tag nil, "Estrategias".html_safe, id: "lbl-cita-detalle-fono-estrategia" %></div><br />
+                <div class="col-sm-12">
+                  <%= text_area_tag :estrategia,nil, :size =>"25x5",  class: 'form-control input-sm' ,maxlength: "510", readonly: true%>
+                 </div>
+
+                 <div class="col-sm-7"><%= label_tag nil, "Resultados Obtenidos".html_safe, id: "lbl-cita-detalle-fono-resultado" %></div><br />
+                <div class="col-sm-12">
+                  <%= text_area_tag :resultado, nil, :size =>"25x5",  class: 'form-control input-sm',maxlength: "510", readonly: true %>
+                 </div>
+                
+                <div class="col-sm-7"><%= label_tag nil, "Observaciones de la conducta".html_safe, id: "lbl-cita-detalle-fono-observacion" %></div><br />
+                <div class="col-sm-12">
+                  <%= text_area_tag :observacion, nil, :size =>"25x5",  class: 'form-control input-sm' ,maxlength: "510", readonly: true%>
+                </div>
+                
+              </td>
+
+              <td class="col-sm-6">
+
+              <div class="panel panel-primary">
+
+                  <div class="panel-heading">
+
+                    <h5 class="panel-title">Descargar Archivo</h5>
+
+                  </div>
+
+                  <div class="panel-body">
+
+                    <div class="row">
+
+                      <div class="col-md-12" style="text-align: left">
+
+                        <p class="col-md-12"> 
+
+                          Una vez adjunto el archivo, ésta sección permite descargar el archivo adjunto si se cuenta con los permisos correspondiente. Para visualizar el botón de descarga <strong> éste debe estar autorizado por el Administrador</strong>. En caso de no visualizarlo contacte con el mismo.
+
+                        </p>
+
+                      </div>
+
+                      <%if @cita_detalle_fono.present?%>
+
+                        <div class="col-sm-12">
+                          <%@resoluciones = Resolucion.where("id =?", @cita_detalle_fono.resolucion_id).first%> 
+                          <%if @resoluciones.habilitado == true%>
+
+                            <%=link_to "<i class='glyphicon glyphicon-download-alt'> Descargar Archivo</i>".html_safe, (Rails.env == 'production' ? "/fonoware/#{@resoluciones.data.url}" : @resoluciones.data.url), class: "btn btn-default btn-xs", target: '_blank',title: "Esta opción le permite desplegar el archivo adjunto."%>
+                          <%else%>
+
+                            <p> 
+
+                              <strong>Archivo no Disponible</strong>
+
+                            </p>
+
+                          <%end%>
+
+                        </div>
+
+                      <%end%>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </td>
+
+
+            </tr>
+            
+                
+          </tbody>
+          
+        
+
+        <div style="background:#e6e6e6;">
+
+       
+          
+        </div>
+
+        </table>
+        
+        <div class="modal-footer-center" style="background:#e6e6e6;">
+          
+        </div>
+
+       <%end %>  
+
+      </div>
+      
+    </div>
+  </div>  
+
+
+  <script type="text/javascript">
+
+    //--------------------------RECUPERAR DATOS ----------------------------
+     <%if @cita_detalle_fono.present?%>
+      
+      <%if @cita_detalle_fono.objetivo != nil%>
+
+        $("#objetivo").val('<%=@cita_detalle_fono.objetivo%>');  
+      
+      <%end%>
+
+      <%if @cita_detalle_fono.estrategia != nil%>
+
+        $("#estrategia").val('<%=@cita_detalle_fono.estrategia%>');  
+      
+      <%end%>
+
+      <%if @cita_detalle_fono.resultado != nil%>
+
+        $("#resultado").val('<%=@cita_detalle_fono.resultado%>');  
+      
+      <%end%>
+
+      <%if @cita_detalle_fono.observacion != nil%>
+
+        $("#observacion").val('<%=@cita_detalle_fono.observacion%>');
+      
+      <%end%>
+
+    <%end%>
+  
+    //-----------------------------------------------------------------------
+
+    // GUARDAR DETALLES DE LA CITA
+    $("#btn-guardar-detalle-fono").bind('click', function () {
+
+      valido = true
+      msg = ""
+
+      if($("#objetivo").val().length == 0){
+
+        msg +="Se debe ingresar objetivos de la cita.\n"
+        valido = false
+      
+      }
+
+      if($("#estrategia").val().length == 0){
+
+        msg +="Es necesario agregar las estrategias utilizadas.\n"
+        valido = false
+      
+      }
+
+      if($("#resultado").val().length == 0){
+
+        msg +="Se debe ingresar los resultados obtenidos.\n"
+        valido = false
+      
+      }
+
+      if (valido){
+
+        swal({
+          title: "Confirmar Detalles",
+          text: "Al confirmar los detalles estos serán guardados. No se podrá editar los datos una vez que se cambie el estado de la cita.",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonClass: "btn-confirm",
+          confirmButtonText: "Confirmar",
+          cancelButtonText: "Cancelar",
+          closeOnConfirm: true,
+          closeOnCancel: true
+        },
+        function(isConfirm) {
+          if (isConfirm) {
+
+            $("#form-datos-cita-detalle-fono").submit();
+            
+          } 
+
+        });
+
+      }else{
+
+        swal(msg);
+      
+      }
+
+      return false;
+    
+    })
+
+    $("textarea").keydown(function(e){
+    // Enter was pressed without shift key
+    if (e.keyCode == 13 && !e.shiftKey)
+    {
+        // prevent default behavior
+        e.preventDefault();
+    }
+    });
+
+  </script>

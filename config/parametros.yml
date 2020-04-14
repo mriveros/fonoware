@@ -8,10 +8,10 @@ development:
   #ESTADOS CITAS
   estado_cita_en_espera: 1
   estado_cita_en_consultorio: 2
-  estado_cita_en_terminado: 3
-  estado_cita_en_anulado: 4
-  estado_cita_en_postergado: 5
-  estado_cita_en_ausente: 6
+  estado_cita_terminado: 3
+  estado_cita_anulado: 4
+  estado_cita_postergado: 5
+  estado_cita_ausente: 6
 
   #sistemas
   sistema_RUE: 1
@@ -45,6 +45,11 @@ development:
   #TIPOS RESOLUCIONES
   archivo_fonoaudiologico: 1
   archivo_clinica_general: 2
+
+  #ESTADOS COBROS
+  estado_cobro_pendiente: 1
+  estado_cobro_cobrado: 2
+  estado_cobro_no_cobrado: 3
   
 
 production:
@@ -96,5 +101,10 @@ production:
   #TIPOS RESOLUCIONES
   archivo_fonoaudiologico: 1
   archivo_clinica_general: 2
+
+  #ESTADOS COBROS
+  estado_cobro_pendiente: 1
+  estado_cobro_cobrado: 2
+  estado_cobro_no_cobrado: 3
   
   

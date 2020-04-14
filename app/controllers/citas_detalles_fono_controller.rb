@@ -301,6 +301,21 @@ class CitasDetallesFonoController < ApplicationController
   end
 
 
+ def cita_detalle_fono_terminado
+
+    @cita = Cita.where("id = ?", params[:cita_id]).first
+    @cita_detalle_fono = CitaDetalleFono.where("cita_id = ?", params[:cita_id]).first
+    
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+
+
 
 
 end

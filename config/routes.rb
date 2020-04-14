@@ -136,6 +136,9 @@ Rails.application.routes.draw do
   post "citas/actualizar"
   get "citas/eliminar"
   get "citas/cambiar_estado_cita_en_espera_a_en_consultorio"
+  get "citas/cambiar_estado_cita_en_consultorio_a_terminado"
+  get "citas/cambiar_estado_cobro_a_cobrado"
+  get "citas/cambiar_estado_cobro_a_no_cobrado"
   
 
   #CITAS DETALLES FONO
@@ -146,7 +149,8 @@ Rails.application.routes.draw do
   get "citas_detalles_fono/adjuntar_resolucion"
   post "citas_detalles_fono/guardar_resolucion_adjunta"
   get "citas_detalles_fono/habilitar_descarga_archivo"
-   get "citas_detalles_fono/deshabilitar_descarga_archivo"
+  get "citas_detalles_fono/deshabilitar_descarga_archivo"
+  get "citas_detalles_fono/cita_detalle_fono_terminado"
   
   #PERSONAS
   post "personas/lista"

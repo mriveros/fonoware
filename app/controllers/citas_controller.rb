@@ -67,6 +67,13 @@ before_filter :require_usuario
 
     end
 
+    if params[:form_buscar_citas][:estado_cobro_id].present?
+
+      cond << "estado_cobro_id = ?"
+      args << params[:form_buscar_citas][:estado_cobro_id]
+
+    end
+
 
     cond = cond.join(" and ").lines.to_a + args if cond.size > 0
 
@@ -122,6 +129,7 @@ before_filter :require_usuario
       @cita.especialidad_id = PARAMETRO[:especialidad_fonoaudiologia]
       @cita.observacion = params[:observacion] 
       @cita.estado_cita_id = PARAMETRO[:estado_cita_en_espera]
+      @cita.estado_cobro_id = PARAMETRO[:estado_cobro_pendiente]
       if @cita.save
 
         auditoria_nueva("registrar cita", "citas", @cita)   
@@ -278,6 +286,149 @@ before_filter :require_usuario
     else
 
       @msg = "No se pudo realizar la modificación del estado de la Cita. Intente más tarde."
+
+    end
+    
+    rescue Exception => exc  
+        
+        # dispone el mensaje de error 
+        #puts "Aqui si muestra el error ".concat(exc.message)
+        if exc.present?        
+        @excep = exc.message.split(':')    
+        @msg = @excep[3].concat( " " + @excep[4].to_s)
+        @eliminado = false
+        
+    end
+
+
+
+     respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+
+  def cambiar_estado_cita_en_consultorio_a_terminado
+
+    @msg = ""
+    @actualizado = false
+    
+    @cita = Cita.where("id = ?", params[:id]).first
+    auditoria_id = auditoria_antes("cambiar estado cita de en consultorio a terminado", "citas", @cita)
+
+    if @cita.present?
+
+      @cita.estado_cita_id = PARAMETRO[:estado_cita_terminado]
+
+      if @cita.save
+      
+        @msg = "El estado de la Cita modificado exitosamente!"
+        @actualizado = true
+        auditoria_despues(@cita, auditoria_id)
+
+      end
+
+    else
+
+      @msg = "No se pudo realizar la modificación del estado de la Cita. Intente más tarde."
+
+    end
+    
+    rescue Exception => exc  
+        
+        # dispone el mensaje de error 
+        #puts "Aqui si muestra el error ".concat(exc.message)
+        if exc.present?        
+        @excep = exc.message.split(':')    
+        @msg = @excep[3].concat( " " + @excep[4].to_s)
+        @eliminado = false
+        
+    end
+
+
+
+     respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+  
+  def cambiar_estado_cobro_a_cobrado
+
+    @msg = ""
+    @actualizado = false
+    
+    @cita = Cita.where("id = ?", params[:id]).first
+    auditoria_id = auditoria_antes("cambiar estado de cobro de cita a cobrado", "citas", @cita)
+
+    if @cita.present?
+
+      @cita.estado_cobro_id = PARAMETRO[:estado_cobro_cobrado]
+
+      if @cita.save
+      
+        @msg = "La Cita ha sido marcado como Cobrado exitosamente!"
+        @actualizado = true
+        auditoria_despues(@cita, auditoria_id)
+
+      end
+
+    else
+
+      @msg = "No se pudo realizar la modificación del estado de cobro de la Cita. Intente más tarde."
+
+    end
+    
+    rescue Exception => exc  
+        
+        # dispone el mensaje de error 
+        #puts "Aqui si muestra el error ".concat(exc.message)
+        if exc.present?        
+        @excep = exc.message.split(':')    
+        @msg = @excep[3].concat( " " + @excep[4].to_s)
+        @eliminado = false
+        
+    end
+
+
+
+     respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+  def cambiar_estado_cobro_a_no_cobrado
+
+    @msg = ""
+    @actualizado = false
+    
+    @cita = Cita.where("id = ?", params[:id]).first
+    auditoria_id = auditoria_antes("cambiar estado de cobro de cita a cobrado", "citas", @cita)
+
+    if @cita.present?
+
+      @cita.estado_cobro_id = PARAMETRO[:estado_cobro_no_cobrado]
+
+      if @cita.save
+      
+        @msg = "La Cita ha sido marcado como No Cobrado."
+        @actualizado = true
+        auditoria_despues(@cita, auditoria_id)
+
+      end
+
+    else
+
+      @msg = "No se pudo realizar la modificación del estado de cobro de la Cita. Intente más tarde."
 
     end
     
