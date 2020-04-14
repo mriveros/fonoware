@@ -192,7 +192,11 @@ skip_before_action :verify_authenticity_token
     if params[:tipo_documento_id].present? && params[:nacionalidad_id] && params[:documento].present?
 
       @paciente = VPaciente.where("tipo_documento_id = ? and nacionalidad_id = ? and documento_persona = ?", params[:tipo_documento_id], params[:nacionalidad_id], params[:documento])  
- 
+   
+    else
+
+      @paciente = VPaciente.where("documento_persona = ?", params[:documento])  
+
     end
 
     respond_to do |f|
@@ -266,7 +270,7 @@ skip_before_action :verify_authenticity_token
     
     if params[:tipo_documento_id].present? && params[:nacionalidad_id] && params[:documento].present?
 
-      @persona = Persona.where("tipo_documento_id = ? and nacionalidad_id = ? and documento_persona = ?", params[:tipo_documento_id], params[:nacionalidad_id], params[:documento])  
+      @persona = VPersona.where("tipo_documento_id = ? and nacionalidad_id = ? and documento_persona = ?", params[:tipo_documento_id], params[:nacionalidad_id], params[:documento])  
  
     end
 
@@ -276,6 +280,19 @@ skip_before_action :verify_authenticity_token
 
     end
 
+  end
+
+  def buscar_paciente_cita
+    
+   @personas = VPaciente.where("nombre_persona ilike ? or apellido_persona ilike ?", "%#{params[:nombre_paciente]}%", "%#{params[:nombre_paciente]}%")
+
+    respond_to do |f|
+      
+      f.html
+      f.json { render :json => @personas }
+    
+    end
+    
   end
 
 

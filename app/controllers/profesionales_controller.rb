@@ -189,7 +189,7 @@ skip_before_action :verify_authenticity_token
 
   def buscar_profesional
     
-    @personas = VProfesional.where("nombre_persona ilike ?", "%#{params[:cliente_produccion]}%")
+    @personas = VProfesional.where("nombre_persona ilike ? or apellido_persona ilike ? ", "%#{params[:nombre_profesional]}%", "%#{params[:nombre_profesional]}%")
 
     respond_to do |f|
       

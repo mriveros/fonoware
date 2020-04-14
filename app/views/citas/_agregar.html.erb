@@ -1,4 +1,4 @@
- 
+<%= javascript_include_tag "modulos/pacientes.js" %>
 <div class="modal-dialog">
       
   <div class="modal-content">
@@ -17,18 +17,29 @@
       <div class="modal-body">
 
         <div class="panel-body">
+ 
+          <div class="col-sm-4"><%= label_tag :nil, "Fecha Cita #{attr_requerido}".html_safe %></div>
 
-          <div class="col-sm-4"><%= f.label :codigo, "Código Precio #{attr_requerido}".html_safe %></div>
-           <div class="col-sm-7"><%= f.text_field :codigo, class: 'form-control input-sm',style:"text-transform:uppercase;", maxlength: "6" %></div>
+          <div class='input-group date'>
+          <%= text_field_tag :cita_fecha, nil, class: 'form-control input-sm' %>
+          <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+          </div>
+
+          <div class="col-sm-1"></div><br /> 
+
+          <div class="col-sm-4"><%= label_tag nil, "Paciente #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= hidden_field_tag :paciente_id, nil ,class: 'form-control input-sm' %></div>
+          <div class="col-sm-7"><%= text_area_tag :cita_paciente_id,nil ,rows: 2,class: 'form-control input-sm', readonly: true %></div>
+          <div class="col-sm-1"></div><br />
           <div class="col-sm-1"></div><br />
 
-           <div class="col-sm-4"><%= f.label :descripcion, "Descripción #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= f.text_field :descripcion, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
-          <div class="col-sm-1"></div><br />  
-
-          <div class="col-sm-4"><%= f.label :monto, "Monto #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= f.text_field :monto, :onkeyup=>' formatear_numero(this)', class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
+          <div class="col-sm-4"><%= label_tag nil, "Profesional #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= hidden_field_tag :profesional_id, nil ,class: 'form-control input-sm' %></div>
+          <div class="col-sm-7"><%= text_area_tag :cita_profesional_id,nil ,rows: 2,class: 'form-control input-sm', readonly: true %></div>
           <div class="col-sm-1"></div><br />
+
+
+
 
            
        
@@ -47,13 +58,14 @@
 
 <style type="text/css">
 
-  #form-agregar-precio label, #form-agregar-precio input[type='text'], #form-agregar-precio select { float:left; margin-top:5px;}
-  #form-agregar-precio br {clear:both; }
-  #form-agregar-precio label { width:200px;font-size:12px;margin-top:10px;}
-  #form-agregar-precio #marca { width:60%;}
-  #form-agregar-precio #modelo { width:60%;}
-  #form-agregar-precio #chapa { width:50%;}
-  #form-agregar-precio #descripcion { width:50%;}
+  #form-agregar-cita label, #form-agregar-cita input[type='text'], #form-agregar-cita select { float:left; margin-top:5px;}
+  #form-agregar-cita br {clear:both; }
+  #form-agregar-cita label { width:200px;font-size:12px;margin-top:10px;}
+  #form-agregar-cita #marca { width:60%;}
+  #form-agregar-cita #modelo { width:60%;}
+  #form-agregar-cita #chapa { width:50%;}
+  #form-agregar-cita #descripcion { width:50%;}
+  .ui-autocomplete{z-index: 1000000; font-size: 10px;}
   
 
 </style>
@@ -61,5 +73,108 @@
 <script type="text/javascript">
 
   aplicar_datepicker2();
+
+  
+
+  $("#cita_fecha").bind('change', function(){   
+
+    var personas = [];
+    $("#cita_profesional_id").val('');
+    $("#profesional_id").val('');
+    $("#cita_profesional_id").attr('readonly', false);
+
+    $.getJSON("<%= url_for(profesionales_buscar_profesional_path) %>", { nombre_profesional: $("#cita_profesional_id").val()}, function(j){
+        
+      var nombre_persona = "";
+      var options = "<option value=''> -- Seleccione un Profesional -- </option>"
+
+      for (var i = 0; i < j.length; i++) {
+        
+        if(j[i].nombre_persona != nombre_persona ){
+          
+          personas.push( {value: j[i].profesional_id +" - "+ j[i].nombre_persona+" "+j[i].apellido_persona });
+          nombre_persona =j[i].profesional_id +" - "+ j[i].nombre_persona+" "+j[i].apellido_persona ;
+
+          options += "<option value="+ j[i].profesional_id +" - "+ j[i].nombre_persona+" "+j[i].apellido_persona + "</option>"
+
+        }
+
+      }
+
+      $("#chofer_id").html(options);
+
+    })
+
+    $("#cita_profesional_id").autocomplete({
+
+      minLength: 1,
+      source: personas,
+      focus: function( event, ui ) {
+      
+        $("#cita_profesional_id" ).val( ui.item.label );
+        return false;
+      },
+      select: function( event, ui ) {
+
+        var datos = ui.item.value.split(" - ");
+        $("#cita_profesional_id").val( ui.item.label );
+        $("#profesional_id").val(datos[0]);
+        return false;
+      }
+    })
+
+  });
+
+
+  $("#cita_fecha").bind('change', function(){   
+
+    var personas = [];
+    $("#cita_paciente_id").val('');
+    $("#paciente_id").val('');
+    $("#cita_paciente_id").attr('readonly', false);
+
+    $.getJSON("<%= url_for(pacientes_buscar_paciente_cita_path) %>", { nombre_paciente: $("#cita_paciente_id").val()}, function(j){
+        
+      var nombre_persona = "";
+      var options = "<option value=''> -- Seleccione un Profesional -- </option>"
+
+      for (var i = 0; i < j.length; i++) {
+        
+        if(j[i].nombre_persona != nombre_persona ){
+          
+          personas.push( {value: j[i].paciente_id +" - "+ j[i].nombre_persona+" "+j[i].apellido_persona });
+          nombre_persona =j[i].paciente_id +" - "+ j[i].nombre_persona+" "+j[i].apellido_persona ;
+
+          options += "<option value="+ j[i].paciente_id +" - "+ j[i].nombre_persona+" "+j[i].apellido_persona + "</option>"
+
+        }
+
+      }
+
+      $("#chofer_id").html(options);
+
+    })
+
+    $("#cita_paciente_id").autocomplete({
+
+      minLength: 1,
+      source: personas,
+      focus: function( event, ui ) {
+      
+        $("#cita_paciente_id" ).val( ui.item.label );
+        return false;
+      },
+      select: function( event, ui ) {
+
+        var datos = ui.item.value.split(" - ");
+        $("#cita_paciente_id").val( ui.item.label );
+        $("#paciente_id").val(datos[0]);
+        return false;
+
+      }
+    })
+
+  });
+
 
 </script>
