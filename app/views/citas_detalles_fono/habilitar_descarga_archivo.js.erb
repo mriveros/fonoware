@@ -1,0 +1,17 @@
+<% if @valido == true %>
+
+  setTimeout(function(){
+
+    
+    $("#link-to-cita-detalle-fono-<%= params[:cita_id]%>").trigger('click');
+    $("#link-to-cita-detalle-fono-<%= params[:cita_id]%>").trigger('click'); 
+    swal("Autorización de descarga de archivo confirmada.", "", "success");
+
+  }, 1000);
+  
+
+<% else %>
+  
+  swal({title: "Atención", text: "No se pudo habilitar la descarga. Intente más tarde", html: false});
+
+<% end %>

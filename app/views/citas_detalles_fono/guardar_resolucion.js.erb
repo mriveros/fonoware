@@ -1,0 +1,17 @@
+<% if @valido == true %>
+
+  setTimeout(function(){
+
+    $("#<%= params[:window_id]%>").modal('hide'); 
+    $("#link-to-cita-detalle-fono-<%= params[:cita_id]%>").trigger('click');
+    $("#link-to-cita-detalle-fono-<%= params[:cita_id]%>").trigger('click'); 
+    swal("Resolucion de Proceso Realizado Exitosamente.", "", "success");
+
+  }, 1000);
+  
+
+<% else %>
+  
+  swal({title: "Atención", text: "<%= j(@msg) %>", html: false});
+
+<% end %>

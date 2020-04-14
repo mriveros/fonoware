@@ -1,6 +1,7 @@
 class CitasDetallesFonoController < ApplicationController
 
-before_filter :require_usuario
+  before_filter :require_usuario
+
 
   def index
 
@@ -73,7 +74,7 @@ before_filter :require_usuario
 
   def emitir_resolucion
 
-    @cita_detalle_fono = CitaDetalleFono.where("id = ?", params[:cita_id]).first
+    @cita_detalle_fono = CitaDetalleFono.where("cita_id = ?", params[:cita_id]).first
     @resolucion = Resolucion.new
 
     respond_to do |f|
@@ -132,7 +133,7 @@ before_filter :require_usuario
      
       @cita_detalle_fono = CitaDetalleFono.where("id = ? and resolucion_id is null", params[:resolucion][:cita_detalle_id]).first
 
-      if @cita_detalle.present?
+      if @cita_detalle_fono.present?
 
         @resolucion.tipo_resolucion_id = PARAMETRO[:archivo_fonoaudiologico]
         
@@ -185,7 +186,7 @@ before_filter :require_usuario
 
   def adjuntar_resolucion
 
-    @cita_detalle_fono = CitaDetalleFono.where("id = ?", params[:cita_id]).first
+    @cita_detalle_fono = CitaDetalleFono.where("id = ?", params[:cita_detalle_id]).first
     @resolucion = Resolucion.find(params[:resolucion_id])
 
     respond_to do |f|
@@ -200,7 +201,7 @@ before_filter :require_usuario
     @valido = true    
     @msg = ""
     
-    @cita_detalle_fono = CitaDetalleFono.where("id = ?", params[:cita_id]).first
+    @cita_detalle_fono = CitaDetalleFono.where("id = ?", params[:cita_detalle_fono_id]).first
     
     unless params[:resolucion][:data].present?
 
@@ -212,7 +213,7 @@ before_filter :require_usuario
     if @valido
 
       @resolucion = Resolucion.find(params[:resolucion][:id])
-      auditoria_id = auditoria_antes("adjuntar archivo de citas detalles fono", "resolucion", @resolucion)
+      auditoria_id = auditoria_antes("adjuntar archivo de citas detalles fono", "resoluciones", @resolucion)
       @resolucion.update_attributes(params[:resolucion])
 
                               
@@ -241,8 +242,37 @@ before_filter :require_usuario
         f.js
 
       end     
-        
+
   end
+
+
+  def habilitar_descarga_archivo
+
+    @valido = false
+    @msg = ""
+
+    cita_detalle_fono = CitaDetalleFono.where("id = ?", params[:cita_detalle_id]).first
+
+    @resolucion = Resolucion.where("id = ?", cita_detalle_fono.resolucion_id).first
+    auditoria_id = auditoria_antes("habilitar descarga de archivos", "resoluciones", @resolucion)
+    @resolucion.habilitado = true
+
+    if @resolucion.save
+
+      @valido = true
+      auditoria_despues(@resolucion, auditoria_id)
+
+    end
+
+    respond_to do |f|
+
+        f.js
+
+      end  
+
+
+  end
+
 
 
 

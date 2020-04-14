@@ -68,6 +68,125 @@
 
               <td>
 
+                <div class="panel panel-primary">
+
+                    <div class="panel-heading">
+
+                      <h5 class="panel-title">Crear Archivo Adjunto</h5>
+
+                    </div>
+
+                    <div class="panel-body">
+
+                      <div class="row">
+
+                        <div class="col-md-12" style="text-align: left">
+
+                          <p> 
+
+                            Este apartado permite crear un archivo, asignarle un código de archivo y una breve descripcion.
+
+                          </p>
+
+                        </div>
+                        <div class="col-sm-12">
+                   
+                          <%=link_to_emitir_resolucion(params[:cita_id])%>
+                  
+                        </div>  
+
+                      </div>
+
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+
+                  <div class="panel-heading">
+
+                    <h5 class="panel-title">Adjuntar Archivo</h5>
+
+                  </div>
+
+                  <div class="panel-body">
+
+                    <div class="row">
+
+                      <div class="col-md-12" style="text-align: left">
+
+                        <p> 
+
+                          Este apartado permite adjuntar un archivo de tipo PDF. Para adjuntar un archivo es necesario completar primeramente los datos de la cita como ser los objetivos, estrategias, resultados obtenidos, y las observaciones. Una vez completado estos detalles se debe crear un archivo para poder adjuntar en esta sección.
+
+                        </p>
+
+                      </div>
+
+                      <%if @cita_detalle_fono.present?%>
+
+                        <div class="col-sm-12">
+                      
+                          <%=link_to_adjuntar_resolucion(@cita_detalle_fono.id)%>
+
+                        </div>
+
+                      <%end%>
+
+                    </div>
+
+                  </div>
+
+              </div>
+
+              <div class="panel panel-primary">
+
+                  <div class="panel-heading">
+
+                    <h5 class="panel-title">Descargar Archivo</h5>
+
+                  </div>
+
+                  <div class="panel-body">
+
+                    <div class="row">
+
+                      <div class="col-md-12" style="text-align: left">
+
+                        <p> 
+
+                          Una vez adjunto el archivo, ésta sección permite descargar el archivo adjunto si se cuenta con los permisos correspondiente. Para visualizar el botón de descarga <strong> éste debe estar autorizado por el Administrador</strong>. En caso de no visualizarlo contacte con el mismo.
+
+                        </p>
+
+                      </div>
+
+                      <%if @cita_detalle_fono.present?%>
+
+                        <div class="col-sm-12">
+                          <%@resoluciones = Resolucion.where("id =?", @cita_detalle_fono.resolucion_id).first%> 
+                          <%if @resoluciones.habilitado == true%>
+
+                            <%=link_to "<i class='glyphicon glyphicon-download-alt'> Descargar Archivo</i>".html_safe, (Rails.env == 'production' ? "/fonoware/#{@resoluciones.data.url}" : @resoluciones.data.url), class: "btn btn-default btn-xs", target: '_blank',title: "Esta opción le permite desplegar el archivo adjunto."%>
+                          <%else%>
+
+                            <p> 
+
+                              <strong>Archivo no Disponible</strong>
+
+                            </p>
+
+                          <%end%>
+
+                        </div>
+
+                      <%end%>
+
+                    </div>
+
+                  </div>
+
+              </div>
+                
 
               </td>
 

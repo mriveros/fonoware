@@ -27,6 +27,24 @@
 
           <%= link_to_cita_detalle_fono(cit.cita_id) %>
 
+          <% @cita_detalle_fono = CitaDetalleFono.where("cita_id = ?", cit.cita_id).first %>
+
+          <%if @cita_detalle_fono.present?%>
+            
+            <%if @cita_detalle_fono.resolucion_id != nil %>
+            
+              <% resolucion = Resolucion.where("id = ?", @cita_detalle_fono.resolucion_id).first %>
+
+              <%if resolucion.data != nil%>
+
+                <%= link_to icon_confirmar,"#", onclick: "habilitar_descarga_archivos(#{@cita_detalle_fono.id}, #{cit.cita_id} );return false;", class: "btn btn-success btn-xs", id: "btn-habilitar-descarga-archivo", title: 'Haga click para autorizar la descarga de adjuntos en esta cita'%>
+
+              <%end%>
+
+            <%end%>
+
+          <%end%>
+
         <%end%>
 
       
@@ -121,6 +139,37 @@
               $.ajax({
                 url: "<%= url_for(citas_cambiar_estado_cita_en_espera_a_en_consultorio_path) %>", 
                 data: {id: cita_id},
+                dataType: 'script'
+              });
+            
+          } else{
+
+            return false;
+
+          }
+
+        });
+  }
+
+  function habilitar_descarga_archivos(cita_detalle_id, cita_id) {
+
+        swal({
+          title: "Confirmar",
+          text: "Al confirmar se habilitará la descarga del archivo adjunto en el detalle de la cita.",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonClass: "btn-confirm",
+          confirmButtonText: "Confirmar",
+          cancelButtonText: "Cancelar",
+          closeOnConfirm: true,
+          closeOnCancel: true
+        },
+        function(isConfirm) {
+          if (isConfirm) {
+
+              $.ajax({
+                url: "<%= url_for(citas_detalles_fono_habilitar_descarga_archivo_path) %>", 
+                data: {cita_detalle_id: cita_detalle_id, cita_id: cita_id},
                 dataType: 'script'
               });
             
