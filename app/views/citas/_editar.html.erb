@@ -1,4 +1,4 @@
-
+<%= javascript_include_tag "modulos/pacientes.js" %>
 <div class="modal-dialog" style="text-align:left;">
       
   <div class="modal-content">
@@ -10,50 +10,304 @@
       
     </div>
 
-    <%= form_for @precio, remote: true, url: precios_actualizar_url, html: { id: "form-editar-precio" }, method: 'POST' do |f| %>
+    <%= form_for @cita, remote: true, url: citas_actualizar_url, html: { id: "form-editar-cita" }, method: 'POST' do |f| %>
 
-      <%= f.hidden_field :id %>
+      <%= hidden_field_tag :cita_id, @cita.cita_id %>
       <%= hidden_field_tag :window_id, params[:window_id]%>
 
       <div class="modal-body">
 
         <div class="panel-body">
+ 
+          <div class="col-sm-4"><%= label_tag :nil, "Fecha Cita #{attr_requerido}".html_safe %></div>
 
-          <div class="col-sm-4"><%= f.label :codigo, "Código Precio #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= f.text_field :codigo, class: 'form-control input-sm',style:"text-transform:uppercase;", maxlength: "6" %></div>
-          <div class="col-sm-1"></div><br />
-          
-          <div class="col-sm-4"><%= f.label :descripcion, "Descripción #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= f.text_field :descripcion, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
+          <div class='input-group date'>
+          <%= text_field_tag :fecha_cita, nil, class: 'form-control input-sm' %>
+          <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+          </div>
+
           <div class="col-sm-1"></div><br /> 
-          
-          
 
-          <div class="col-sm-4"><%= f.label :monto, "Monto #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= f.text_field :monto, :onkeyup=>' formatear_numero(this)' ,class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
+          <div class="col-sm-4"><%= label_tag nil, "Paciente #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= hidden_field_tag :paciente_id, nil ,class: 'form-control input-sm' %></div>
+          <div class="col-sm-7"><%= text_area_tag :cita_paciente_id,nil ,rows: 2,class: 'form-control input-sm', readonly: true %></div>
           <div class="col-sm-1"></div><br />
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= label_tag nil, "Profesional #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= hidden_field_tag :profesional_id, nil ,class: 'form-control input-sm' %></div>
+          <div class="col-sm-7"><%= text_area_tag :cita_profesional_id,nil ,rows: 2,class: 'form-control input-sm', readonly: true %></div>
+          <div class="col-sm-1"></div><br />
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= f.label :tipo_consulta, "Tipo Consulta #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= f.collection_select :tipo_consulta_id, TipoConsulta.especialidad_fonoaudiologia, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm', style: "width:220px;"} %></div>
+          <div class="col-sm-1"></div><br />
+          <div class="col-sm-1"></div><br />
+
+           <div class="col-sm-4"><%= label_tag :monto_consulta, "Monto Consulta #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= f.collection_select :precio_id, VPrecio.predeterminado, :id, :descripcion, { include_blank: false}, {class: 'form-control input-sm', style: "width:220px;"} %></div>
+          <div class="col-sm-1"></div><br />
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= label_tag nil, "Observación".html_safe %></div>
+          <div class="col-sm-7"><%= text_area_tag :observacion,nil ,:size =>"25x5",class: 'form-control input-sm', maxlength: 255 %></div>
+          <div class="col-sm-1"></div><br />
+
+
+        </div>  
        
       </div>
-
       <div class="modal-footer" style="background:#e6e6e6;">
+        
         <%= link_to "<span class='glyphicon glyphicon-remove'></span> Cerrar".html_safe, "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %> 
-        <%= f.submit "Guardar".html_safe, class: "btn btn-primary", id: "btn-guardar-precio" %>          
+        <%= link_to "Actualizar","#" ,class: "btn btn-primary", id: "btn-actualizar-cita" %>
+
       </div>
 
     <% end %>
 
-  </div>
 </div>
 
 <style type="text/css">
 
-  #form-editar-precio label, #form-editar-precio input[type='text'], #form-editar-precio select { float:left; margin-top:5px;}
-  #form-editar-precio br {clear:both; }
-  #form-editar-precio label { width:200px;font-size:12px;margin-top:10px;}
-
+  #form-editar-cita label, #form-editar-cita input[type='text'], #form-editar-cita select { float:left; margin-top:5px;}
+  #form-editar-cita br {clear:both; }
+  #form-editar-cita label { width:200px;font-size:12px;margin-top:10px;}
+  .ui-autocomplete{z-index: 1000000; font-size: 10px;}
 
 </style>
 
 <script type="text/javascript">
   aplicar_datepicker2();
+  // CARGAR DATOS PARA EDITAR CITA
+  <%if @cita.present?%>
+
+   <%if @cita.fecha_cita != nil %>
+
+        $("#fecha_cita").val('<%=@cita.fecha_cita.strftime('%d/%m/%Y')%>');  
+      
+    <%end%>
+
+    <%if @cita.paciente_id != nil %>
+
+        $("#paciente_id").val('<%=@cita.paciente_id%>');  
+        $("#cita_paciente_id").val('<%=@cita.paciente_nombre+' '+@cita.paciente_apellido%>');  
+    <%end%>
+
+    <%if @cita.profesional_id != nil %>
+
+        $("#profesional_id").val('<%=@cita.profesional_id%>');  
+        $("#cita_profesional_id").val('<%=@cita.profesional_nombre+' '+@cita.profesional_apellido%>');
+
+    <%end%>
+
+    <%if @cita.tipo_consulta_id != nil%>
+
+        $("#cita_tipo_consulta_id").val('<%=@cita.tipo_consulta_id%>');
+      
+    <%end%>
+
+    <%if @cita.precio != nil%>
+
+        $("#cita_precio_id").val('<%=@cita.precio_id%>');
+      
+    <%end%>
+
+    <%if @cita.observacion != nil %>
+
+        $("#observacion").val('<%=@cita.observacion%>');  
+      
+    <%end%>
+
+
+  <%end%>
+
+
+  //-----------------------------------------------------------------------
+  $("#fecha_cita").bind('change', function(){   
+
+    var personas = [];
+    $("#cita_profesional_id").val('');
+    $("#profesional_id").val('');
+    $("#cita_profesional_id").attr('readonly', false);
+
+    $.getJSON("<%= url_for(profesionales_buscar_profesional_path) %>", { nombre_profesional: $("#cita_profesional_id").val()}, function(j){
+        
+      var nombre_persona = "";
+      var options = "<option value=''> -- Seleccione un Profesional -- </option>"
+
+      for (var i = 0; i < j.length; i++) {
+        
+        if(j[i].nombre_persona != nombre_persona ){
+          
+          personas.push( {value: j[i].profesional_id +" - "+ j[i].nombre_persona+" "+j[i].apellido_persona });
+          nombre_persona =j[i].profesional_id +" - "+ j[i].nombre_persona+" "+j[i].apellido_persona ;
+
+          options += "<option value="+ j[i].profesional_id +" - "+ j[i].nombre_persona+" "+j[i].apellido_persona + "</option>"
+
+        }
+
+      }
+
+      $("#chofer_id").html(options);
+
+    })
+
+    $("#cita_profesional_id").autocomplete({
+
+      minLength: 1,
+      source: personas,
+      focus: function( event, ui ) {
+      
+        $("#cita_profesional_id" ).val( ui.item.label );
+        return false;
+      },
+      select: function( event, ui ) {
+
+        var datos = ui.item.value.split(" - ");
+        $("#cita_profesional_id").val( ui.item.label );
+        $("#profesional_id").val(datos[0]);
+        return false;
+      }
+    })
+
+  });
+
+
+  $("#fecha_cita").bind('change', function(){   
+
+    var personas = [];
+    $("#cita_paciente_id").val('');
+    $("#paciente_id").val('');
+    $("#cita_paciente_id").attr('readonly', false);
+
+    $.getJSON("<%= url_for(pacientes_buscar_paciente_cita_path) %>", { nombre_paciente: $("#cita_paciente_id").val()}, function(j){
+        
+      var nombre_persona = "";
+      var options = "<option value=''> -- Seleccione un Profesional -- </option>"
+
+      for (var i = 0; i < j.length; i++) {
+        
+        if(j[i].nombre_persona != nombre_persona ){
+          
+          personas.push( {value: j[i].paciente_id +" - "+ j[i].nombre_persona+" "+j[i].apellido_persona });
+          nombre_persona =j[i].paciente_id +" - "+ j[i].nombre_persona+" "+j[i].apellido_persona ;
+
+          options += "<option value="+ j[i].paciente_id +" - "+ j[i].nombre_persona+" "+j[i].apellido_persona + "</option>"
+
+        }
+
+      }
+
+      $("#chofer_id").html(options);
+
+    })
+
+    $("#cita_paciente_id").autocomplete({
+
+      minLength: 1,
+      source: personas,
+      focus: function( event, ui ) {
+      
+        $("#cita_paciente_id" ).val( ui.item.label );
+        return false;
+      },
+      select: function( event, ui ) {
+
+        var datos = ui.item.value.split(" - ");
+        $("#cita_paciente_id").val( ui.item.label );
+        $("#paciente_id").val(datos[0]);
+        return false;
+
+      }
+    })
+
+  });
+
+  $("textarea").keydown(function(e){
+    // Enter was pressed without shift key
+    if (e.keyCode == 13 && !e.shiftKey)
+    {
+        // prevent default behavior
+        e.preventDefault();
+    }
+    });
+
+
+
+  $("#btn-actualizar-cita").bind('click', function () {
+
+      valido = true
+      msg = ""
+
+      if($("#fecha_cita").val().length == 0){
+
+        msg +="Ingrese la fecha de la Cita.\n"
+        valido = false
+      
+      }
+
+      if($("#paciente_id").val().length == 0){
+
+        msg +="Debe ingresar un paciente.\n"
+        valido = false
+      
+      }
+
+      if($("#profesional_id").val().length == 0){
+
+        msg +="Debe ingresar un profesional.\n"
+        valido = false
+      
+      }
+
+      if($("#v_cita_tipo_consulta_id").val().length == 0){
+
+        msg +="Debe seleccionar el tipo de consulta.\n"
+        valido = false
+      
+      }
+
+      if($("#v_cita_precio_id").val() == ""){
+
+        msg +="Debe seleccionar el monto de la consulta.\n"
+        valido = false
+      
+      }
+
+      if (valido){
+
+        swal({
+          title: "Confirmar",
+          text: "Al confirmar se registrará la cita en la fecha seleccionada con el estado En Espera",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonClass: "btn-confirm",
+          confirmButtonText: "Confirmar",
+          cancelButtonText: "Cancelar",
+          closeOnConfirm: true,
+          closeOnCancel: true
+        },
+        function(isConfirm) {
+          if (isConfirm) {
+
+            $("#form-editar-cita").submit();
+            
+          } 
+
+        });
+
+      }else{
+
+        swal(msg);
+      
+      }
+
+      return false;
+    
+    })
+
+
+
 </script>

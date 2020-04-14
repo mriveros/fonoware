@@ -19,7 +19,7 @@
           
           <%= link_to_editar_cita(cit) %>
           <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{cit.cita_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-cita", title: 'Haga click para eliminarla cita'  %>
-          <%= link_to icon_confirmar,"#", onclick: "cambiar_estado_cita_en_espera_a_en_consultorio(#{cit.cita_id});return false;", class: "btn btn-success btn-xs", id: "btn-cambiar-estado-en-espera", title: 'Haga click para cambiar el estado de esta cita.'%>
+          <%= link_to icon_confirmar,"#", onclick: "cambiar_estado_cita_en_espera_a_en_consultorio(#{cit.cita_id});return false;", class: "btn btn-success btn-xs", id: "btn-cambiar-estado-en-espera", title: 'Haga click para cambiar el estado de esta cita a En Consultorio.'%>
 
         <%end%>
 

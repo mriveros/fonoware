@@ -1,4 +1,4 @@
-<% if @precio_ok.present? %>
+<% if @cita_ok.present? %>
 
    $("<div class='col-sm-12' id='msg-editar-cita' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Actualizado Exitosamente.</div>").insertBefore("#form-editar-cita");
    
@@ -16,12 +16,13 @@
 
     $("#<%= params[:window_id]%>").modal('hide'); 
     $("#form-buscar-citas").submit();
-    swal("Guardado Exitosamente.");
+    swal("La cita ha sido modificada Exitosamente.");
 
-  }, 3000);
+  }, 1000);
 
 <% else %>
 
   $("<div class='col-sm-12' id='msg-editar-cita' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= j(@msg) %></div>").insertBefore("#form-editar-cita");
+  swal("La cita no ha sido modificada. Intente más tarde");
 
 <% end %>

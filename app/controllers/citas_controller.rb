@@ -106,26 +106,34 @@ before_filter :require_usuario
 
   def guardar
 
-    valido = true
+    @valido = true
     @msg = ""
     @cita_ok = false
-
-    @cita = Cita.new()
-    @cita.fecha_cita = params[:cita][:fecha]
-    @cita.paciente_id = params[:paciente_id]
-    @cita.profesional_id = params[:profesional_id]
-    @cita.tipo_consulta_id = params[:tipo_consulta][:id]
-    @cita.especialidad_id = PARAMETROS[:especialidad_fonoaudiologia]
-    @cita.precio_id = params[:precio_id]
-    @cita.observacion = params[:cita][:observacion]
-    @cita.paciente_id = params[:paciente_id]    
-
-    if @cita.save
-
-      auditoria_nueva("registrar cita", "citas", @cita)   
-      @cita_ok = true
     
-    end 
+
+    if @valido
+
+      @cita = Cita.new()
+      @cita.fecha_cita = params[:fecha_cita]
+      @cita.paciente_id = params[:paciente_id]
+      @cita.profesional_id = params[:profesional_id]
+      @cita.tipo_consulta_id = params[:cita][:tipo_consulta_id]
+      @cita.precio_id = params[:cita][:precio_id]
+      @cita.especialidad_id = PARAMETRO[:especialidad_fonoaudiologia]
+      @cita.observacion = params[:observacion] 
+      @cita.estado_cita_id = PARAMETRO[:estado_cita_en_espera]
+      if @cita.save
+
+        auditoria_nueva("registrar cita", "citas", @cita)   
+        @cita_ok = true
+
+      else
+
+        @msg = "Error al guardar la cita. Intente más tarde"
+
+      end 
+
+    end
   
     rescue Exception => exc  
       # dispone el mensaje de error 
@@ -146,7 +154,7 @@ before_filter :require_usuario
 
   def editar
 
-    @cita = Cita.find(params[:id])
+    @cita = VCita.where("cita_id = ?", params[:id]).first
 
     respond_to do |f|
 
@@ -158,32 +166,36 @@ before_filter :require_usuario
 
   def actualizar
 
-    valido = true
+    @valido = true
     @msg = ""
+    @cita_ok = false
 
-    @cita = Cita.find(params[:cita][:id])
+    @cita = Cita.find(params[:cita_id])
     auditoria_id = auditoria_antes("actualizar cita", "citas", @cita)
 
-    if valido
+    if @valido
 
-      @cita.fecha_cita = params[:cita][:fecha]
+      @cita.fecha_cita = params[:fecha_cita]
       @cita.paciente_id = params[:paciente_id]
       @cita.profesional_id = params[:profesional_id]
-      @cita.tipo_consulta_id = params[:tipo_consulta][:id]
-      @cita.especialidad_id = PARAMETROS[:especialidad_fonoaudiologia]
-      @cita.precio_id = params[:precio_id]
-      @cita.observacion = params[:cita][:observacion]
-      @cita.paciente_id = params[:paciente_id]
-     
-
+      @cita.tipo_consulta_id = params[:v_cita][:tipo_consulta_id]
+      @cita.precio_id = params[:v_cita][:precio_id]
+      @cita.especialidad_id = PARAMETRO[:especialidad_fonoaudiologia]
+      @cita.observacion = params[:observacion] 
+      @cita.estado_cita_id = PARAMETRO[:estado_cita_en_espera]
       if @cita.save
 
-        auditoria_despues(@cita, auditoria_id)
+        auditoria_nueva("registrar cita", "citas", @cita)   
         @cita_ok = true
 
-      end
+      else
+
+        @msg = "Error al actualizar la cita. Intente más tarde"
+
+      end 
 
     end
+    
     rescue Exception => exc  
       # dispone el mensaje de error 
       #puts "Aqui si muestra el error ".concat(exc.message)
