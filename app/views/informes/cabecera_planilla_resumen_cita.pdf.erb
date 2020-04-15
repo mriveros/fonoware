@@ -1,0 +1,99 @@
+<div style="width: 100%; text-align: center; margin-top:10px;">
+ 
+    <%#= wicked_pdf_image_tag 'escudo.png', :size => "48x40" %>
+  
+    <p style="font-size: 14px; text-align: center; font-family: times new roman">
+    
+      Sistema de gestión para Especialidades - Fonoware<br />
+      <label style="font-size: 18px;">RESUMEN DE CITAS</label>
+      <br />
+      <label style="font-size: 15px;">Lic. Ma Lourdes Benitez</label>
+      <br />
+      <label style="font-size: 15px;"></label>
+    </p>
+    </br>
+    </br>
+    
+</div>
+
+<div id="cont" style="width:80%;">
+
+  <table style="text-align: left; font-size: 12px; margin-left: 10%;" width="80%">
+    
+    <%if params[:fecha_desde].present?%>
+    <tr>
+    
+      <th width="20%">FECHA DESDE: </th>
+      <td width="40%"><%=params[:fecha_desde] %></td>
+
+    <%end%>
+    
+    <%if params[:fecha_hasta].present?%>
+
+      <th width="20%">FECHA HASTA:</th>
+      <td width="40%"><%=params[:fecha_hasta] %></td>
+    
+    <%end%>
+
+    </tr>
+    
+    <%if params[:paciente_id].present?%>
+      <% @paciente = VPaciente.where("paciente_id = ?", params[:paciente_id]).first %>
+      <tr>
+        
+        <th width="20%">PACIENTE:</th>
+        <td width="40%"><%=@paciente.nombre_persona%> <%=@paciente.apellido_persona%></td>
+
+      </tr>
+
+    <%end%>
+
+     <%if params[:profesional_id].present?%>
+      <% @profesional = VProfesional.where("profesional_id = ?", params[:profesional_id]).first %>
+      <tr>
+        
+        <th width="20%">Profesional:</th>
+        <td width="40%"><%=@profesional.nombre_persona%> <%=@profesional.apellido_persona%></td>
+
+      </tr>
+
+    <%end%>
+
+    <%if params[:tipo_consulta_id].present?%>
+      <% @tipo_consulta = TipoConsulta.where("id = ?", params[:tipo_consulta_id]).first %>
+      <tr>
+      
+        <th width="20%">Tipo Consulta:</th>
+        <td width="40%"><%=@tipo_consulta.descripcion%></td>
+
+      </tr>
+    <%end%>
+
+    
+    <%if params[:estado_cobro_id].present?%>
+      <% @estado_cobro = EstadoCobro.where("id = ?", params[:estado_cobro_id]).first %>
+      <tr>
+      
+        <th width="20%">Estado Cobro:</th>
+        <td width="40%"><%=@estado_cobro.descripcion%></td>
+
+      </tr>
+    <%end%>
+
+    <%if params[:estado_cita_id].present?%>
+      <% @estado_cita = EstadoCita.where("id = ?", params[:estado_cita_id]).first %>
+      <tr>
+      
+        <th width="20%">Estado Cita:</th>
+        <td width="40%"><%=@estado_cita.descripcion%></td>
+
+      </tr>
+    <%end%>
+
+
+    
+  </table>
+<br/>
+<br/>
+<br/>
+</div>

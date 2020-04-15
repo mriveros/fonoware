@@ -1,0 +1,70 @@
+
+<table align="center" class="cual" style="width: 80%; border: 1px solid #000 !important;">
+ 
+  <tr>
+
+   		<th>ID Cita</th>
+      <th>Fecha</th>
+      <th>Paciente</th>
+      <th>Profesional</th>
+      <th>Tipo Consulta</th>
+      <th>Estado Cita</th>
+      <th>Monto Consulta</th>
+      <th>Estado Cobro</th>
+
+  </tr>
+
+  <% @cita.each do |cita|%>
+    
+    <% @total_produccion = 0 %>
+    <% @total_credito = 0 %>
+    <% @total_debito = 0 %>
+  
+  	<tr>
+
+ 		 	<td><%= cita.cita_id%></td>
+      <td><%= cita.fecha_cita.strftime('%m/%d/%Y') %></td>
+      <td><%= cita.paciente_nombre + ' ' + cita.paciente_apellido%></td>
+      <td><%= cita.profesional_nombre + ' ' + cita.profesional_apellido%></td>
+      <td><%= cita.tipo_consulta%></td>
+      <td><%= cita.estado_cita%></td>
+      <td><%= cita.precio.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse%></td>
+      <td><%= cita.estado_cobro%></td>
+
+		</tr>
+  		
+  	
+<%end%>
+
+<!--
+    <table align="center" class="cual" style="width: 80%; border: 1px solid #000 !important;">
+      
+
+      <tr>
+
+        <th>TOTAL GENERAL</th>
+        <th>GASOIL UTILIZADO</th>
+        <th>TOTAL FLETE</th>
+        <th>ADELANTOS</th>
+        <th>GASTOS</th>
+        <th>MONTO COBRADO</th>
+        
+      </tr>
+      <tr>
+
+        <th>TOTAL GENERAL</th>
+        <th></th>
+        <th> </th>
+        <th></th>
+        <th></th>
+        <th>%></th>
+        
+      </tr>
+      
+
+    </table> 
+-->
+
+<br/>
+<br/>
+<br/>

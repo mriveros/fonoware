@@ -1,10 +1,26 @@
-<%if @produccion.present?%>
+<%if @cita.present?%>
 
- 	swal("Datos Procesados!", "", "success");
+ 	
+  setTimeout(function(){ 
+
+  swal("Datos Procesados!", "", "success");
+
+  }, 1000);
+  $("#btn-generar-reporte").attr('disabled', false);
+  
  	window.open("<%= url_for(informes_generar_pdf_path(@parametros))%>", '_blank')
+  
 
 <%else%>
 
-	swal("No hay datos que mostrar. Intente nuevamente", "","warning")
+setTimeout(function(){ 
+
+  swal("No hay datos que mostrar. Intente nuevamente", "","warning");
+
+}, 1000);
+
+$("#btn-generar-reporte").attr('disabled', false);
+
+
 
 <%end%>

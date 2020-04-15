@@ -50,8 +50,6 @@
           <%= text_field_tag :fecha_desde, nil, class: 'form-control input-sm' %>
           <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
           </div>
-        <div class="col-sm-1"></div><br /> 
-        <div class="col-sm-1"></div><br /> 
 
          <div class="col-sm-1"></div><br />
         <div class="col-sm-4"><%= label_tag :nil, "Desde Fecha #{attr_requerido}".html_safe %></div>
@@ -60,17 +58,14 @@
           <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
           </div>
         <div class="col-sm-1"></div><br /> 
-        <div class="col-sm-1"></div><br />  
+       
 
-        <div class="col-sm-1"></div><br />
-        <div class="col-sm-4"><%= label_tag :nil, "Informe General".html_safe %></div>
-        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= check_box_tag :general, nil ,class: 'form-control input-sm' %></div>
-        <div class="col-sm-1"></div><br />
+      
 
       </div>
       <div class="modal-footer" style="background:#e6e6e6; text-align: center">
 
-        <%= submit_tag  "Generar Informe", class: "btn btn-primary", id: "btn-guardar-produccion" %>
+        <%= submit_tag  "Generar Informe", class: "btn btn-primary", id: "btn-generar-reporte" %>
           
       </div>
 
@@ -80,11 +75,13 @@
 
 <%end%>
 
-
-
-
-
 <script type="text/javascript">
+
+  $("#btn-generar-reporte").bind('click', function(){
+    
+    $("#btn-generar-reporte").attr('disabled', true);
+
+  })
 
   //OBTENER PACIENTE
   $("#cita_paciente_id").bind('focus', function(){   

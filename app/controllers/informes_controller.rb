@@ -66,15 +66,16 @@ class InformesController < ApplicationController
 
     if cond.size > 0
      
-      @produccion =  VCita.where(cond).orden_01.paginate(per_page: 10, page: params[:page])
+      @cita =  VCita.where(cond).orden_01.paginate(per_page: 10, page: params[:page])
 
     else
 
-      @produccion = VCita.orden_01.paginate(per_page: 10, page: params[:page])
-     
+      @cita = VCita.orden_01.paginate(per_page: 10, page: params[:page])
+      puts "//////////////////DEBUG"
+      puts @cita.size
     end
 
-    @parametros = { format: :pdf, produccion_id: @produccion.map(&:produccion_id), flota_id: params[:flota_id], chofer_id: params[:chofer_id], cliente_id: params[:cliente_id], fecha_desde: params[:fecha_desde], fecha_hasta: params[:fecha_hasta], pertenece: params[:pertenece], cobrado: params[:cobrado], estado_produccion_id: params[:form_buscar_produccion][:estado_produccion_id] }
+    @parametros = { format: :pdf, cita_id: @cita.map(&:cita_id), paciente_id: params[:paciente_id], profesional_id: params[:profesional_id], tipo_consulta_id: params[:tipo_consulta][:id], estado_cita_id: params[:estado_cita][:id], tipo_consulta_id: params[:estado_cobro][:id], fecha_desde: params[:fecha_desde], fecha_hasta: params[:fecha_hasta] }
 
     respond_to do |f|
 
@@ -87,7 +88,7 @@ class InformesController < ApplicationController
   def generar_pdf
     
     
-   @produccion =  VProduccion.where("produccion_id in (?)", params[:produccion_id]).orden_01.paginate(per_page: 10, page: params[:page])
+   @cita =  VCita.where("cita_id in (?)", params[:cita_id]).orden_01.paginate(per_page: 10, page: params[:page])
     
 
     respond_to do |f|
@@ -95,10 +96,10 @@ class InformesController < ApplicationController
       f.pdf do
 
           render  :pdf => "planilla_resumen_produccion_#{Time.now.strftime("%Y_%m_%d__%H_%M")}",
-                  :template => 'informes/planilla_resumen_produccion.pdf.erb',
+                  :template => 'informes/planilla_reporte_cita.pdf.erb',
                   :layout => 'pdf.html',
-                  :header => {:html => { :template => "informes/cabecera_planilla_resumen_produccion.pdf.erb" ,
-                  :locals   => { :produccion => @produccion }}},
+                  :header => {:html => { :template => "informes/cabecera_planilla_resumen_cita.pdf.erb" ,
+                  :locals   => { :cita => @cita }}},
                   :margin => {:top => 65,                         # default 10 (mm)
                   :bottom => 11,
                   :left => 3,
