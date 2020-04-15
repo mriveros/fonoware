@@ -21,40 +21,45 @@
       <div class="panel-body" style="background:#e6e6e6; ">
         
         <div class="col-sm-4"><%= label_tag nil, "Paciente #{attr_requerido}".html_safe %></div>
-        <div class="col-sm-7"><%= hidden_field_tag :flota_id, nil ,class: 'form-control input-sm' %></div>
-        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= text_area_tag :flota_produccion, nil, rows: 3 ,class: 'form-control input-sm'%></div>
+        <%= hidden_field_tag :paciente_id %>
+        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= text_area_tag :cita_paciente_id, nil, rows: 3 ,class: 'form-control input-sm'%></div>
         <br style="clear: both;"/>
 
         <div class="col-sm-4"><%= label_tag :nil, "Profesional #{attr_requerido}".html_safe %></div>
-        <div class="col-sm-7"><%= hidden_field_tag :chofer_id, nil ,class: 'form-control input-sm' %></div>
-        <div class="col-sm-7" style= "margin: 0px 0px 21px;" ><%= text_area_tag :chofer_produccion, nil ,rows: 3,class: 'form-control input-sm'%></div>
+        <%= hidden_field_tag :profesional_id %>
+        <div class="col-sm-7" style= "margin: 0px 0px 21px;" ><%= text_area_tag :cita_profesional_id, nil ,rows: 3,class: 'form-control input-sm'%></div>
         <div class="col-sm-1"></div><br />
 
         <div class="col-sm-1"></div><br />
         <div class="col-sm-4"><%= label_tag :nil, "Tipo Consulta".html_safe %></div>
-        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= collection_select :form_buscar_produccion, :estado_produccion_id, TipoConsulta.order('id'), :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %></div>
+        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= collection_select :tipo_consulta, :id, TipoConsulta.order('id'), :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %></div>
          <div class="col-sm-1"></div><br />
 
         <div class="col-sm-1"></div><br />
         <div class="col-sm-4"><%= label_tag :nil, "Estado Cita".html_safe %></div>
-        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= collection_select :form_buscar_produccion, :estado_produccion_id, EstadoCita.order('id'), :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %></div>
+        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= collection_select :estado_cita, :id, EstadoCita.order('id'), :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %></div>
          <div class="col-sm-1"></div><br />
 
         <div class="col-sm-1"></div><br />
         <div class="col-sm-4"><%= label_tag :nil, "Estado Cobro".html_safe %></div>
-        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= collection_select :form_buscar_produccion, :estado_produccion_id, EstadoCobro.order('id'), :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %></div>
+        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= collection_select :estado_cobro, :id, EstadoCobro.order('id'), :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %></div>
          <div class="col-sm-1"></div><br />
 
-        <div class="col-sm-1"></div><br />
-        <div class="col-sm-4"><%= label_tag :nil, "Desde Fecha".html_safe %></div>
-        <div class="col-sm-5" style= "margin: 0px 0px 21px;"><%= date_field_tag :fecha_desde, @fecha, class: 'form-control input-sm', style: "margin-top:0px;height:42px" %>
-        </div>    
+        <div class="col-sm-4"><%= label_tag :nil, "Desde Fecha #{attr_requerido}".html_safe %></div>
+          <div class='input-group date col-sm-4'>
+          <%= text_field_tag :fecha_desde, nil, class: 'form-control input-sm' %>
+          <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+          </div>
+        <div class="col-sm-1"></div><br /> 
         <div class="col-sm-1"></div><br /> 
 
          <div class="col-sm-1"></div><br />
-        <div class="col-sm-4"><%= label_tag :nil, "Hasta Fecha".html_safe %></div>
-        <div class="col-sm-5" style= "margin: 0px 0px 21px;"><%= date_field_tag :fecha_hasta, @fecha, class: 'form-control input-sm', style: "margin-top:0px;height:42px" %>
-        </div>    
+        <div class="col-sm-4"><%= label_tag :nil, "Desde Fecha #{attr_requerido}".html_safe %></div>
+          <div class='input-group date col-sm-4'>
+          <%= text_field_tag :fecha_hasta, nil, class: 'form-control input-sm' %>
+          <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+          </div>
+        <div class="col-sm-1"></div><br /> 
         <div class="col-sm-1"></div><br />  
 
         <div class="col-sm-1"></div><br />
@@ -81,151 +86,101 @@
 
 <script type="text/javascript">
 
-
-   //Obtener Flota
-  $("#flota_produccion").bind('focus', function(){   
-
-    var flotas = [];
-    $("#flota_produccion").val('');
-    $("#flota_id").val('');
-    $("#flota_produccion").attr('readonly', false);
-
-    $.getJSON("<%= url_for(pacientes_buscar_paciente_path) %>", { flota_produccion: $("#flota_produccion").val()}, function(j){
-        
-      var nombre_flota = "";
-      var options = "<option value=''> -- Seleccione una Flota -- </option>"
-
-      for (var i = 0; i < j.length; i++) {
-        
-        if(j[i].nombre_flota != nombre_flota ){
-          
-          flotas.push( {value: j[i].id +" - Código Camión: "+ j[i].codigo_flota + "| Marca: "+ j[i].marca+"| Chapa: "+j[i].chapa +"| Descripción: "+j[i].descripcion });
-          nombre_flota =j[i].id +" - "+ j[i].marca+" "+j[i].chapa ;
-
-          options += "<option value="+ j[i].id +" - Código Camión: "+ j[i].codigo_flota + "| Marca: "+ j[i].marca+"| Chapa: "+j[i].chapa +"| Descripción: "+j[i].descripcion+ "</option>"
-
-        }
-
-      }
-
-      $("#chofer_id").html(options);
-
-    })
-
-    $("#flota_produccion").autocomplete({
-
-      minLength: 1,
-      source: flotas,
-      focus: function( event, ui ) {
-      
-        $("#flota_produccion" ).val( ui.item.label );
-        return false;
-      },
-      select: function( event, ui ) {
-
-        var datos = ui.item.value.split(" - ");
-        $("#flota_produccion").val( ui.item.label );
-        $("#flota_id").val(datos[0]);
-        return false;
-      }
-    })
-
-  });
-
-  //Obtener chofer
-  $("#chofer_produccion").bind('focus', function(){   
+  //OBTENER PACIENTE
+  $("#cita_paciente_id").bind('focus', function(){   
 
     var personas = [];
-    $("#chofer_produccion").val('');
-    $("#chofer_id").val('');
-    $("#chofer_produccion").attr('readonly', false);
+    $("#cita_paciente_id").val('');
+    $("#paciente_id").val('');
+    $("#cita_paciente_id").attr('readonly', false);
 
-    $.getJSON("<%= url_for(pacientes_buscar_paciente_path) %>", { chofer_produccion: $("#chofer_produccion").val()}, function(j){
+    $.getJSON("<%= url_for(pacientes_buscar_paciente_cita_path) %>", { nombre_paciente: $("#cita_paciente_id").val()}, function(j){
         
       var nombre_persona = "";
-      var options = "<option value=''> -- Seleccione un Chofer -- </option>"
+      var options = "<option value=''> -- Seleccione un Profesional -- </option>"
 
       for (var i = 0; i < j.length; i++) {
         
         if(j[i].nombre_persona != nombre_persona ){
           
-          personas.push( {value: j[i].id +" - "+ j[i].nombre_persona+" "+j[i].apellido_persona });
-          nombre_persona =j[i].id +" - "+ j[i].nombre_persona+" "+j[i].apellido_persona ;
+          personas.push( {value: j[i].paciente_id +" - "+ j[i].nombre_persona+" "+j[i].apellido_persona });
+          nombre_persona =j[i].paciente_id +" - "+ j[i].nombre_persona+" "+j[i].apellido_persona ;
 
-          options += "<option value="+ j[i].id +" - "+ j[i].nombre_persona+" "+j[i].apellido_persona + "</option>"
+          options += "<option value="+ j[i].paciente_id +" - "+ j[i].nombre_persona+" "+j[i].apellido_persona + "</option>"
 
         }
 
       }
 
-      $("#chofer_id").html(options);
+      $("#cita_paciente_id").html(options);
 
     })
 
-    $("#chofer_produccion").autocomplete({
+    $("#cita_paciente_id").autocomplete({
 
       minLength: 1,
       source: personas,
       focus: function( event, ui ) {
       
-        $("#chofer_produccion" ).val( ui.item.label );
+        $("#cita_paciente_id" ).val( ui.item.label );
         return false;
       },
       select: function( event, ui ) {
 
         var datos = ui.item.value.split(" - ");
-        $("#chofer_produccion").val( ui.item.label );
-        $("#chofer_id").val(datos[0]);
+        $("#cita_paciente_id").val( ui.item.label );
+        $("#paciente_id").val(datos[0]);
         return false;
+
       }
     })
 
   });
 
-  //Obtener cliente
-  $("#cliente_produccion").bind('focus', function(){   
+  //OBTENER PROFESIONAL
+  $("#cita_profesional_id").bind('focus', function(){   
 
-    var clientes = [];
-    $("#cliente_produccion").val('');
-    $("#cliente_id").val('');
-    $("#cliente_produccion").attr('readonly', false);
+    var personas = [];
+    $("#cita_profesional_id").val('');
+    $("#profesional_id").val('');
+    $("#cita_profesional_id").attr('readonly', false);
 
-    $.getJSON("<%= url_for(pacientes_buscar_paciente_path) %>", { cliente_produccion: $("#cliente_produccion").val()}, function(j){
+    $.getJSON("<%= url_for(profesionales_buscar_profesional_path) %>", { nombre_profesional: $("#cita_profesional_id").val()}, function(j){
         
       var nombre_persona = "";
-      var options = "<option value=''> -- Seleccione un Cliente -- </option>"
+      var options = "<option value=''> -- Seleccione un Profesional -- </option>"
 
       for (var i = 0; i < j.length; i++) {
         
         if(j[i].nombre_persona != nombre_persona ){
           
-          clientes.push( {value: j[i].id +" - Razon Social: "+ j[i].razon_social+" Cliente: "+ j[i].cliente_nombre+" "+j[i].cliente_apellido });
-          nombre_persona =j[i].id +" - "+ j[i].razon_social+" "+ j[i].cliente_nombre+" "+j[i].cliente_apellido ;
+          personas.push( {value: j[i].profesional_id +" - "+ j[i].nombre_persona+" "+j[i].apellido_persona });
+          nombre_persona =j[i].profesional_id +" - "+ j[i].nombre_persona+" "+j[i].apellido_persona ;
 
-          options += "<option value="+ j[i].id +" -Razon Social:"+ j[i].razon_social+" Cliente: "+ j[i].cliente_nombre+" "+j[i].cliente_apellido + "</option>"
+          options += "<option value="+ j[i].profesional_id +" - "+ j[i].nombre_persona+" "+j[i].apellido_persona + "</option>"
 
         }
 
       }
 
-      $("#chofer_id").html(options);
+      $("#cita_profesional_id").html(options);
 
     })
 
-    $("#cliente_produccion").autocomplete({
+    $("#cita_profesional_id").autocomplete({
 
       minLength: 1,
-      source: clientes,
+      source: personas,
       focus: function( event, ui ) {
       
-        $("#cliente_produccion" ).val( ui.item.label );
+        $("#cita_profesional_id" ).val( ui.item.label );
         return false;
       },
       select: function( event, ui ) {
 
         var datos = ui.item.value.split(" - ");
-        $("#cliente_produccion").val( ui.item.label );
-        $("#cliente_id").val(datos[0]);
+        $("#cita_profesional_id").val( ui.item.label );
+        $("#profesional_id").val(datos[0]);
         return false;
       }
     })

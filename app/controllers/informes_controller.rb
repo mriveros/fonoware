@@ -3,85 +3,61 @@ class InformesController < ApplicationController
 	before_filter :require_usuario
 
   def indexa
+
   	cond = []
     args = []
 
   	@informe = "informes"
   	@msg = "" 
     
-    if params[:flota_id].present?
+    if params[:paciente_id].present?
 
-      cond << "flota_id = ?"
-      args << params[:flota_id]
-
-    end
-
-    if params[:chofer_id].present?
-
-      cond << "chofer_id = ?"
-      args << params[:chofer_id]
+      cond << "paciente_id = ?"
+      args << params[:paciente_id]
 
     end
 
-    if params[:cliente_id].present?
+    if params[:profesional_id].present?
 
-      cond << "cliente_id = ?"
-      args << params[:cliente_id]
+      cond << "profesional_id = ?"
+      args << params[:profesional_id]
+
+    end
+
+    if params[:tipo_consulta][:id].present?
+
+      cond << "tipo_consulta_id = ?"
+      args << params[:tipo_consulta][:id]
+
+    end
+
+    if params[:estado_cita][:id].present?
+
+      cond << "estado_cita_id = ?"
+      args << params[:estado_cita][:id]
+
+    end
+
+    if params[:estado_cobro][:id].present?
+
+      cond << "estado_cobro_id = ?"
+      args << params[:estado_cobro][:id]
 
     end
 
     if params[:fecha_desde].present? && params[:fecha_hasta].present? 
 
-      cond << "fecha_produccion >= '#{params[:fecha_desde]}' and fecha_produccion <= '#{params[:fecha_hasta]}'" 
+      cond << "fecha_cita >= '#{params[:fecha_desde]}' and fecha_cita <= '#{params[:fecha_hasta]}'" 
 
     elsif params[:fecha_desde].present?
       
-      cond << "fecha_produccion >= ?"
+      cond << "fecha_cita >= ?"
       args << params[:fecha_desde]
 
     elsif params[:fecha_hasta].present?
       
-      cond << "fecha_produccion <= ?"
+      cond << "fecha_cita <= ?"
       args << params[:fecha_hasta]
-
-    end
-
-    if params[:general].present?
-
-      puts "se generará informe general"
-
-    else
-
-      if params[:cobrado].present?
-
-        cond << "cobrado = ?"
-        args << true
-
-      else
-
-        cond << "cobrado = ?"
-        args << false
-
-      end
-
-      if params[:pertenece].present?
-
-        cond << "pertenece = ?"
-        args << true
-
-      else
-
-        cond << "pertenece = ?"
-        args << false
-      
-      end
-
-    end
-
-    if params[:form_buscar_produccion][:estado_produccion_id].present?
-
-      cond << "estado_produccion_id = ?"
-      args << params[:form_buscar_produccion][:estado_produccion_id]
 
     end
 
@@ -90,11 +66,11 @@ class InformesController < ApplicationController
 
     if cond.size > 0
      
-      @produccion =  VProduccion.where(cond).orden_01.paginate(per_page: 10, page: params[:page])
+      @produccion =  VCita.where(cond).orden_01.paginate(per_page: 10, page: params[:page])
 
     else
 
-      @produccion = VProduccion.orden_01.paginate(per_page: 10, page: params[:page])
+      @produccion = VCita.orden_01.paginate(per_page: 10, page: params[:page])
      
     end
 
