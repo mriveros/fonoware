@@ -163,16 +163,20 @@
 
                         <div class="col-sm-12">
                           <%@resoluciones = Resolucion.where("id =?", @cita_detalle_fono.resolucion_id).first%> 
-                          <%if @resoluciones.habilitado == true%>
+                          <%if @resoluciones.present?%>
+                          
+                            <%if @resoluciones.habilitado == true%>
 
-                            <%=link_to "<i class='glyphicon glyphicon-download-alt'> Descargar Archivo</i>".html_safe, (Rails.env == 'production' ? "/fonoware/#{@resoluciones.data.url}" : @resoluciones.data.url), class: "btn btn-default btn-xs", target: '_blank',title: "Esta opción le permite desplegar el archivo adjunto."%>
-                          <%else%>
+                              <%=link_to "<i class='glyphicon glyphicon-download-alt'> Descargar Archivo</i>".html_safe, (Rails.env == 'production' ? "/fonoware/#{@resoluciones.data.url}" : @resoluciones.data.url), class: "btn btn-default btn-xs", target: '_blank',title: "Esta opción le permite desplegar el archivo adjunto."%>
+                            <%else%>
 
-                            <p> 
+                              <p> 
 
-                              <strong>Archivo no Disponible</strong>
+                                <strong>Archivo no Disponible</strong>
 
-                            </p>
+                              </p>
+
+                            <%end%>
 
                           <%end%>
 

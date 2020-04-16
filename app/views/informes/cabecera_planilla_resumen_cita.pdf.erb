@@ -23,16 +23,19 @@
     <%if params[:fecha_desde].present?%>
     <tr>
     
-      <th width="20%">FECHA DESDE: </th>
+      <th width="20%">Fecha desde: </th>
       <td width="40%"><%=params[:fecha_desde] %></td>
 
     <%end%>
-    
-    <%if params[:fecha_hasta].present?%>
 
-      <th width="20%">FECHA HASTA:</th>
-      <td width="40%"><%=params[:fecha_hasta] %></td>
+    </tr>
+
+     <%if params[:fecha_hasta].present?%>
+    <tr>
     
+      <th width="20%">Fecha hasta: </th>
+      <td width="40%"><%=params[:fecha_hasta] %></td>
+
     <%end%>
 
     </tr>
@@ -41,7 +44,7 @@
       <% @paciente = VPaciente.where("paciente_id = ?", params[:paciente_id]).first %>
       <tr>
         
-        <th width="20%">PACIENTE:</th>
+        <th width="20%">Paciente:</th>
         <td width="40%"><%=@paciente.nombre_persona%> <%=@paciente.apellido_persona%></td>
 
       </tr>
@@ -94,6 +97,5 @@
     
   </table>
 <br/>
-<br/>
-<br/>
+
 </div>

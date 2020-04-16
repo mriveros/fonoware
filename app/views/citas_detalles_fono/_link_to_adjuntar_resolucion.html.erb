@@ -1,4 +1,4 @@
-<%= link_to "<span class='glyphicon glyphicon-paperclip'> Adjuntar Archivo PDF</span>".html_safe, "#", id: "link-to-adjuntar-resolucion-#{cita_detalle_id}-#{resolucion_id}", class: 'btn btn-primary btn-sm', title: 'Haga click para adjuntar la resolucion.', onclick: "$('.modal').html('');return false;" %>
+<%= link_to "<span class='glyphicon glyphicon-paperclip'> Adjuntar Archivo PDF</span>".html_safe, "#", id: "link-to-adjuntar-resolucion-#{cita_detalle_id}-#{resolucion_id}", class: 'btn btn-primary btn-sm', title: 'Haga click para adjuntar un archivo a la cita.', onclick: "$('.modal').html('');return false;" %>
 
 <%= modal_window( window_id: "modal-window-adjuntar-resolucion", link_to_id: "#link-to-adjuntar-resolucion-#{cita_detalle_id}-#{resolucion_id}", url: citas_detalles_fono_adjuntar_resolucion_path( window_id: "modal-window-adjuntar-resolucion", cita_detalle_id: cita_detalle_id,resolucion_id: resolucion_id, cita_id: cita_id ) )%>
 

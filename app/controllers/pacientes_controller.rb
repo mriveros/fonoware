@@ -270,7 +270,7 @@ skip_before_action :verify_authenticity_token
     
     if params[:tipo_documento_id].present? && params[:nacionalidad_id] && params[:documento].present?
 
-      @persona = VPersona.where("tipo_documento_id = ? and nacionalidad_id = ? and documento_persona = ?", params[:tipo_documento_id], params[:nacionalidad_id], params[:documento])  
+      @persona = Persona.where("tipo_documento_id = ? and nacionalidad_id = ? and documento_persona = ?", params[:tipo_documento_id], params[:nacionalidad_id], params[:documento])  
  
     end
 

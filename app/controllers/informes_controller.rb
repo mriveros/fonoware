@@ -71,11 +71,10 @@ class InformesController < ApplicationController
     else
 
       @cita = VCita.orden_01.paginate(per_page: 10, page: params[:page])
-      puts "//////////////////DEBUG"
-      puts @cita.size
+
     end
 
-    @parametros = { format: :pdf, cita_id: @cita.map(&:cita_id), paciente_id: params[:paciente_id], profesional_id: params[:profesional_id], tipo_consulta_id: params[:tipo_consulta][:id], estado_cita_id: params[:estado_cita][:id], tipo_consulta_id: params[:estado_cobro][:id], fecha_desde: params[:fecha_desde], fecha_hasta: params[:fecha_hasta] }
+    @parametros = { format: :pdf, cita_id: @cita.map(&:cita_id), paciente_id: params[:paciente_id], profesional_id: params[:profesional_id], tipo_consulta_id: params[:tipo_consulta][:id], estado_cita_id: params[:estado_cita][:id], estado_cobro_id: params[:estado_cobro][:id], fecha_desde: params[:fecha_desde], fecha_hasta: params[:fecha_hasta] }
 
     respond_to do |f|
 
@@ -95,7 +94,7 @@ class InformesController < ApplicationController
      
       f.pdf do
 
-          render  :pdf => "planilla_resumen_produccion_#{Time.now.strftime("%Y_%m_%d__%H_%M")}",
+          render  :pdf => "planilla_resumen_cita_#{Time.now.strftime("%Y_%m_%d__%H_%M")}",
                   :template => 'informes/planilla_reporte_cita.pdf.erb',
                   :layout => 'pdf.html',
                   :header => {:html => { :template => "informes/cabecera_planilla_resumen_cita.pdf.erb" ,

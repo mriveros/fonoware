@@ -277,7 +277,7 @@ before_filter :require_usuario
 
       if @cita.save
       
-        @msg = "El estado de la Cita modificado exitosamente!"
+        @msg = "Estado de la Cita modificado exitosamente!"
         @actualizado = true
         auditoria_despues(@cita, auditoria_id)
 

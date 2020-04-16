@@ -36,18 +36,18 @@
             <%if @cita_detalle_fono.resolucion_id != nil %>
             
               <% resolucion = Resolucion.where("id = ?", @cita_detalle_fono.resolucion_id).first %>
-
+  
               <%if resolucion.data != nil && resolucion.habilitado == false%>
 
 
-                <%= link_to icon_confirmar,"#", onclick: "habilitar_descarga_archivos(#{@cita_detalle_fono.id}, #{cit.cita_id} );return false;", class: "btn btn-success btn-xs", id: "btn-habilitar-descarga-archivo", title: 'Haga click para autorizar la descarga de adjuntos en esta cita'%>
+                <%= link_to icon_confirmar,"#", onclick: "habilitar_descarga_archivos(#{@cita_detalle_fono.id}, #{cit.cita_id} );return false;", class: "btn btn-success-dos btn-xs", id: "btn-habilitar-descarga-archivo", title: 'Haga click para autorizar la descarga de adjuntos en esta cita'%>
 
               <%end%>
 
               <%if resolucion.data != nil && resolucion.habilitado == true%>
 
 
-                <%= link_to icon_eliminar,"#", onclick: "deshabilitar_descarga_archivos(#{@cita_detalle_fono.id}, #{cit.cita_id} );return false;", class: "btn btn-warning btn-xs", id: "btn-habilitar-descarga-archivo", title: 'Haga click para desautorizar la descarga de adjuntos en esta cita'%>
+                <%= link_to icon_eliminar,"#", onclick: "deshabilitar_descarga_archivos(#{@cita_detalle_fono.id}, #{cit.cita_id} );return false;", class: "btn btn-success-dos btn-xs", id: "btn-habilitar-descarga-archivo", title: 'Haga click para desautorizar la descarga de adjuntos en esta cita'%>
                 
               <%end%>
 

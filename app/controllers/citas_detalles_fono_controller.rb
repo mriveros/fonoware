@@ -186,8 +186,21 @@ class CitasDetallesFonoController < ApplicationController
 
   def adjuntar_resolucion
 
+    @valido = true
+    @msg = ""
+
     @cita_detalle_fono = CitaDetalleFono.where("id = ?", params[:cita_detalle_id]).first
-    @resolucion = Resolucion.find(params[:resolucion_id])
+    
+    if @cita_detalle_fono.resolucion_id != nil
+
+      @resolucion = Resolucion.find(params[:resolucion_id])
+    
+    else
+
+      @valido = false
+      @msg = "No se puede adjuntar un archivo ya que no se ha creado previamente. Primero debe ir a la opción Crear Archivo Adjunto"
+
+    end
 
     respond_to do |f|
 

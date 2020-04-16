@@ -20,12 +20,12 @@
 
       <div class="panel-body" style="background:#e6e6e6; ">
         
-        <div class="col-sm-4"><%= label_tag nil, "Paciente #{attr_requerido}".html_safe %></div>
+        <div class="col-sm-4"><%= label_tag nil, "Paciente".html_safe %></div>
         <%= hidden_field_tag :paciente_id %>
         <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= text_area_tag :cita_paciente_id, nil, rows: 3 ,class: 'form-control input-sm'%></div>
         <br style="clear: both;"/>
 
-        <div class="col-sm-4"><%= label_tag :nil, "Profesional #{attr_requerido}".html_safe %></div>
+        <div class="col-sm-4"><%= label_tag :nil, "Profesional".html_safe %></div>
         <%= hidden_field_tag :profesional_id %>
         <div class="col-sm-7" style= "margin: 0px 0px 21px;" ><%= text_area_tag :cita_profesional_id, nil ,rows: 3,class: 'form-control input-sm'%></div>
         <div class="col-sm-1"></div><br />
@@ -45,14 +45,14 @@
         <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= collection_select :estado_cobro, :id, EstadoCobro.order('id'), :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %></div>
          <div class="col-sm-1"></div><br />
 
-        <div class="col-sm-4"><%= label_tag :nil, "Desde Fecha #{attr_requerido}".html_safe %></div>
+        <div class="col-sm-4"><%= label_tag :nil, "Desde la Fecha".html_safe %></div>
           <div class='input-group date col-sm-4'>
           <%= text_field_tag :fecha_desde, nil, class: 'form-control input-sm' %>
           <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
           </div>
 
          <div class="col-sm-1"></div><br />
-        <div class="col-sm-4"><%= label_tag :nil, "Desde Fecha #{attr_requerido}".html_safe %></div>
+        <div class="col-sm-4"><%= label_tag :nil, "Hasta la Fecha".html_safe %></div>
           <div class='input-group date col-sm-4'>
           <%= text_field_tag :fecha_hasta, nil, class: 'form-control input-sm' %>
           <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
