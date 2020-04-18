@@ -11,7 +11,7 @@
 
 <div style="clear:both;"></div>
  
-<div class="table-responsive" id="table-pacientes">
+<div class="table-responsive" id="table-historial-pacientes">
 
   <table class="table table-small-font table-bordered table-striped" style="font-size:11px;">
    
@@ -120,7 +120,7 @@
  
   //---------------------------------------------------------------------------//
   //---------------------------- BUSCAR PERSONAS-------- -------------------------//
-  $("#table-pacientes input, #table-pacientes select").bind('change', function () {
+  $("#table-historial-pacientes input, #table-pacientes select").bind('change', function () {
       $.ajaxQ.abortAll();
       $("#form-buscar-pacientes").submit();
 
