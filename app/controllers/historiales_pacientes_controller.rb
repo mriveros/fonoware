@@ -86,6 +86,9 @@ skip_before_action :verify_authenticity_token
 
     @paciente = Paciente.where("id = ?", params[:paciente_id]).first
     @paciente_detalle_fono = PacienteDetalleFono.where("paciente_id = ?", params[:paciente_id]).first
+    @citas = VCita.orden_fecha_cita.where("paciente_id = ?", params[:paciente_id]).paginate(per_page: 10, page: params[:page])
+    @total_encontrados = VCita.count
+    @total_registros = VCita.count
 
     respond_to do |f|
 
@@ -97,9 +100,10 @@ skip_before_action :verify_authenticity_token
 
   def lista_citas
 
-  
-      @citas = VCita.orden_fecha_cita.where("paciente_id = ?", params[:paciente_id]).paginate(per_page: 10, page: params[:page])
-      @total_encontrados = VCita.count
+    puts "DEBUG//////////////////"
+    puts params[:form_buscar_citas_paciente_id]
+    @citas = VCita.orden_fecha_cita.where("paciente_id = ?", params[:form_buscar_citas_paciente_id]).paginate(per_page: 10, page: params[:page])
+    @total_encontrados = VCita.count
 
     @total_registros = VCita.count
 

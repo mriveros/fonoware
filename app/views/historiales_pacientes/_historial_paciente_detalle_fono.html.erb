@@ -6,7 +6,7 @@
 
       <div  align="center" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
 
-        <h3 style="float:center;">Historial Fonoaudiológico del Paciente</h3>
+        <h3 style="float:center;">Detalles del Paciente</h3>
 
       </div>
 
@@ -156,68 +156,105 @@
         
         <div class="modal-footer-center" style="background:#e6e6e6;">
           
-          
+            <h3 style="float:center;">Historial Fonoaudiológico del Paciente</h3>
+
         </div>
 
        <%end %>  
 
       </div>
       <!--DESDE ACA SE REALIZA LA TABLA DE CITAS PARA EL HISTORIAL-->
+
       <div class="table-responsive" id="table-citas">
 
-  <table class="table table-small-font table-bordered table-striped" style="font-size:11px;">
-   
-    <thead>
+      <table class="table table-small-font table-bordered table-striped" style="font-size:11px;">
+       
+        <thead> 
 
-      <%= form_tag historiales_pacientes_lista_citas_path, remote: true, id: "form-buscar-citas"  do  %>
+            <tr>
+              
+              <th style="width:10%;">
+                <div><%= label_tag nil, "Fecha Cita".html_safe %></div>
+              </th>
 
-         <%= hidden_field_tag :paciente_id, @paciente.id %>
+              <th style="width:7%;">
+                <span>Documento</span>
+              </th>
 
-        <tr>
+              <th style="width:15%;">
+                <span>Nombre Paciente</span>
+              </th>
+              
+              <th style="width:15%;" >
+                <span>Apellido Paciente</span>
+              </th>
+
+              <th style="width:10%;">
+                  <span>Tipo Consulta</span>
+              </th> 
+
+              <th style="width:10%;"></th>
+
+            </tr>
+
+          </thead> 
+
+        <tbody>
+
+          <% if @citas.present? %>
+
+          <% @citas.each do |cit| %>
+
+            <tr>
+
+              <td><%= cit.fecha_cita.strftime('%d/%m/%Y')%></td>
+              <td><%= cit.paciente_documento.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse%></td>
+              <td><%= cit.paciente_nombre%></td>
+              <td><%= cit.paciente_apellido%></td>
+              <td><%= cit.tipo_consulta%></td>
+
+              <td style="width:120px;"> 
+
+                <%if cit.estado_cita_id == PARAMETRO[:estado_cita_terminado]%>
+
+                  <%= link_to_cita_detalle_fono_terminado_historial(cit.cita_id) %>
+                  
+                <%end%>
+                 
+               </td>
+
+              </td>
+
+            </tr>
+
+          <% end %>
+
+          <tr id="tab-paginacion">
+
+              <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate @citas, :params => params %></div></td>
+          </tr>
+
+          <tr>
+              <td colspan="12">
+                Cantidad de registros encontrados: <%= @total_encontrados %> 
+              </td>
+          </tr>
+
+          <% else %>
+
+            <tr>
+
+              <td colspan="12"><p class='none-result'>No se han encontrado resultados.</p></td>
+
+            </tr>
+
+
+          <% end %>
           
-           <th style="width:10%;">
-            <div><%= label_tag nil, "Fecha Cita".html_safe %></div>
-         </th>
 
-          <th style="width:7%;">
-            <span>Documento</span>
-          </th>
-
-          <th style="width:15%;">
-            <span>Nombre Paciente</span>
-          </th>
-          
-          <th style="width:15%;" >
-            <span>Apellido Paciente</span>
-          </th>
-
-          <th style="width:10%;">
-              <span>Tipo Consulta</span>
-          </th> 
-
-          <th style="width:7%;">
-            <span>Monto Consulta</span>
-          </th>
-
-          <th style="width:10%;">
-              <span>Estado Cita</span>
-          </th> 
-
-          <th style="width:10%;">
-              <span>Estado Cobro</span>
-          </th> 
-
-          <th style="width:10%;"></th>
-
-        </tr>
-
-        <% end %>
-
-      </thead> 
-
-    <tbody id="citas-lista"></tbody>
-  
-  </table>
+        </tbody>
+      
+      </table>
 
 </div>
 
@@ -229,9 +266,7 @@
 
 
   <script type="text/javascript">
-
-    $("#form-buscar-citas").submit();
-
+    
      $("textarea").keydown(function(e){
     // Enter was pressed without shift key
     if (e.keyCode == 13 && !e.shiftKey)
@@ -362,9 +397,5 @@
     }
     
   })
-
-
-
-
 
   </script>
