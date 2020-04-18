@@ -80,10 +80,18 @@ Rails.application.routes.draw do
   get "pacientes/buscar_paciente"
   get "pacientes/buscar_persona"
   get "pacientes/buscar_paciente_cita"
-  
+
   #PACIENTES DETALLES FONO
   get "pacientes_detalles_fono/paciente_detalle_fono"
   post "pacientes_detalles_fono/guardar_detalle_fono"
+
+  #HISTORIALES PACIENTES
+  post "historiales_pacientes/lista"
+  get "historiales_pacientes/lista"
+  get "historiales_pacientes/index"
+  get "historiales_pacientes/historial_detalle_fono"
+  
+
 
   #PROFESIONALES
   post "profesionales/lista"
