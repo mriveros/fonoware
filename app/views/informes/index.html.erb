@@ -5,8 +5,8 @@
 
   <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
     <h3 style="float:left;margin-top:5px;">Generar Informes</h3>
-    
   </div>
+
 </div>
 
 <div style="clear:both;"></div>
@@ -25,31 +25,37 @@
         <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= text_area_tag :cita_paciente_id, nil, rows: 3 ,class: 'form-control input-sm'%></div>
         <br style="clear: both;"/>
 
+
         <div class="col-sm-4"><%= label_tag :nil, "Profesional".html_safe %></div>
         <%= hidden_field_tag :profesional_id %>
         <div class="col-sm-7" style= "margin: 0px 0px 21px;" ><%= text_area_tag :cita_profesional_id, nil ,rows: 3,class: 'form-control input-sm'%></div>
         <div class="col-sm-1"></div><br />
+
 
         <div class="col-sm-1"></div><br />
         <div class="col-sm-4"><%= label_tag :nil, "Tipo Consulta".html_safe %></div>
         <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= collection_select :tipo_consulta, :id, TipoConsulta.order('id'), :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %></div>
          <div class="col-sm-1"></div><br />
 
+
         <div class="col-sm-1"></div><br />
         <div class="col-sm-4"><%= label_tag :nil, "Estado Cita".html_safe %></div>
         <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= collection_select :estado_cita, :id, EstadoCita.order('id'), :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %></div>
          <div class="col-sm-1"></div><br />
+
 
         <div class="col-sm-1"></div><br />
         <div class="col-sm-4"><%= label_tag :nil, "Estado Cobro".html_safe %></div>
         <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= collection_select :estado_cobro, :id, EstadoCobro.order('id'), :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %></div>
          <div class="col-sm-1"></div><br />
 
+
         <div class="col-sm-4"><%= label_tag :nil, "Desde la Fecha".html_safe %></div>
           <div class='input-group date col-sm-4'>
           <%= text_field_tag :fecha_desde, nil, class: 'form-control input-sm' %>
           <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
           </div>
+
 
          <div class="col-sm-1"></div><br />
         <div class="col-sm-4"><%= label_tag :nil, "Hasta la Fecha".html_safe %></div>
@@ -60,9 +66,9 @@
         <div class="col-sm-1"></div><br /> 
        
 
-      
-
       </div>
+
+      
       <div class="modal-footer" style="background:#e6e6e6; text-align: center">
 
         <%= submit_tag  "Generar Informe", class: "btn btn-primary", id: "btn-generar-reporte" %>
