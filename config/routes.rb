@@ -89,7 +89,7 @@ Rails.application.routes.draw do
   post "historiales_pacientes/lista"
   get "historiales_pacientes/lista"
   get "historiales_pacientes/index"
-  get "historiales_pacientes/historial_detalle_fono"
+  get "historiales_pacientes/historial_paciente_detalle_fono"
   
 
 

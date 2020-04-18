@@ -44,22 +44,22 @@
                 
                 <div class="col-sm-4"><%= label_tag nil, "Antecedentes Personales".html_safe, id: "lbl-antecedentes-personales" %></div><br />
                 <div class="col-sm-12">
-                  <%= text_area_tag :antecedentes_personales, nil, class: 'form-control input-sm', :size =>"25x3", maxlength: "255" %>
+                  <%= text_area_tag :antecedentes_personales, nil, class: 'form-control input-sm', :size =>"25x3", maxlength: "255", readonly: true %>
                 </div>
                 
                 <div class="col-sm-4"><%= label_tag nil, "Antecedentes Familiares".html_safe, id: "lbl-antecedentes-familiares" %></div><br />
                 <div class="col-sm-12">
-                  <%= text_area_tag :antecedentes_familiares,nil,  class: 'form-control input-sm', :size =>"25x3", maxlength: "255"  %>
+                  <%= text_area_tag :antecedentes_familiares,nil,  class: 'form-control input-sm', :size =>"25x3", maxlength: "255", readonly: true   %>
                  </div>
 
                  <div class="col-sm-4"><%= label_tag nil, "Antecedentes Hábitos".html_safe, id: "lbl-antecedentes-habitos" %></div><br />
                 <div class="col-sm-12">
-                  <%= text_area_tag :antecedentes_habitos, nil,  class: 'form-control input-sm' , :size =>"25x3", maxlength: "255" %>
+                  <%= text_area_tag :antecedentes_habitos, nil,  class: 'form-control input-sm' , :size =>"25x3", maxlength: "255", readonly: true  %>
                  </div>
                 
                 <div class="col-sm-4"><%= label_tag nil, "Otros Antecedentes".html_safe, id: "lbl-antecedentes-familiares" %></div><br />
                 <div class="col-sm-12">
-                  <%= text_area_tag :antecedentes_otros, nil,  class: 'form-control input-sm' , :size =>"25x3", maxlength: "255" %>
+                  <%= text_area_tag :antecedentes_otros, nil,  class: 'form-control input-sm' , :size =>"25x3", maxlength: "255", readonly: true  %>
                 </div>
                 
               </td>
@@ -74,7 +74,7 @@
                   <div id= "div_sindrome" hidden="true">
 
                     <div class="col-sm-12"><%= label_tag nil, "Especificar".html_safe, id: "lbl-especificar-sindrome" %></div>
-                    <div class="col-sm-12"><%= text_field_tag :sindrome_especificar, nil, class: 'form-control input-sm'%></div>
+                    <div class="col-sm-12"><%= text_field_tag :sindrome_especificar, nil, class: 'form-control input-sm' , readonly: true %></div>
                   </div>
 
                 </div>
@@ -88,7 +88,7 @@
                   <div id= "div_transtornos" hidden="true">
                   
                     <div class="col-sm-12"><%= label_tag nil, "Especificar".html_safe, id: "lbl-especificar-transtorno" %></div>
-                    <div class="col-sm-12"><%= text_field_tag :transtorno_especificar, nil, class: 'form-control input-sm' %></div>
+                    <div class="col-sm-12"><%= text_field_tag :transtorno_especificar, nil, class: 'form-control input-sm', readonly: true  %></div>
 
                   </div>
 
@@ -104,7 +104,7 @@
                   <div id= "div_enfermedad" hidden="true">                
                   
                     <div class="col-sm-12"><%= label_tag nil, "Especificar".html_safe, id: "lbl-especificar-enfermedad"%></div>
-                    <div class="col-sm-12"><%= text_field_tag :enfermedad_especificar, nil, class: 'form-control input-sm' %></div>
+                    <div class="col-sm-12"><%= text_field_tag :enfermedad_especificar, nil, class: 'form-control input-sm', readonly: true  %></div>
                   </div>
 
                 </div>
@@ -121,12 +121,12 @@
                 
 
                 <div class="col-sm-12"><%= label_tag nil, "Tiempo Escolaridad".html_safe %></div>
-                <div class="col-sm-12"><%= text_field_tag :escolaridad_tiempo, nil, class: 'form-control input-sm'%></div>
+                <div class="col-sm-12"><%= text_field_tag :escolaridad_tiempo, nil, class: 'form-control input-sm', readonly: true %></div>
                 <div class="col-sm-1"></div><br/><br/>
                
 
                 <div class="col-sm-12"><%= label_tag nil, "Institución Actual".html_safe %></div>
-                <div class="col-sm-12"><%= text_field_tag :escolaridad_institucion, nil, class: 'form-control input-sm'%></div>
+                <div class="col-sm-12"><%= text_field_tag :escolaridad_institucion, nil, class: 'form-control input-sm' , readonly:true %></div>
                 <div class="col-sm-1"></div><br/><br/>
                 
                 
@@ -140,7 +140,7 @@
               <td>
 
                 <div class="col-sm-12"><%= label_tag nil, "Derivado Por".html_safe %></div>
-                <div class="col-sm-12"><%= text_field_tag :datos_derivacion, nil, class: 'form-control input-sm'%></div>
+                <div class="col-sm-12"><%= text_field_tag :datos_derivacion, nil, class: 'form-control input-sm', readonly:true%></div>
                 <div class="col-sm-1"></div><br/><br/>
                 
 
@@ -167,7 +167,7 @@
         
         <div class="modal-footer-center" style="background:#e6e6e6;">
 
-          <%= f.submit "Actualizar Datos", class: "btn btn-primary", id: "btn-actualizar-datos-paciente"  %>
+    
           
         </div>
 
