@@ -14,13 +14,12 @@
    
     <div class="panel-body">
       
-      <div class="table-responsive" id="table-paciente-detalle-fono">
+      <div class="table-responsive" id="table-historial-paciente-detalle-fono">
 
-         <%= form_for @paciente, remote: true, url: pacientes_detalles_fono_guardar_detalle_fono_url, html: { id: "form-datos-paciente" }, method: 'POST' do |f| %>
+         <%= form_for @paciente, remote: true, url: pacientes_detalles_fono_guardar_detalle_fono_url, html: { id: "form-historial-paciente" }, method: 'POST' do |f| %>
 
           <%= hidden_field_tag :paciente_id, @paciente.id %>
           
-
         <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
          
 
@@ -38,7 +37,7 @@
             
           </thead>
        
-          <tbody id="paciente-detalle-fono">
+          <tbody id="historial-paciente-detalle-fono">
             <tr>
               <td>
                 
@@ -79,7 +78,6 @@
 
                 </div>
 
-
                
                 <div class="col-sm-4"><%= label_tag nil, "Transtornos".html_safe, id: "lbl-transtornos" %></div><br />
                 <div class="col-sm-12">
@@ -93,7 +91,6 @@
                   </div>
 
                 </div>
-
 
                 
                 <div class="col-sm-4"><%= label_tag nil, "Enfermedad".html_safe, id: "lbl-enfermedad" %></div><br />
@@ -129,12 +126,8 @@
                 <div class="col-sm-12"><%= text_field_tag :escolaridad_institucion, nil, class: 'form-control input-sm' , readonly:true %></div>
                 <div class="col-sm-1"></div><br/><br/>
                 
-                
-
 
               </td>
-
-
 
 
               <td>
@@ -144,10 +137,7 @@
                 <div class="col-sm-1"></div><br/><br/>
                 
 
-
               </td>
-
-
 
 
             </tr>
@@ -166,12 +156,9 @@
         </table>
         
         <div class="modal-footer-center" style="background:#e6e6e6;">
-
-    
+          
           
         </div>
-
-       
 
        <%end %>  
 

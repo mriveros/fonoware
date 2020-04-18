@@ -3,11 +3,13 @@ class HistorialesPacientesController < ApplicationController
 before_filter :require_usuario
 skip_before_action :verify_authenticity_token
 
+
   def index
   
 
   end
  
+
   def lista
 
     cond = []
@@ -79,6 +81,7 @@ skip_before_action :verify_authenticity_token
 
   end
 
+
   def historial_paciente_detalle_fono
 
     @paciente = Paciente.where("id = ?", params[:paciente_id]).first
@@ -91,7 +94,6 @@ skip_before_action :verify_authenticity_token
     end
     
   end
-
 
 
 end
