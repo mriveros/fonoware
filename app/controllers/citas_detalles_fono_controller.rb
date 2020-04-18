@@ -314,7 +314,7 @@ class CitasDetallesFonoController < ApplicationController
   end
 
 
- def cita_detalle_fono_terminado
+  def cita_detalle_fono_terminado
 
     @cita = Cita.where("id = ?", params[:cita_id]).first
     @cita_detalle_fono = CitaDetalleFono.where("cita_id = ?", params[:cita_id]).first
@@ -326,9 +326,5 @@ class CitasDetallesFonoController < ApplicationController
     end
 
   end
-
-
-
-
 
 end

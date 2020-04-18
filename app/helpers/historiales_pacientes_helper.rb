@@ -38,5 +38,11 @@ module HistorialesPacientesHelper
     end
 
   end
+
+  def link_to_cita_detalle_fono_terminado_historial(cita_id)
+
+    render partial: 'link_to_cita_detalle_fono_terminado_historial', locals: { cita_id: cita_id}
+
+  end
   
 end

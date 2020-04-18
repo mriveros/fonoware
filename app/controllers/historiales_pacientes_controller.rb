@@ -10,7 +10,7 @@ skip_before_action :verify_authenticity_token
   end
  
 
-  def lista
+  def lista_pacientes
 
     cond = []
     args = []
@@ -93,6 +93,35 @@ skip_before_action :verify_authenticity_token
 
     end
     
+  end
+
+  def lista_citas
+
+  
+      @citas = VCita.orden_fecha_cita.where("paciente_id = ?", params[:paciente_id]).paginate(per_page: 10, page: params[:page])
+      @total_encontrados = VCita.count
+
+    @total_registros = VCita.count
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+  def historial_cita_detalle_fono_terminado
+
+    @cita = Cita.where("id = ?", params[:cita_id]).first
+    @cita_detalle_fono = CitaDetalleFono.where("cita_id = ?", params[:cita_id]).first
+    
+    respond_to do |f|
+
+      f.js
+
+    end
+
   end
 
 

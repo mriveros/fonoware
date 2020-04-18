@@ -141,12 +141,9 @@
 
 
             </tr>
-            
-                
-          </tbody>
-          
         
-
+          </tbody>
+        
         <div style="background:#e6e6e6;">
 
        
@@ -154,6 +151,8 @@
         </div>
 
         </table>
+
+
         
         <div class="modal-footer-center" style="background:#e6e6e6;">
           
@@ -163,12 +162,75 @@
        <%end %>  
 
       </div>
-      
-    </div>
+      <!--DESDE ACA SE REALIZA LA TABLA DE CITAS PARA EL HISTORIAL-->
+      <div class="table-responsive" id="table-citas">
+
+  <table class="table table-small-font table-bordered table-striped" style="font-size:11px;">
+   
+    <thead>
+
+      <%= form_tag historiales_pacientes_lista_citas_path, remote: true, id: "form-buscar-citas"  do  %>
+
+         <%= hidden_field_tag :paciente_id, @paciente.id %>
+
+        <tr>
+          
+           <th style="width:10%;">
+            <div><%= label_tag nil, "Fecha Cita".html_safe %></div>
+         </th>
+
+          <th style="width:7%;">
+            <span>Documento</span>
+          </th>
+
+          <th style="width:15%;">
+            <span>Nombre Paciente</span>
+          </th>
+          
+          <th style="width:15%;" >
+            <span>Apellido Paciente</span>
+          </th>
+
+          <th style="width:10%;">
+              <span>Tipo Consulta</span>
+          </th> 
+
+          <th style="width:7%;">
+            <span>Monto Consulta</span>
+          </th>
+
+          <th style="width:10%;">
+              <span>Estado Cita</span>
+          </th> 
+
+          <th style="width:10%;">
+              <span>Estado Cobro</span>
+          </th> 
+
+          <th style="width:10%;"></th>
+
+        </tr>
+
+        <% end %>
+
+      </thead> 
+
+    <tbody id="citas-lista"></tbody>
+  
+  </table>
+
+</div>
+
+
+
+    <!--HASTA ACA SE REALIZA LA TABLA PARA AGREGAR EL HISTORIAL-->
+
   </div>  
 
 
   <script type="text/javascript">
+
+    $("#form-buscar-citas").submit();
 
      $("textarea").keydown(function(e){
     // Enter was pressed without shift key

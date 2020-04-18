@@ -86,10 +86,13 @@ Rails.application.routes.draw do
   post "pacientes_detalles_fono/guardar_detalle_fono"
 
   #HISTORIALES PACIENTES
-  post "historiales_pacientes/lista"
-  get "historiales_pacientes/lista"
+  post "historiales_pacientes/lista_pacientes"
+  get "historiales_pacientes/lista_pacientes"
   get "historiales_pacientes/index"
   get "historiales_pacientes/historial_paciente_detalle_fono"
+  get "historiales_pacientes/lista_citas"
+  post "historiales_pacientes/lista_citas"
+  get "historiales_pacientes/historial_cita_detalle_fono_terminado"
   
 
 
