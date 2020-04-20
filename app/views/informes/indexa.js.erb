@@ -5,8 +5,10 @@
 
   swal("Reporte generado Exitosamente!", "", "success");
 
-  }, 1000);
-  $("#btn-generar-reporte").attr('disabled', false);
+  }, 
+  1000);
+  
+  //$("#btn-generar-reporte").attr('disabled', false);
   
  	window.open("<%= url_for(informes_generar_pdf_path(@parametros))%>", '_blank')
   
