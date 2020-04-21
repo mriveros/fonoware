@@ -281,25 +281,25 @@
       
       <%if @paciente_detalle_fono.antecedentes_personales != nil%>
 
-        $("#antecedentes_personales").val('<%=@paciente_detalle_fono.antecedentes_personales%>');  
+        $("#antecedentes_personales").val('<%=@paciente_detalle_fono.antecedentes_personales.gsub('<br/>','\n')%>');  
       
       <%end%>
 
       <%if @paciente_detalle_fono.antecedentes_familiares != nil%>
 
-        $("#antecedentes_familiares").val('<%=@paciente_detalle_fono.antecedentes_familiares%>');  
+        $("#antecedentes_familiares").val('<%=@paciente_detalle_fono.antecedentes_familiares.gsub('<br/>','\n')%>');  
       
       <%end%>
 
       <%if @paciente_detalle_fono.antecedentes_habitos != nil%>
 
-        $("#antecedentes_habitos").val('<%=@paciente_detalle_fono.antecedentes_habitos%>');  
+        $("#antecedentes_habitos").val('<%=@paciente_detalle_fono.antecedentes_habitos.gsub('<br/>','\n')%>');  
       
       <%end%>
 
       <%if @paciente_detalle_fono.antecedentes_otros != nil%>
 
-        $("#antecedentes_otros").val('<%=@paciente_detalle_fono.antecedentes_otros%>');
+        $("#antecedentes_otros").val('<%=@paciente_detalle_fono.antecedentes_otros.gsub('<br/>','\n')%>');
       
       <%end%>
      
