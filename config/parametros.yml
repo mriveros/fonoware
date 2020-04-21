@@ -9,9 +9,8 @@ development:
   estado_cita_en_espera: 1
   estado_cita_en_consultorio: 2
   estado_cita_terminado: 3
-  estado_cita_anulado: 4
-  estado_cita_postergado: 5
-  estado_cita_ausente: 6
+  estado_cita_postergado: 4
+  estado_cita_ausente: 5
 
   #sistemas
   sistema_RUE: 1
@@ -63,10 +62,9 @@ production:
   #ESTADOS CITAS
   estado_cita_en_espera: 1
   estado_cita_en_consultorio: 2
-  estado_cita_en_terminado: 3
-  estado_cita_en_anulado: 4
-  estado_cita_en_postergado: 5
-  estado_cita_en_ausente: 6
+  estado_cita_terminado: 3
+  estado_cita_postergado: 4
+  estado_cita_ausente: 5
 
    
   #sistemas

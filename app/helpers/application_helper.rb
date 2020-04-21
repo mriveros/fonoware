@@ -62,7 +62,7 @@ module ApplicationHelper
   #FIN CONTROL DE ACCESOS
 
   def icon_borrar
-    "<i class='glyphicon glyphicon-remove' 'style='color:#F50A19;size:12px></i>".html_safe
+    "<span class='glyphicon glyphicon-trash'></span>".html_safe
   end
   def image_del
     image_tag("delete-icon.png", :style => "width:16px;")

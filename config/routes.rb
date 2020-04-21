@@ -151,6 +151,8 @@ Rails.application.routes.draw do
   get "citas/cambiar_estado_cobro_a_cobrado"
   get "citas/cambiar_estado_cobro_a_no_cobrado"
   get "citas/cambiar_estado_cita_terminado_a_en_consultorio"
+  get "citas/postergar_cita"
+  post "citas/guardar_postergar_cita"
   
 
   #CITAS DETALLES FONO

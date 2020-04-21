@@ -510,4 +510,46 @@ before_filter :require_usuario
 
   end
 
+  
+  def postergar_cita
+
+    @cita = Cita.where("id = ?", params[:cita_id]).first
+
+    respond_to do |f|
+
+      f.js
+      
+    end
+
+  end
+
+
+  def guardar_postergar_cita
+    
+    @cita_ok = false
+    @msg = ""
+
+    @cita = Cita.where("id = ?", params[:cita_id]).first
+    @cita.observacion = "FECHA ORIGINAL: #{@cita.fecha_cita}, FECHA POSTERGACION: #{params[:fecha_cita]} OBS: #{params[:observacion]}"
+    @cita.fecha_cita = params[:fecha_cita]
+    @cita.estado_cita_id = PARAMETRO[:estado_cita_postergado]
+
+    if @cita.save
+
+      @cita_ok = true
+
+    else
+
+      @msg = "No se pudo reagendar la cita. Intente más tarde. "
+
+    end
+
+    respond_to do |f|
+
+      f.js
+      
+    end
+
+  end
+
 end
