@@ -124,6 +124,7 @@ class ApplicationController < ActionController::Base
     perfil = VAcceso.where("usuario_id = ? and rol_id = ?", current_usuario.id, PARAMETRO[:rol_tecnico_becas_medias])
     perfil.present?
   end
+  
   def rol_administrador_becas_media
     perfil = VAcceso.where("usuario_id = ? and rol_id = ?", current_usuario.id, PARAMETRO[:rol_administrador_becas_media])
     perfil.present?

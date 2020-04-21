@@ -10,7 +10,13 @@
       <td><%= cit.paciente_nombre%></td>
       <td><%= cit.paciente_apellido%></td>
       <td><%= cit.tipo_consulta%></td>
-      <td><%= cit.precio.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
+      
+      <%if rol_administrador%>
+        
+        <td><%= cit.precio.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
+      
+      <%end%>
+      
       <td><%= cit.estado_cita%></td>
       <td><%= cit.estado_cobro%></td>
 

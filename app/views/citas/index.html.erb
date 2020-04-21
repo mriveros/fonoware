@@ -73,14 +73,18 @@
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-citas', '#form_buscar_citas_tipo_consulta_id');"><i class="fa fa-times"></i></span>
             </div>
           </th> 
+          
+          <%if rol_administrador%>
+          
+            <th style="width:7%;">
+              <span>Monto Consulta</span>
+              <div class="input-group input-group-sm">
+                <%= text_field_tag :form_buscar_citas_monto_consulta, nil, :class => 'form-control', :placeholder => "" %>
+                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-citas', '#form_buscar_citas_monto_consulta');"><i class="fa fa-times"></i></span>
+              </div>
+            </th>
 
-          <th style="width:7%;">
-            <span>Monto Consulta</span>
-            <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_citas_monto_consulta, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-citas', '#form_buscar_citas_monto_consulta');"><i class="fa fa-times"></i></span>
-            </div>
-          </th>
+          <%end%>
 
           <th style="width:10%;">
               <span>Estado Cita</span>

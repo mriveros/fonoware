@@ -48,10 +48,14 @@
                   <%= text_area_tag :objetivo, nil,:size =>"25x5", class: 'form-control input-sm',maxlength: "510", readonly: true%>
                 </div>
                 
-                <div class="col-sm-7"><%= label_tag nil, "Estrategias".html_safe, id: "lbl-cita-detalle-fono-estrategia" %></div><br />
-                <div class="col-sm-12">
-                  <%= text_area_tag :estrategia,nil, :size =>"25x5",  class: 'form-control input-sm' ,maxlength: "510", readonly: true%>
-                 </div>
+                <%if rol_administrador%>
+                
+                  <div class="col-sm-7"><%= label_tag nil, "Estrategias".html_safe, id: "lbl-cita-detalle-fono-estrategia" %></div><br />
+                  <div class="col-sm-12">
+                    <%= text_area_tag :estrategia,nil, :size =>"25x5",  class: 'form-control input-sm' ,maxlength: "510", readonly: true%>
+                   </div>
+               
+                <%end%>
 
                  <div class="col-sm-7"><%= label_tag nil, "Resultados Obtenidos".html_safe, id: "lbl-cita-detalle-fono-resultado" %></div><br />
                 <div class="col-sm-12">
@@ -93,7 +97,7 @@
 
                         <div class="col-sm-12">
                           <%@resoluciones = Resolucion.where("id =?", @cita_detalle_fono.resolucion_id).first%> 
-                          <%if @resoluciones.habilitado == true%>
+                          <%if @resoluciones.habilitado == true || rol_administrador %>
 
                             <%=link_to "<i class='glyphicon glyphicon-download-alt'> Descargar Archivo</i>".html_safe, (Rails.env == 'production' ? "/fonoware/#{@resoluciones.data.url}" : @resoluciones.data.url), class: "btn btn-default btn-xs", target: '_blank',title: "Esta opción le permite desplegar el archivo adjunto."%>
                           <%else%>
