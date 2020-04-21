@@ -24,15 +24,17 @@
 
         <%if cit.estado_cita_id == PARAMETRO[:estado_cita_en_espera]%>
           
-          <%= link_to_editar_cita(cit) %>
-          <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{cit.cita_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-cita", title: 'Haga click para eliminarla cita'  %>
-          <%= link_to icon_confirmar,"#", onclick: "cambiar_estado_cita_en_espera_a_en_consultorio(#{cit.cita_id});return false;", class: "btn btn-success btn-xs", id: "btn-cambiar-estado-en-espera", title: 'Haga click para cambiar el estado de esta cita a En Consultorio.'%>
+          <%= link_to_editar_cita(cit) if acceso_permitido("citas.editar")%>
+
+          <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{cit.cita_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-cita", title: 'Haga click para eliminarla cita' if acceso_permitido("citas.eliminar") %>
+
+          <%= link_to icon_confirmar,"#", onclick: "cambiar_estado_cita_en_espera_a_en_consultorio(#{cit.cita_id});return false;", class: "btn btn-success btn-xs", id: "btn-cambiar-estado-en-espera", title: 'Haga click para cambiar el estado de esta cita a En Consultorio.' if acceso_permitido("citas.cambiar_estado_cita_en_espera_a_en_consultorio")%>
 
         <%end%>
 
         <%if cit.estado_cita_id == PARAMETRO[:estado_cita_en_consultorio]%>
 
-          <%= link_to_cita_detalle_fono(cit.cita_id) %>
+          <%= link_to_cita_detalle_fono(cit.cita_id) if acceso_permitido("citas_detalles_fono.cita_detalle_fono") %>
 
           <% @cita_detalle_fono = CitaDetalleFono.where("cita_id = ?", cit.cita_id).first %>
 
@@ -46,20 +48,20 @@
               <%if resolucion.data != nil && resolucion.habilitado == false%>
 
 
-                <%= link_to icon_confirmar,"#", onclick: "habilitar_descarga_archivos(#{@cita_detalle_fono.id}, #{cit.cita_id} );return false;", class: "btn btn-success-dos btn-xs", id: "btn-habilitar-descarga-archivo", title: 'Haga click para autorizar la descarga de adjuntos en esta cita'%>
+                <%= link_to icon_confirmar,"#", onclick: "habilitar_descarga_archivos(#{@cita_detalle_fono.id}, #{cit.cita_id} );return false;", class: "btn btn-success-dos btn-xs", id: "btn-habilitar-descarga-archivo", title: 'Haga click para autorizar la descarga de adjuntos en esta cita' if acceso_permitido("citas_detalles_fono.habilitar_descarga_archivo")%>
 
               <%end%>
 
               <%if resolucion.data != nil && resolucion.habilitado == true%>
 
 
-                <%= link_to icon_eliminar,"#", onclick: "deshabilitar_descarga_archivos(#{@cita_detalle_fono.id}, #{cit.cita_id} );return false;", class: "btn btn-success-dos btn-xs", id: "btn-habilitar-descarga-archivo", title: 'Haga click para desautorizar la descarga de adjuntos en esta cita'%>
+                <%= link_to icon_eliminar,"#", onclick: "deshabilitar_descarga_archivos(#{@cita_detalle_fono.id}, #{cit.cita_id} );return false;", class: "btn btn-success-dos btn-xs", id: "btn-habilitar-descarga-archivo", title: 'Haga click para desautorizar la descarga de adjuntos en esta cita' if acceso_permitido("citas_detalles_fono.deshabilitar_descarga_archivo")%>
                 
               <%end%>
 
             <%end%>
 
-            <%= link_to icon_confirmar,"#", onclick: "cambiar_estado_cita_en_consultorio_a_terminado(#{cit.cita_id} );return false;", class: "btn btn-success btn-xs", id: "btn-cambiar-estado-en-consultorio", title: 'Haga click para cambiar el estado de esta cita a Terminado'%>
+            <%= link_to icon_confirmar,"#", onclick: "cambiar_estado_cita_en_consultorio_a_terminado(#{cit.cita_id} );return false;", class: "btn btn-success btn-xs", id: "btn-cambiar-estado-en-consultorio", title: 'Haga click para cambiar el estado de esta cita a Terminado' if acceso_permitido("citas.cambiar_estado_cita_en_consultorio_a_terminado")%>
 
           <%end%>
 
@@ -68,7 +70,7 @@
 
         <%if cit.estado_cita_id == PARAMETRO[:estado_cita_terminado]%>
 
-          <%= link_to "<i class='glyphicon glyphicon-repeat'></i>".html_safe,"#", onclick: "cambiar_estado_cita_terminado_a_en_consultorio(#{cit.cita_id} );return false;", class: "btn btn-info btn-xs", id: "btn-cambiar-estado-terminado-a-en-consultorio", title: 'Haga click aquí para volver al estado anterior de la Cita En Consultorio'%>
+          <%= link_to "<i class='glyphicon glyphicon-repeat'></i>".html_safe,"#", onclick: "cambiar_estado_cita_terminado_a_en_consultorio(#{cit.cita_id} );return false;", class: "btn btn-info btn-xs", id: "btn-cambiar-estado-terminado-a-en-consultorio", title: 'Haga click aquí para volver al estado anterior de la Cita En Consultorio' if acceso_permitido("citas.cambiar_estado_cita_terminado_a_en_consultorio")%>
 
           <%= link_to_cita_detalle_fono_terminado(cit.cita_id) %>
 
