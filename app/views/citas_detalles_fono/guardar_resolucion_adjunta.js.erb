@@ -1,6 +1,9 @@
 <% if @valido == true %>
+    
+    
 
   setTimeout(function(){ 
+    
 
     $("#<%= params[:window_id]%>").modal('hide'); 
     $("#link-to-cita-detalle-fono-<%= params[:cita_id]%>").trigger('click');
@@ -8,6 +11,15 @@
     swal("Se ha adjuntado el archivo a la Cita exitosamente.", "", "success");
 
   }, 1000);
+
+  setTimeout(function(){ 
+    
+    
+    $("#form_buscar_citas_id").val('<%= @cita_detalle_fono.cita_id %>');
+    $("#form-buscar-citas").submit();
+
+  }, 1000);
+  
   
 
 <% else %>

@@ -214,8 +214,6 @@ class CitasDetallesFonoController < ApplicationController
     @valido = true    
     @msg = ""
     
-    @cita_detalle_fono = CitaDetalleFono.where("id = ?", params[:cita_detalle_fono_id]).first
-    
     unless params[:resolucion][:data].present?
 
       @valido = false
@@ -229,6 +227,7 @@ class CitasDetallesFonoController < ApplicationController
       auditoria_id = auditoria_antes("adjuntar archivo de citas detalles fono", "resoluciones", @resolucion)
       @resolucion.update_attributes(params[:resolucion])
 
+      @cita_detalle_fono = CitaDetalleFono.where("resolucion_id = ?", @resolucion.id).first
                               
       if @resolucion.save
         

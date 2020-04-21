@@ -30,7 +30,7 @@
 
           <%= link_to icon_confirmar,"#", onclick: "cambiar_estado_cita_en_espera_a_en_consultorio(#{cit.cita_id});return false;", class: "btn btn-success btn-xs", id: "btn-cambiar-estado-en-espera", title: 'Haga click para cambiar el estado de esta cita a En Consultorio.' if acceso_permitido("citas.cambiar_estado_cita_en_espera_a_en_consultorio")%>
 
-          <%= link_to icon_rellenar, "#", id:"link-to-postergar-cita-#{cit.cita_id}", class: "btn btn-warning btn-xs", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;", title: 'Haga click para postergar esta cita a una siguiente fecha.' if acceso_permitido("citas.postergar_cita") %>
+          <%= link_to icon_rellenar, "#", id:"link-to-postergar-cita-#{cit.cita_id}", class: "btn btn-warning btn-xs", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;", title: 'Haga click aquí para postergar esta cita a una siguiente fecha.' if acceso_permitido("citas.postergar_cita") %>
 
           <%= modal_window( window_id: "modal-window-postergar-cita-#{cit.cita_id}", link_to_id: "#link-to-postergar-cita-#{cit.cita_id}", url: citas_postergar_cita_path( window_id: "modal-window-postergar-cita-#{cit.cita_id}", cita_id: cit.cita_id))%>
 
