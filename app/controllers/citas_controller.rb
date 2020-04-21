@@ -74,6 +74,16 @@ before_filter :require_usuario
 
     end
 
+    if rol_tutor
+       
+      tutor = Tutor.where("persona_id = ?", current_usuario.persona_id).first
+      tutor_detalle = TutorDetalle.where("tutor_id = ?", tutor.id)
+      
+      cond << "paciente_id in (?)"
+      args << tutor_detalle.map(&:paciente_id)
+      
+    end 
+
 
     cond = cond.join(" and ").lines.to_a + args if cond.size > 0
 

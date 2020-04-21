@@ -2,7 +2,7 @@ development:
 
   #ROLES 
   rol_administrador: 1
-  rol_operador: 3
+  rol_tutor: 3
   rol_super: 6
 
   #ESTADOS CITAS
@@ -57,7 +57,7 @@ production:
 
   #ROLES 
   rol_administrador: 1
-  rol_operador: 3
+  rol_tutor: 3
   rol_super: 6
 
   #ESTADOS CITAS

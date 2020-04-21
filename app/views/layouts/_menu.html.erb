@@ -21,15 +21,14 @@
 						
 					<% if current_usuario.present? %>
 						<li>
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuraciones <b class="caret"></b></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuraciones <b class="caret"></b></a>
 
-                            <ul class="dropdown-menu">
-                                <li><%= link_to "Controladores", controladores_index_path if acceso_permitido("controladores.index") %></li>
-                                <li><%= link_to "Roles", roles_index_path if acceso_permitido("roles.index")%></li>
-                                <li><%= link_to "Personas", personas_index_path if acceso_permitido("personas.index") %></li>
-                                <li><%= link_to "Usuarios", usuarios_index_path if acceso_permitido("usuarios.index") %></li>
+                <ul class="dropdown-menu">
+                  <li><%= link_to "Controladores", controladores_index_path if acceso_permitido("controladores.index") %></li>
+                  <li><%= link_to "Roles", roles_index_path if acceso_permitido("roles.index")%></li>
+                  <li><%= link_to "Personas", personas_index_path if acceso_permitido("personas.index") %></li>
+                  <li><%= link_to "Usuarios", usuarios_index_path if acceso_permitido("usuarios.index") %></li>
 								<li><%= link_to "Tipos Caracteristicas", tipos_caracteristicas_index_path if acceso_permitido("tipos_caracteristicas.index") %></li>
-								<li><%#= link_to "Disciplinas", disciplinas_index_path if acceso_permitido("disciplinas.index") %></li>
 								<li><%= link_to "Informaciones", informaciones_index_path if acceso_permitido("informaciones.index")%></li>
 
                             </ul>
