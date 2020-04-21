@@ -34,10 +34,10 @@ class CitasDetallesFonoController < ApplicationController
 
         auditoria_id = auditoria_antes("actualizar datos de la cita detalle fono", "citas_detalles_fono", @cita_detalle_fono)
         @cita_detalle_fono.cita_id = params[:cita_id]
-        @cita_detalle_fono.objetivo = params[:objetivo]
-        @cita_detalle_fono.estrategia = params[:estrategia]
-        @cita_detalle_fono.resultado = params[:resultado]
-        @cita_detalle_fono.observacion = params[:observacion]
+        @cita_detalle_fono.objetivo = params[:objetivo].gsub("\r\n", '<br/>')
+        @cita_detalle_fono.estrategia = params[:estrategia].gsub("\r\n", '<br/>')
+        @cita_detalle_fono.resultado = params[:resultado].gsub("\r\n", '<br/>')
+        @cita_detalle_fono.observacion = params[:observacion].gsub("\r\n", '<br/>')
         
         if @cita_detalle_fono.save
 

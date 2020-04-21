@@ -33,11 +33,11 @@ skip_before_action :verify_authenticity_token
 
     if @paciente_detalle_fono.present?
 
-      auditoria_id = auditoria_antes("actualizar datos de detalles de pacientes", "pacientes_detalles_fono", @paciente_detalle_fono)
-      @paciente_detalle_fono.antecedentes_personales = params[:antecedentes_personales]
-      @paciente_detalle_fono.antecedentes_familiares = params[:antecedentes_familiares]
-      @paciente_detalle_fono.antecedentes_otros = params[:antecedentes_otros]
-      @paciente_detalle_fono.antecedentes_habitos = params[:antecedentes_habitos]
+     auditoria_id = auditoria_antes("actualizar datos de detalles de pacientes", "pacientes_detalles_fono", @paciente_detalle_fono)
+      @paciente_detalle_fono.antecedentes_personales = params[:antecedentes_personales].gsub("\r\n", '<br/>')
+      @paciente_detalle_fono.antecedentes_familiares = params[:antecedentes_familiares].gsub("\r\n", '<br/>')
+      @paciente_detalle_fono.antecedentes_otros = params[:antecedentes_otros].gsub("\r\n", '<br/>')
+      @paciente_detalle_fono.antecedentes_habitos = params[:antecedentes_habitos].gsub("\r\n", '<br/>')
       @paciente_detalle_fono.sindrome = params[:sindrome]
       @paciente_detalle_fono.sindrome_especificar = params[:sindrome_especificar]
       @paciente_detalle_fono.transtornos = params[:transtornos]
@@ -52,7 +52,7 @@ skip_before_action :verify_authenticity_token
       if @paciente_detalle_fono.save
 
         @guardado_ok = true
-        auditoria_despues(@paciente_detalle_fono, auditoria_id)
+       auditoria_despues(@paciente_detalle_fono, auditoria_id)
 
       end
 

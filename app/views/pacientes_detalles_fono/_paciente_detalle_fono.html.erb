@@ -44,7 +44,7 @@
                 
                 <div class="col-sm-4"><%= label_tag nil, "Antecedentes Personales".html_safe, id: "lbl-antecedentes-personales" %></div><br />
                 <div class="col-sm-12">
-                  <%= text_area_tag :antecedentes_personales, nil, class: 'form-control input-sm', :size =>"25x3", maxlength: "255" %>
+                  <%= text_area_tag :antecedentes_personales, nil, class: 'form-control input-sm', maxlength: "255", :size =>"25x3" %>
                 </div>
                 
                 <div class="col-sm-4"><%= label_tag nil, "Antecedentes Familiares".html_safe, id: "lbl-antecedentes-familiares" %></div><br />
@@ -183,39 +183,39 @@
 
   <script type="text/javascript">
 
-     $("textarea").keydown(function(e){
+     /*$("textarea").keydown(function(e){
     // Enter was pressed without shift key
     if (e.keyCode == 13 && !e.shiftKey)
     {
         // prevent default behavior
         e.preventDefault();
     }
-    });
+    });*/
 
     //--------------------------RECUPERAR DATOS ----------------------------
      <%if @paciente_detalle_fono.present?%>
       
       <%if @paciente_detalle_fono.antecedentes_personales != nil%>
 
-        $("#antecedentes_personales").val('<%=@paciente_detalle_fono.antecedentes_personales%>');  
+        $("#antecedentes_personales").val('<%=@paciente_detalle_fono.antecedentes_personales.gsub('<br/>','\n') %>');  
       
       <%end%>
 
       <%if @paciente_detalle_fono.antecedentes_familiares != nil%>
 
-        $("#antecedentes_familiares").val('<%=@paciente_detalle_fono.antecedentes_familiares%>');  
+        $("#antecedentes_familiares").val('<%=@paciente_detalle_fono.antecedentes_familiares.gsub('<br/>','\n')%>');  
       
       <%end%>
 
       <%if @paciente_detalle_fono.antecedentes_habitos != nil%>
 
-        $("#antecedentes_habitos").val('<%=@paciente_detalle_fono.antecedentes_habitos%>');  
+        $("#antecedentes_habitos").val('<%=@paciente_detalle_fono.antecedentes_habitos.gsub('<br/>','\n')%>');  
       
       <%end%>
 
       <%if @paciente_detalle_fono.antecedentes_otros != nil%>
 
-        $("#antecedentes_otros").val('<%=@paciente_detalle_fono.antecedentes_otros%>');
+        $("#antecedentes_otros").val('<%=@paciente_detalle_fono.antecedentes_otros.gsub('<br/>','\n')%>');
       
       <%end%>
      

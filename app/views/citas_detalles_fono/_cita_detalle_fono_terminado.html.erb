@@ -153,25 +153,25 @@
       
       <%if @cita_detalle_fono.objetivo != nil%>
 
-        $("#objetivo").val('<%=@cita_detalle_fono.objetivo%>');  
+        $("#objetivo").val('<%=@cita_detalle_fono.objetivo.gsub('<br/>','\n')%>');  
       
       <%end%>
 
       <%if @cita_detalle_fono.estrategia != nil%>
 
-        $("#estrategia").val('<%=@cita_detalle_fono.estrategia%>');  
+        $("#estrategia").val('<%=@cita_detalle_fono.estrategia.gsub('<br/>','\n')%>');  
       
       <%end%>
 
       <%if @cita_detalle_fono.resultado != nil%>
 
-        $("#resultado").val('<%=@cita_detalle_fono.resultado%>');  
+        $("#resultado").val('<%=@cita_detalle_fono.resultado.gsub('<br/>','\n')%>');  
       
       <%end%>
 
       <%if @cita_detalle_fono.observacion != nil%>
 
-        $("#observacion").val('<%=@cita_detalle_fono.observacion%>');
+        $("#observacion").val('<%=@cita_detalle_fono.observacion.gsub('<br/>','\n')%>');
       
       <%end%>
 
@@ -179,72 +179,6 @@
   
     //-----------------------------------------------------------------------
 
-    // GUARDAR DETALLES DE LA CITA
-    $("#btn-guardar-detalle-fono").bind('click', function () {
-
-      valido = true
-      msg = ""
-
-      if($("#objetivo").val().length == 0){
-
-        msg +="Se debe ingresar objetivos de la cita.\n"
-        valido = false
-      
-      }
-
-      if($("#estrategia").val().length == 0){
-
-        msg +="Es necesario agregar las estrategias utilizadas.\n"
-        valido = false
-      
-      }
-
-      if($("#resultado").val().length == 0){
-
-        msg +="Se debe ingresar los resultados obtenidos.\n"
-        valido = false
-      
-      }
-
-      if (valido){
-
-        swal({
-          title: "Confirmar Detalles",
-          text: "Al confirmar los detalles estos serán guardados. No se podrá editar los datos una vez que se cambie el estado de la cita.",
-          type: "warning",
-          showCancelButton: true,
-          confirmButtonClass: "btn-confirm",
-          confirmButtonText: "Confirmar",
-          cancelButtonText: "Cancelar",
-          closeOnConfirm: true,
-          closeOnCancel: true
-        },
-        function(isConfirm) {
-          if (isConfirm) {
-
-            $("#form-datos-cita-detalle-fono").submit();
-            
-          } 
-
-        });
-
-      }else{
-
-        swal(msg);
-      
-      }
-
-      return false;
     
-    })
-
-    $("textarea").keydown(function(e){
-    // Enter was pressed without shift key
-    if (e.keyCode == 13 && !e.shiftKey)
-    {
-        // prevent default behavior
-        e.preventDefault();
-    }
-    });
 
   </script>
