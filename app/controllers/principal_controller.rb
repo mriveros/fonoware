@@ -7,16 +7,7 @@ class PrincipalController < ApplicationController
     mes_actual = Time.now.month
     anho_actual = Time.now.year
 
-    @producciones_total = VProduccion.all
-
-    @producciones_cobrados = VProduccion.where("EXTRACT (MONTH FROM fecha_produccion) = ? and EXTRACT (YEAR FROM fecha_produccion) = ? and cobrado = ?", mes_actual, anho_actual,  true)
-    @producciones_sin_cobrar = VProduccion.where("EXTRACT (MONTH FROM fecha_produccion) = ? and EXTRACT (YEAR FROM fecha_produccion) = ? and cobrado = ?", mes_actual, anho_actual , false)
-    @producciones_no_pertenece = VProduccion.where(" EXTRACT (MONTH FROM fecha_produccion) = ? and EXTRACT (YEAR FROM fecha_produccion) = ? and pertenece = ?", mes_actual, anho_actual, false)
-    @producciones_pertenece = VProduccion.where("EXTRACT (MONTH FROM fecha_produccion) = ? and EXTRACT (YEAR FROM fecha_produccion) = ? and pertenece = ?", mes_actual, anho_actual, true)
-    @cantidad_producciones = VProduccion.where("EXTRACT (MONTH FROM fecha_produccion) = ? and EXTRACT (YEAR FROM fecha_produccion) = ?", mes_actual, anho_actual)
-    @gastos_producciones = VProduccionDetalleDebito.where("EXTRACT (MONTH FROM fecha) = ? and EXTRACT (YEAR FROM fecha) = ?", mes_actual, anho_actual)
-
-    
+    @citas_dia = Cita.where("fecha_cita = ?", Date.today)
     
   end
 	
