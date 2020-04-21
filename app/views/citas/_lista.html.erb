@@ -76,13 +76,13 @@
 
           <%if cit.estado_cobro_id == PARAMETRO[:estado_cobro_pendiente] || cit.estado_cobro_id == PARAMETRO[:estado_cobro_no_cobrado]%>
             
-            <%= link_to icon_confirmar_cobro,"#", onclick: "cambiar_estado_cobro_a_cobrado(#{cit.cita_id});return false;", class: "btn btn-success btn-xs", id: "btn-cambiar-estado-cobro-cobrado", title: 'Haga click aquí para marcar esta cita como Cobrado.'%>
+            <%= link_to icon_confirmar_cobro,"#", onclick: "cambiar_estado_cobro_a_cobrado(#{cit.cita_id});return false;", class: "btn btn-success btn-xs", id: "btn-cambiar-estado-cobro-cobrado", title: 'Haga click aquí para marcar esta cita como Cobrado.' if acceso_permitido("citas_detalles_fono.cambiar_estado_cobro_a_cobrado")%>
           
           <%end%>
 
           <%if cit.estado_cobro_id == PARAMETRO[:estado_cobrado] || cit.estado_cobro_id == PARAMETRO[:estado_cobro_pendiente]%>
             
-            <%= link_to icon_desconfirmar_cobro,"#", onclick: "cambiar_estado_cobro_a_no_cobrado(#{cit.cita_id});return false;", class: "btn btn-warning btn-xs", id: "btn-cambiar-estado-cobro-no-cobrado", title: 'Haga click aquí para marcar esta cita como No Cobrado.'%>
+            <%= link_to icon_desconfirmar_cobro,"#", onclick: "cambiar_estado_cobro_a_no_cobrado(#{cit.cita_id});return false;", class: "btn btn-warning btn-xs", id: "btn-cambiar-estado-cobro-no-cobrado", title: 'Haga click aquí para marcar esta cita como No Cobrado.' if acceso_permitido("citas_detalles_fono.cambiar_estado_cobro_a_no_cobrado")%>
           
           <%end%>
 
