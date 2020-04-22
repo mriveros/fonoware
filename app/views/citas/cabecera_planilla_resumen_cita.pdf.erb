@@ -3,34 +3,46 @@
     <%#= wicked_pdf_image_tag 'escudo.png', :size => "48x40" %>
   
     <p style="font-size: 14px; text-align: center; font-family: times new roman">
-    
+    <br/><br/><br/>
       Sistema de gestión para Especialidades - Fonoware<br />
-      <label style="font-size: 18px;">RESUMEN DE CITA FONOAUDIOLOGICA</label>
+      <label style="font-size: 18px;">RESUMEN DE CITA FONOAUDIOLÓGICA</label>
       <br />
-      <label style="font-size: 15px;">Lic. Ma Lourdes Benitez</label>
+      <label style="font-size: 16px;">María Lourdes Benitez</label><br />
+      <label style="font-size: 13px;">Lic. en Fonoaudiología</label><br />
+      <label style="font-size: 13px;">Máster en Neurosicología</label><br />
       <br />
-      <label style="font-size: 15px;"></label>
+      
     </p>
-
     </br>
-    </br>
+    
     
 </div>
 
 <div id="cont" style="width:80%;">
 
   <table style="text-align: left; font-size: 12px; margin-left: 10%;" width="80%">
-    
+   
     <%if @cita.fecha_cita.present?%>
     <tr>
     
-      <th width="20%">Fecha cita: </th>
-      <td width="40%"><%=@cita.fecha_cita %></td>
-
-    <%end%>
+      <th width="20%">Fecha: </th>
+      <td width="40%"><%=@cita.fecha_cita.strftime('%d/%m/%Y') %></td>
 
     </tr>
     
+    <%end%>
+
+    <%if @cita.paciente_documento.present?%>
+
+      <tr>
+    
+        <th width="20%">Paciente Documento: </th>
+        <td width="40%"><%=@cita.paciente_documento.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
+
+      </tr>
+
+    <%end%>
+  
     <%if @cita.paciente_id.present?%>
       <% @paciente = VPaciente.where("paciente_id = ?", @cita.paciente_id).first %>
       <tr>
