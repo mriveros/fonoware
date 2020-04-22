@@ -1,0 +1,59 @@
+<div style="width: 100%; text-align: center; margin-top:10px;">
+ 
+    <%#= wicked_pdf_image_tag 'escudo.png', :size => "48x40" %>
+  
+    <p style="font-size: 14px; text-align: center; font-family: times new roman">
+    
+      Sistema de gestión para Especialidades - Fonoware<br />
+      <label style="font-size: 18px;">RESUMEN DE CITA FONOAUDIOLOGICA</label>
+      <br />
+      <label style="font-size: 15px;">Lic. Ma Lourdes Benitez</label>
+      <br />
+      <label style="font-size: 15px;"></label>
+    </p>
+
+    </br>
+    </br>
+    
+</div>
+
+<div id="cont" style="width:80%;">
+
+  <table style="text-align: left; font-size: 12px; margin-left: 10%;" width="80%">
+    
+    <%if @cita.fecha_cita.present?%>
+    <tr>
+    
+      <th width="20%">Fecha cita: </th>
+      <td width="40%"><%=@cita.fecha_cita %></td>
+
+    <%end%>
+
+    </tr>
+    
+    <%if @cita.paciente_id.present?%>
+      <% @paciente = VPaciente.where("paciente_id = ?", @cita.paciente_id).first %>
+      <tr>
+        
+        <th width="20%">Paciente:</th>
+        <td width="40%"><%=@paciente.nombre_persona%> <%=@paciente.apellido_persona%></td>
+
+      </tr>
+
+    <%end%>
+
+    <%if @cita.tipo_consulta_id.present?%>
+      <% @tipo_consulta = TipoConsulta.where("id = ?", @cita.tipo_consulta_id).first %>
+      <tr>
+      
+        <th width="20%">Tipo Consulta:</th>
+        <td width="40%"><%=@tipo_consulta.descripcion%></td>
+
+      </tr>
+    <%end%>
+    
+  </table>
+  
+<br/>
+
+</div>

@@ -552,4 +552,47 @@ before_filter :require_usuario
 
   end
 
+  def imprimir_informe
+
+    @cita = VCita.where("cita_id = ?", params[:id]).first
+
+    @parametros = { format: :pdf, cita_id: @cita.cita_id }
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+
+  def generar_informe_pdf
+
+    @cita =  VCita.where("cita_id = ?", params[:cita_id]).first
+    
+    respond_to do |f|
+     
+      f.pdf do
+
+          render  :pdf => "informe_cita_#{Time.now.strftime("%Y_%m_%d__%H_%M")}",
+                  :template => 'citas/planilla_reporte_cita.pdf.erb',
+                  :layout => 'pdf.html',
+                  :header => {:html => { :template => "citas/cabecera_planilla_resumen_cita.pdf.erb" ,
+                  :locals   => { :cita => @cita }}},
+                  :margin => {:top => 65,                         # default 10 (mm)
+                  :bottom => 11,
+                  :left => 3,
+                  :right => 3},
+                  :orientation => 'Portrait',
+                  :page_size => "A4",
+                  :footer => { :html => {:template => 'layouts/footer.pdf' },
+                  :spacing => 1,
+                  :line => true }
+      end
+      
+    end
+
+  end
+
 end

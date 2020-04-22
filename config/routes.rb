@@ -153,6 +153,8 @@ Rails.application.routes.draw do
   get "citas/cambiar_estado_cita_terminado_a_en_consultorio"
   get "citas/postergar_cita"
   post "citas/guardar_postergar_cita"
+  get "citas/imprimir_informe"
+  get "citas/generar_informe_pdf"
   
 
   #CITAS DETALLES FONO

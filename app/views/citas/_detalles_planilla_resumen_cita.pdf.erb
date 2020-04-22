@@ -1,0 +1,63 @@
+
+<table align="center" class="cual" style="width: 80%; border: 1px solid #000 !important;">
+ 
+  <tr>
+
+      <th>Objetivos</th>
+
+  </tr>
+  <% cita_detalle = CitaDetalleFono.where("cita_id = ?", @cita.cita_id).first %>
+  <%if  cita_detalle.present?%>
+  
+    <tr>
+
+      <td align="left"><%= text_area_tag :objetivo,cita_detalle.objetivo.gsub('<br/>',"\r\n"), :size =>"25x5",  class: 'form-control input-sm' ,maxlength: "510", style: "border: none;"%></td>
+
+    </tr>
+
+    <tr>
+
+        <th>Estrategias</th>
+        
+    </tr>
+   <tr>
+
+      <td align="left"><%= text_area_tag :objetivo,cita_detalle.estrategia.gsub('<br/>',"\r\n"), :size =>"25x5",  class: 'form-control input-sm' ,maxlength: "510", style: "border: none;"%></td>
+
+    </tr> 
+
+    <tr>
+
+      <th>Resultados</th>
+      
+  </tr>
+   <tr>
+
+      <td align="left"><%= text_area_tag :objetivo,cita_detalle.resultado.gsub('<br/>',"\r\n"), :size =>"25x5",  class: 'form-control input-sm' ,maxlength: "510", style: "border: none;"%></td>
+
+    </tr>  
+
+    <tr>
+
+      <th>Observaciones</th>
+      
+  </tr>
+   <tr>
+
+      <td align="left"><%= text_area_tag :objetivo,cita_detalle.observacion.gsub('<br/>',"\r\n"), :size =>"25x5",  class: 'form-control input-sm' ,maxlength: "510", style: "border: none;"%></td>
+
+    </tr>      
+    
+<%end%>
+
+<br/>
+<br/>
+<br/>
+
+<script type="text/javascript">
+
+    //--------------------------RECUPERAR DATOS ----------------------------
+
+      
+
+</script>
