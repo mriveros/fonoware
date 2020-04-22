@@ -142,7 +142,7 @@ module ApplicationHelper
   end
 
   def icon_print_informe
-     " <span class='glyphicon glyphicon-print'> Imp. Informe</span>".html_safe
+     " <span class='glyphicon glyphicon-print'>Imp. Resumen</span>".html_safe
   end
 
   def icon_print
