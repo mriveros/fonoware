@@ -90,7 +90,7 @@
           
           <%end%>
 
-          <%= link_to icon_print_informe,"#", onclick: "imprimir_informe(#{cit.cita_id});return false;", class: "btn btn-success btn-xs", id: "btn-imprimir-informe-cita", title: 'Haga click aquí para imprimir el informe de la cita.' if acceso_permitido("citas.cambiar_estado_cobro_a_cobrado")%>
+          <%= link_to icon_print_informe,"#", onclick: "imprimir_informe(#{cit.cita_id});return false;", class: "btn btn-success btn-xs", id: "btn-imprimir-informe-cita", title: 'Haga click aquí para imprimir el informe de la cita.' if acceso_permitido("citas.imprimir_informe")%>
 
 
         <%end%>
