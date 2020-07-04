@@ -64,7 +64,6 @@
                 
               </td>
 
-
               <td>
                 
                  <div class="col-sm-4"><%= label_tag nil, "Sindrome".html_safe, id: "lbl-sindrome" %></div><br />
@@ -78,9 +77,7 @@
                   </div>
 
                 </div>
-
-
-               
+ 
                 <div class="col-sm-4"><%= label_tag nil, "Transtornos".html_safe, id: "lbl-transtornos" %></div><br />
                 <div class="col-sm-12">
 
@@ -93,8 +90,6 @@
                   </div>
 
                 </div>
-
-
                 
                 <div class="col-sm-4"><%= label_tag nil, "Enfermedad".html_safe, id: "lbl-enfermedad" %></div><br />
                 <div class="col-sm-12">
@@ -109,33 +104,23 @@
 
                 </div>
 
-
               </td>
-
 
               <td>
 
                 <div class="col-sm-12"><%= label_tag nil, "Curso Escolaridad".html_safe %></div>
                 <div class="col-sm-5"><%= collection_select :escolaridad_grado, :id, Curso.basica, :id, :descripcion, { include_blank: true}, { class: 'form-control input-sm', style: "width:100px;"} %></div>
-                <div class="col-sm-1"></div><br/><br/>
-                
+                <div class="col-sm-1"></div><br/><br/>              
 
                 <div class="col-sm-12"><%= label_tag nil, "Tiempo Escolaridad".html_safe %></div>
                 <div class="col-sm-12"><%= text_field_tag :escolaridad_tiempo, nil, class: 'form-control input-sm'%></div>
                 <div class="col-sm-1"></div><br/><br/>
                
-
                 <div class="col-sm-12"><%= label_tag nil, "Institución Actual".html_safe %></div>
                 <div class="col-sm-12"><%= text_field_tag :escolaridad_institucion, nil, class: 'form-control input-sm'%></div>
                 <div class="col-sm-1"></div><br/><br/>
-                
-                
-
 
               </td>
-
-
-
 
               <td>
 

@@ -14,8 +14,8 @@ development:
 
   database: fonoware
   username: postgres
-  password: postgres
-  host:  localhost
+  password: dev.postgres
+  host:  192.168.0.50
   port: 5432
 #---------------------------------------
 
