@@ -244,7 +244,7 @@ class CitasDetallesFonoController < ApplicationController
       if exc.present?    
 
         @excep = exc.message.split(':')    
-        @msg = @excep[3].concat(" "+@excep[4])
+        @msg = @excep
         @valido = false  
 
       end
