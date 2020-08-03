@@ -167,7 +167,7 @@
                           
                             <%if @resoluciones.habilitado == true || rol_administrador%>
 
-                              <%=link_to "<i class='glyphicon glyphicon-download-alt'> Descargar Archivo</i>".html_safe, (Rails.env == 'production' ? "/fonoware/#{@resoluciones.data.url}" : @resoluciones.data.url), class: "btn btn-default btn-xs", target: '_blank',title: "Esta opción le permite desplegar el archivo adjunto."%>
+                              <%=link_to "<i class='glyphicon glyphicon-download-alt'> Descargar Archivo</i>".html_safe, (Rails.env == 'production' ? "#{@resoluciones.data.url}" : @resoluciones.data.url), class: "btn btn-default btn-xs", target: '_blank',title: "Esta opción le permite desplegar el archivo adjunto."%>
                             <%else%>
 
                               <p> 

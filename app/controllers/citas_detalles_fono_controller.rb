@@ -136,7 +136,6 @@ class CitasDetallesFonoController < ApplicationController
       if @cita_detalle_fono.present?
 
         @resolucion.tipo_resolucion_id = PARAMETRO[:archivo_fonoaudiologico]
-        
                               
         if @resolucion.save
       
@@ -227,13 +226,13 @@ class CitasDetallesFonoController < ApplicationController
       auditoria_id = auditoria_antes("adjuntar archivo de citas detalles fono", "resoluciones", @resolucion)
       @resolucion.update_attributes(params[:resolucion])
 
-      @cita_detalle_fono = CitaDetalleFono.where("resolucion_id = ?", @resolucion.id).first
-                              
       if @resolucion.save
         
         auditoria_despues(@resolucion, auditoria_id)         
         
       end
+
+      @cita_detalle_fono = CitaDetalleFono.where("resolucion_id = ?", @resolucion.id).first
 
     end
 
