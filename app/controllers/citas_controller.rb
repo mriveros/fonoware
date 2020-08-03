@@ -236,10 +236,18 @@ before_filter :require_usuario
     @msg = ""
 
     @cita = Cita.find(params[:id])
+    @cita_detalle = CitaDetalleFono.where("cita_id = ?", params[:id]).first
+
     @cita_elim = @cita  
 
     if @valido
+      
+      if @cita_detalle.present?
 
+        @cita_detalle.destroy
+
+      end
+    
       if @cita.destroy
 
         auditoria_nueva("eliminar cita", "citas", @cita)
@@ -284,6 +292,53 @@ before_filter :require_usuario
     if @cita.present?
 
       @cita.estado_cita_id = PARAMETRO[:estado_cita_en_consultorio]
+
+      if @cita.save
+      
+        @msg = "Estado de la Cita modificado exitosamente!"
+        @actualizado = true
+        auditoria_despues(@cita, auditoria_id)
+
+      end
+
+    else
+
+      @msg = "No se pudo realizar la modificación del estado de la Cita. Intente más tarde."
+
+    end
+    
+    rescue Exception => exc  
+        
+        # dispone el mensaje de error 
+        #puts "Aqui si muestra el error ".concat(exc.message)
+        if exc.present?        
+        @excep = exc.message.split(':')    
+        @msg = @excep[3].concat( " " + @excep[4].to_s)
+        @eliminado = false
+        
+    end
+
+
+
+     respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+  def cambiar_estado_cita_en_consultorio_a_en_espera
+
+    @msg = ""
+    @actualizado = false
+    
+    @cita = Cita.where("id = ?", params[:id]).first
+    auditoria_id = auditoria_antes("cambiar estado cita de en consultorio a en espera ", "citas", @cita)
+
+    if @cita.present?
+
+      @cita.estado_cita_id = PARAMETRO[:estado_cita_en_espera]
 
       if @cita.save
       
