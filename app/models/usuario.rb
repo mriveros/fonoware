@@ -15,7 +15,6 @@ class Usuario < ActiveRecord::Base
   has_many :perfiles, :dependent => :restrict_with_error
   belongs_to :persona
   belongs_to :perfil_actual, class_name: "Perfil", foreign_key: 'perfil_actual_id'  
-  has_many :infraestructuras_fiscalizaciones, :dependent => :restrict_with_error
   before_create -> {self.token = generate_token}
 
   def self.generar_password

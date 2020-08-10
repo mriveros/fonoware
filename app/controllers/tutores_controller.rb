@@ -378,7 +378,7 @@ skip_before_action :verify_authenticity_token
         if exc.present?        
           
           @excep = exc.message.split(':')    
-          @msg = @excep[3].concat(" "+@excep[4])
+          @msg = @excep
           @eliminado = false
         
         end
