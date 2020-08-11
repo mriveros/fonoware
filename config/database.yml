@@ -14,8 +14,8 @@ development:
 
   database: fonoware
   username: postgres
-  password: dev.postgres
-  host:  192.168.100.50
+  password: database#production#pg
+  host:  192.168.100.55
   port: 5432
 #---------------------------------------
 
@@ -25,8 +25,8 @@ DB_AUDITORIAS:
   <<: *default
   database: fonoware_auditoria
   username: postgres
-  password: dev.postgres
-  host: 192.168.100.50
+  password: database#production#pg
+  host: 192.168.100.55
   port: 5432
 
 
@@ -46,14 +46,14 @@ production:
 
   database: fonoware
   username: postgres
-  password: dev.postgres
-  host:  192.168.100.50
+  password: database#production#pg
+  host:  192.168.100.55
   port: 5432
 
 DB_AUDITORIAS:
   <<: *default
   database: fonoware_auditoria
   username: postgres
-  password: dev.postgres
-  host: 192.168.100.50
+  password: database#production#pg
+  host: 192.168.100.55
   port: 5432
