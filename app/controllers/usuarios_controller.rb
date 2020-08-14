@@ -491,7 +491,7 @@ class UsuariosController < ApplicationController
 
   def eliminar_perfil
 
-    @perfil = Perfil.find(params[:id])
+    @perfil = Perfil.where("id = ?", params[:id]).first
     @usuario_id = @perfil.usuario_id
 
     if @perfil.destroy
