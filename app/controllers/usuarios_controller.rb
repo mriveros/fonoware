@@ -116,12 +116,12 @@ class UsuariosController < ApplicationController
 
       edad = (DateTime.now - persona.fecha_nacimiento) / 365.25
 
-      if edad.to_i < 18
+      # if edad.to_i < 18
 
-        valido = false
-        @msg += "Para acceder a una cuenta deber ser mayor edad.<br />"
+      #   valido = false
+      #   @msg += "Para acceder a una cuenta deber ser mayor edad.<br />"
 
-      end
+      # end
 
       if valido
 
